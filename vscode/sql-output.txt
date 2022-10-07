@@ -1,0 +1,10 @@
+TABLE account_account_type
+{
+    id integer [not null] DEFAULT nextval{'account_account_type_id_seq'::regclass}
+    name varchar [not null]
+    include_initial_balance boolean
+    type varchar [not null]
+    internal_group varchar [not null]
+    note text
+}
+
