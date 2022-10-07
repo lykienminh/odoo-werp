@@ -231,11 +231,8 @@ TABLE product_category
   id integer [pk]
   name varchar [not null]
   complete_name varchar
-  parent_id integer
   parent_path varchar
 }
-
-REF: product_category.parent_id > product_category.id
 
 TABLE product_template
 {
@@ -356,7 +353,6 @@ REF: account_account.group_id > account_group.id
 TABLE account_group
 {
   id integer [pk]
-  parent_id integer
   parent_path varchar
   name varchar [not null]
   code_prefix_start varchar
@@ -365,7 +361,6 @@ TABLE account_group
 }
 
 REF: account_group.company_id > res_company.id
-REF: account_group.parent_id > account_group.id
 
 TABLE account_bank_statement_cashbox
 {
@@ -451,7 +446,7 @@ TABLE account_incoterms
 {
   id integer [pk]
   name varchar [not null]
-  code varchar{3} [not null]
+  code varchar [not null]
   active boolean
 }
 
@@ -567,7 +562,7 @@ REF: account_payment_method_line.payment_method_id > account_payment_method.id
 
 TABLE account_payment_term
 {
-  id integer [pk]]
+  id integer [pk]
   name varchar [not null]
   active boolean
   note text
@@ -1176,7 +1171,3 @@ Table mail_activity_type {
 }
 
 Ref: mail_activity_type.triggered_next_type_id > mail_activity_type.id
-
-Table account_account {
-    id integer [pk]
-}
