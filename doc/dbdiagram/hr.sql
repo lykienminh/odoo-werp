@@ -1,3 +1,44 @@
+TABLE hr_plan_activity_type
+{
+  id integer [pk]
+  activity_type_id integer
+  summary varchar
+  responsible varchar [not null]
+  responsible_id integer
+  note text
+}
+
+REF: hr_plan_activity_type.activity_type_id > mail_activity_type.id
+REF: hr_plan_activity_type.responsible_id > res_users.id
+
+TABLE hr_plan
+{
+  id integer [pk]
+  name varchar [not null]
+  active boolean
+}
+
+TABLE barcode_rule
+{
+  id integer [pk]
+  name varchar [not null]
+  barcode_nomenclature_id integer
+  sequence integer
+  encoding varchar [not null]
+  type varchar [not null]
+  pattern varchar [not null]
+  alias varchar [not null]
+}
+
+REF: barcode_rule.barcode_nomenclature_id > barcode_nomenclature.id
+
+TABLE barcode_nomenclature
+{
+  id integer [pk]
+  name varchar [not null]
+  upc_ean_conv varchar [not null]
+}
+
 Table hr_attendance {
     id integer [pk]
     employee_id integer [not null]
