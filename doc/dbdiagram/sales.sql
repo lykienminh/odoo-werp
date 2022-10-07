@@ -330,6 +330,674 @@ TABLE account_account_type
   note text
 }
 
+TABLE account_account
+{
+  id integer [pk]
+  message_main_attachment_id integer
+  name varchar [not null]
+  currency_id integer
+  code varchar{64} [not null, unique]
+  deprecated boolean
+  user_type_id integer [not null]
+  internal_type varchar
+  internal_group varchar
+  reconcile boolean
+  note text
+  company_id integer [not null, unique]
+  group_id integer
+  root_id integer
+  is_off_balance boolean
+}
+
+REF: account_account.company_id > res_company.id
+REF: account_account.currency_id > res_currency.id
+REF: account_account.group_id > account_group.id
+
+TABLE account_group
+{
+  id integer [pk]
+  parent_id integer
+  parent_path varchar
+  name varchar [not null]
+  code_prefix_start varchar
+  code_prefix_end varchar
+  company_id integer [not null]
+}
+
+REF: account_group.company_id > res_company.id
+REF: account_group.parent_id > account_group.id
+
+TABLE account_analytic_default
+{
+  id integer [pk]
+  sequence integer
+  analytic_id integer
+  product_id integer
+  partner_id integer
+  account_id integer
+  user_id integer
+  company_id integer
+  date_start date
+  date_stop date
+}
+
+REF: account_analytic_default.account_id > account_account.id
+REF: account_analytic_default.analytic_id > account_analytic_account.id
+REF: account_analytic_default.company_id > res_company.id
+REF: account_analytic_default.partner_id > res_partner.id
+REF: account_analytic_default.product_id > product_product.id
+
+TABLE account_cashbox_line
+{
+  id integer [pk]
+  coin_value numeric [not null]
+  "number" integer
+  cashbox_id integer
+}
+
+REF: account_cashbox_line.cashbox_id > account_bank_statement_cashbox.id
+
+TABLE account_bank_statement_cashbox
+{
+  id integer [pk]
+}
+
+TABLE account_bank_statement_closebalance
+{
+  id integer [pk]
+}
+
+TABLE account_bank_statement
+{
+  id integer [pk]
+  sequence_prefix varchar
+  sequence_number integer
+  message_main_attachment_id integer
+  name varchar
+  reference varchar
+  date date [not null]
+  date_done timestamp
+  balance_start numeric
+  balance_end_real numeric
+  state varchar [not null]
+  journal_id integer [not null]
+  company_id integer
+  total_entry_encoding numeric
+  balance_end numeric
+  difference numeric
+  user_id integer
+  cashbox_start_id integer
+  cashbox_end_id integer
+  previous_statement_id integer
+  is_valid_balance_start boolean
+}
+
+REF: account_bank_statement.cashbox_end_id > account_bank_statement_cashbox.id
+REF: account_bank_statement.cashbox_start_id > account_bank_statement_cashbox.id
+REF: account_bank_statement.company_id > res_company.id
+REF: account_bank_statement.journal_id > account_journal.id
+REF: account_bank_statement.message_main_attachment_id > ir_attachment.id
+REF: account_bank_statement.previous_statement_id > account_bank_statement.id
+
+TABLE account_bank_statement_line
+{
+  id integer [not null] DEFAULT nextval{'account_bank_statement_line_id_seq'::regclass}
+  move_id integer [not null]
+  statement_id integer [not null]
+  sequence integer
+  account_number varchar
+  partner_name varchar
+  transaction_type varchar
+  payment_ref varchar [not null]
+  amount numeric
+  amount_currency numeric
+  foreign_currency_id integer
+  amount_residual double precision
+  currency_id integer
+  partner_id integer
+  is_reconciled boolean
+}
+
+REF: account_bank_statement_line.currency_id > res_currency.id
+REF: account_bank_statement_line.foreign_currency_id > res_currency.id
+REF: account_bank_statement_line.move_id > account_move.id
+REF: account_bank_statement_line.partner_id > res_partner.id
+REF: account_bank_statement_line.statement_id > account_bank_statement.id
+
+TABLE account_bank_statement_line
+{
+  id integer [pk]
+  move_id integer [not null]
+  statement_id integer [not null]
+  sequence integer
+  account_number varchar
+  partner_name varchar
+  transaction_type varchar
+  payment_ref varchar [not null]
+  amount numeric
+  amount_currency numeric
+  foreign_currency_id integer
+  amount_residual double
+  currency_id integer
+  partner_id integer
+  is_reconciled boolean
+}
+
+REF: account_bank_statement_line.currency_id > res_currency.id
+REF: account_bank_statement_line.foreign_currency_id > res_currency.id
+REF: account_bank_statement_line.move_id > account_move.id
+REF: account_bank_statement_line.partner_id > res_partner.id
+REF: account_bank_statement_line.statement_id > account_bank_statement.id
+
+TABLE account_cash_rounding
+{
+  id integer [pk]
+  name varchar [not null]
+  rounding double [not null]
+  strategy varchar [not null]
+  rounding_method varchar [not null]
+}
+
+TABLE account_full_reconcile
+{
+  id integer [pk]]
+  name varchar [not null]
+  exchange_move_id integer
+}
+
+REF: account_full_reconcile.exchange_move_id > account_move.id
+
+TABLE account_incoterms
+{
+  id integer [pk]
+  name varchar [not null]
+  code varchar{3} [not null]
+  active boolean
+}
+
+TABLE account_journal_group
+{
+  id integer [pk]
+  name varchar [not null]
+  company_id integer [not null]
+  sequence integer
+}
+
+REF: account_journal_group.company_id > res_company.id
+
+TABLE account_journal
+{
+  id integer [pk]
+  message_main_attachment_id integer
+  name varchar [not null]
+  code varchar{5} [not null, unique]
+  active boolean
+  type varchar [not null]
+  default_account_id integer
+  suspense_account_id integer
+  restrict_mode_hash_table boolean
+  sequence integer
+  invoice_reference_type varchar [not null]
+  invoice_reference_model varchar [not null]
+  currency_id integer
+  company_id integer [not null, unique]
+  refund_sequence boolean
+  sequence_override_regex text
+  profit_account_id integer
+  loss_account_id integer
+  bank_account_id integer
+  bank_statements_source varchar
+  sale_activity_type_id integer
+  sale_activity_user_id integer
+  sale_activity_note text
+  alias_id integer
+  secure_sequence_id integer
+  show_on_dashboard boolean
+  color integer
+  check_manual_sequencing boolean
+  check_sequence_id integer
+}
+
+REF: account_journal.alias_id > mail_alias.id
+REF: account_journal.bank_account_id > res_partner_bank.id
+REF: account_journal.check_sequence_id > ir_sequence.id
+REF: account_journal.company_id > res_company.id
+REF: account_journal.currency_id > res_currency.id
+REF: account_journal.default_account_id > account_account.id
+REF: account_journal.loss_account_id > account_account.id
+REF: account_journal.profit_account_id > account_account.id
+REF: account_journal.sale_activity_type_id > mail_activity_type.id
+REF: account_journal.sale_activity_user_id > res_users.id
+REF: account_journal.secure_sequence_id > ir_sequence.id
+REF: account_journal.suspense_account_id > account_account.id
+
+TABLE account_move_line
+{
+  id integer [pk]
+  move_id integer [not null]
+  move_name varchar
+  date date
+  ref varchar
+  parent_state varchar
+  journal_id integer
+  company_id integer
+  company_currency_id integer
+  account_id integer
+  account_root_id integer
+  sequence integer
+  name varchar
+  quantity numeric
+  price_unit numeric
+  discount numeric
+  debit numeric
+  credit numeric
+  balance numeric
+  amount_currency numeric
+  price_subtotal numeric
+  price_total numeric
+  reconciled boolean
+  blocked boolean
+  date_maturity date
+  currency_id integer [not null]
+  partner_id integer
+  product_uom_id integer
+  product_id integer
+  reconcile_model_id integer
+  payment_id integer
+  statement_line_id integer
+  statement_id integer
+  group_tax_id integer
+  tax_line_id integer
+  tax_group_id integer
+  tax_base_amount numeric
+  tax_repartition_line_id integer
+  tax_audit varchar
+  tax_tag_invert boolean
+  amount_residual numeric
+  amount_residual_currency numeric
+  full_reconcile_id integer
+  matching_number varchar
+  analytic_account_id integer
+  display_type varchar
+  is_rounding_line boolean
+  exclude_from_invoice_tab boolean
+}
+
+REF: account_move_line.account_id > account_account.id
+REF: account_move_line.analytic_account_id > account_analytic_account.id
+REF: account_move_line.company_currency_id > res_currency.id
+REF: account_move_line.company_id > res_company.id
+REF: account_move_line.currency_id > res_currency.id
+REF: account_move_line.full_reconcile_id > account_full_reconcile.id
+REF: account_move_line.group_tax_id > account_tax.id
+REF: account_move_line.journal_id > account_journal.id
+REF: account_move_line.move_id > account_move.id
+REF: account_move_line.partner_id > res_partner.id
+REF: account_move_line.payment_id > account_payment.id
+REF: account_move_line.product_id > product_product.id
+REF: account_move_line.product_uom_id > uom_uom.id
+REF: account_move_line.reconcile_model_id > account_reconcile_model.id
+REF: account_move_line.statement_id > account_bank_statement.id
+REF: account_move_line.statement_line_id > account_bank_statement_line.id
+REF: account_move_line.tax_group_id > account_tax_group.id
+REF: account_move_line.tax_line_id > account_tax.id
+REF: account_move_line.tax_repartition_line_id > account_tax_repartition_line.id
+
+TABLE account_partial_reconcile
+{
+  id integer [pk]
+  debit_move_id integer [not null]
+  credit_move_id integer [not null]
+  full_reconcile_id integer
+  debit_currency_id integer
+  credit_currency_id integer
+  amount numeric
+  debit_amount_currency numeric
+  credit_amount_currency numeric
+  company_id integer
+  max_date date
+}
+
+REF: account_partial_reconcile.company_id > res_company.id
+REF: account_partial_reconcile.credit_currency_id > res_currency.id
+REF: account_partial_reconcile.credit_move_id > account_move_line.id
+REF: account_partial_reconcile.debit_currency_id > res_currency.id
+REF: account_partial_reconcile.debit_move_id > account_move_line.id
+REF: account_partial_reconcile.full_reconcile_id > account_full_reconcile.id
+
+TABLE account_payment_method
+{
+  id integer [pk]
+  name varchar [not null]
+  code varchar [not null, unique]
+  payment_type varchar [not null, unique]
+}
+
+TABLE account_payment_method_line
+{
+  id integer [pk]
+  name varchar
+  sequence integer
+  payment_method_id integer [not null]
+  payment_account_id integer
+  journal_id integer
+  payment_acquirer_id integer
+}
+
+REF: account_payment_method_line.journal_id > account_journal.id
+REF: account_payment_method_line.payment_account_id > account_account.id
+REF: account_payment_method_line.payment_acquirer_id > payment_acquirer.id
+REF: account_payment_method_line.payment_method_id > account_payment_method.id
+
+TABLE account_payment_term
+{
+  id integer [pk]]
+  name varchar [not null]
+  active boolean
+  note text
+  company_id integer
+  sequence integer [not null]
+}
+
+REF: account_payment_term.company_id > res_company.id
+
+TABLE account_payment_term_line
+{
+  id integer [not null]
+  value varchar [not null]
+  value_amount numeric
+  days integer [not null]
+  day_of_the_month integer
+  option varchar [not null]
+  payment_id integer [not null]
+  sequence integer
+}
+
+REF: account_payment_term_line.payment_id > account_payment_term.id
+
+TABLE account_payment
+{
+  id integer [pk]
+  message_main_attachment_id integer
+  move_id integer [not null]
+  is_reconciled boolean
+  is_matched boolean
+  partner_bank_id integer
+  is_internal_transfer boolean
+  paired_internal_transfer_payment_id integer
+  payment_method_line_id integer
+  payment_method_id integer
+  amount numeric
+  payment_type varchar [not null]
+  partner_type varchar [not null]
+  payment_reference varchar
+  currency_id integer
+  partner_id integer
+  outstanding_account_id integer
+  destination_account_id integer
+  destination_journal_id integer
+  payment_transaction_id integer
+  payment_token_id integer
+  source_payment_id integer
+  check_amount_in_words varchar
+  check_number varchar
+}
+
+REF: account_payment.currency_id > res_currency.id
+REF: account_payment.destination_account_id > account_account.id
+REF: account_payment.destination_journal_id > account_journal.id
+REF: account_payment.message_main_attachment_id > ir_attachment.id
+REF: account_payment.move_id > account_move.id
+REF: account_payment.outstanding_account_id > account_account.id
+REF: account_payment.paired_internal_transfer_payment_id > account_payment.id
+REF: account_payment.partner_bank_id > res_partner_bank.id
+REF: account_payment.partner_id > res_partner.id
+REF: account_payment.payment_method_id > account_payment_method.id
+REF: account_payment.payment_method_line_id > account_payment_method_line.id
+REF: account_payment.payment_token_id > payment_token.id
+REF: account_payment.payment_transaction_id > payment_transaction.id
+REF: account_payment.source_payment_id > account_payment.id
+
+TABLE account_reconcile_model_partner_mapping
+{
+  id integer [pk]
+  model_id integer [not null]
+  partner_id integer [not null]
+  payment_ref_regex varchar
+  narration_regex varchar
+}
+
+REF: account_reconcile_model_partner_mapping.model_id > account_reconcile_model.id
+REF: account_reconcile_model_partner_mapping.partner_id > res_partner.id
+
+TABLE account_reconcile_model
+{
+  id integer [pk]
+  message_main_attachment_id integer
+  active boolean
+  name varchar [not null]
+  sequence integer [not null]
+  company_id integer [not null]
+  rule_type varchar [not null]
+  auto_reconcile boolean
+  to_check boolean
+  matching_order varchar [not null]
+  match_text_location_label boolean
+  match_text_location_note boolean
+  match_text_location_reference boolean
+  match_nature varchar [not null]
+  match_amount varchar
+  match_amount_min double
+  match_amount_max double
+  match_label varchar
+  match_label_param varchar
+  match_note varchar
+  match_note_param varchar
+  match_transaction_type varchar
+  match_transaction_type_param varchar
+  match_same_currency boolean
+  allow_payment_tolerance boolean
+  payment_tolerance_param double
+  payment_tolerance_type varchar [not null]
+  match_partner boolean
+  past_months_limit integer
+  decimal_separator varchar
+}
+
+REF: account_reconcile_model.company_id > res_company.id
+REF: account_reconcile_model.message_main_attachment_id > ir_attachment.id
+
+TABLE account_reconcile_model_line
+{
+  id integer [pk]
+  model_id integer
+  company_id integer
+  sequence integer [not null]
+  account_id integer [not null]
+  journal_id integer
+  label varchar
+  amount_type varchar [not null]
+  force_tax_included boolean
+  amount double
+  amount_string varchar [not null]
+  analytic_account_id integer
+}
+
+REF: account_reconcile_model_line.account_id > account_account.id
+REF: account_reconcile_model_line.analytic_account_id > account_analytic_account.id
+REF: account_reconcile_model_line.company_id > res_company.id
+REF: account_reconcile_model_line.journal_id > account_journal.id
+REF: account_reconcile_model_line.model_id > account_reconcile_model.id
+
+TABLE account_tax_carryover_line
+{
+  id integer [pk]
+  name varchar [not null]
+  amount double [not null]
+  date date [not null]
+  tax_report_line_id integer
+  company_id integer [not null]
+  foreign_vat_fiscal_position_id integer
+}
+
+REF: account_tax_carryover_line.company_id > res_company.id
+REF: account_tax_carryover_line.foreign_vat_fiscal_position_id > account_fiscal_position.id
+REF: account_tax_carryover_line.tax_report_line_id > account_tax_report_line.id
+
+TABLE account_tax_report
+{
+    id integer [pk]
+    name varchar [not null]
+    country_id integer [not null]
+}
+
+REF: account_tax_report.country_id > res_country.id
+
+TABLE account_tax_report_line
+{
+  id integer [pk]
+  name varchar [not null]
+  report_action_id integer
+  parent_id integer
+  sequence integer [not null]
+  parent_path varchar
+  report_id integer [not null]
+  tag_name varchar
+  code varchar
+  formula varchar
+  carry_over_condition_method varchar
+  carry_over_destination_line_id integer
+  is_carryover_persistent boolean
+  is_carryover_used_in_balance boolean
+}
+
+REF: account_tax_report_line.carry_over_destination_line_id > account_tax_report_line.id
+REF: account_tax_report_line.parent_id > account_tax_report_line.id
+REF: account_tax_report_line.report_action_id > ir_act_window.id
+REF: account_tax_report_line.report_id > account_tax_report.id
+
+TABLE account_tax_group
+{
+  id integer [not null]
+  name varchar [not null]
+  sequence integer
+  country_id integer
+  preceding_subtotal varchar
+}
+
+REF: account_tax_group.country_id > res_country.id
+
+TABLE account_tax
+{
+  id integer [pk]
+  name varchar [not null]
+  type_tax_use varchar [not null]
+  tax_scope varchar
+  amount_type varchar [not null]
+  active boolean
+  company_id integer [not null]
+  sequence integer [not null]
+  amount numeric [not null]
+  description varchar
+  price_include boolean
+  include_base_amount boolean
+  is_base_affected boolean
+  analytic boolean
+  tax_group_id integer [not null]
+  tax_exigibility varchar
+  cash_basis_transition_account_id integer
+  country_id integer [not null]
+  CONSTRAINT account_tax_name_company_uniq UNIQUE {name company_id type_tax_use tax_scope}
+}
+
+REF: account_tax.cash_basis_transition_account_id > account_account.id
+REF: account_tax.company_id > res_company.id
+REF: account_tax.country_id > res_country.id
+REF: account_tax.tax_group_id > account_tax_group.id
+
+TABLE account_tax_repartition_line
+{
+  id integer [pk]
+  factor_percent double [not null]
+  repartition_type varchar [not null]
+  account_id integer
+  invoice_tax_id integer
+  refund_tax_id integer
+  company_id integer
+  sequence integer
+  use_in_tax_closing boolean
+}
+
+REF: account_tax_repartition_line.account_id > account_account.id
+REF: account_tax_repartition_line.company_id > res_company.id
+REF: account_tax_repartition_line.invoice_tax_id > account_tax.id
+REF: account_tax_repartition_line.refund_tax_id > account_tax.id
+
+TABLE account_fiscal_position
+{
+  id integer [pk]
+  sequence integer
+  name varchar [not null]
+  active boolean
+  company_id integer [not null]
+  note text
+  auto_apply boolean
+  vat_required boolean
+  country_id integer
+  country_group_id integer
+  zip_from varchar
+  zip_to varchar
+  foreign_vat varchar
+}
+
+REF: account_fiscal_position.company_id > res_company.id
+REF: account_fiscal_position.country_group_id > res_country_group.id
+REF: account_fiscal_position.country_id > res_country.id
+
+TABLE account_fiscal_position_tax
+{
+  id integer [pk]
+  position_id integer [not null, unique]
+  company_id integer
+  tax_src_id integer [not null, unique]
+  tax_dest_id integer [unique]
+}
+
+REF: account_fiscal_position_tax.company_id > res_company.id
+REF: account_fiscal_position_tax.position_id > account_fiscal_position.id
+REF: account_fiscal_position_tax.tax_dest_id > account_tax.id
+REF: account_fiscal_position_tax.tax_src_id > account_tax.id
+
+TABLE account_fiscal_position_account
+{
+  id integer [pk]
+  position_id integer [not null, unique]
+  company_id integer
+  account_src_id integer [not null, unique]
+  account_dest_id integer [not null, unique]
+}
+
+REF: account_fiscal_position_account.account_dest_id > account_account.id
+REF: account_fiscal_position_account.account_src_id > account_account.id
+REF: account_fiscal_position_account.company_id > res_company.id
+REF: account_fiscal_position_account.position_id > account_fiscal_position.id
+
+-- NOT FIND
+-- account_root
+-- sequence_mixin
+
+-- TEMPLATE
+-- account_group_template
+-- account_account_template
+-- account_chart_template
+-- account_tax_template
+-- account_tax_repartition_line_template
+-- account_fiscal_position_template
+-- account_fiscal_position_tax_template
+-- account_fiscal_position_account_template
+-- account_reconcile_model_template
+-- account_reconcile_model_line_template
+
 -- ==================================================
 
 Table digest_digest {
