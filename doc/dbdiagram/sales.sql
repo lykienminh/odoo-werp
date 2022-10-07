@@ -367,42 +367,7 @@ TABLE account_group
 REF: account_group.company_id > res_company.id
 REF: account_group.parent_id > account_group.id
 
-TABLE account_analytic_default
-{
-  id integer [pk]
-  sequence integer
-  analytic_id integer
-  product_id integer
-  partner_id integer
-  account_id integer
-  user_id integer
-  company_id integer
-  date_start date
-  date_stop date
-}
-
-REF: account_analytic_default.account_id > account_account.id
-REF: account_analytic_default.analytic_id > account_analytic_account.id
-REF: account_analytic_default.company_id > res_company.id
-REF: account_analytic_default.partner_id > res_partner.id
-REF: account_analytic_default.product_id > product_product.id
-
-TABLE account_cashbox_line
-{
-  id integer [pk]
-  coin_value numeric [not null]
-  "number" integer
-  cashbox_id integer
-}
-
-REF: account_cashbox_line.cashbox_id > account_bank_statement_cashbox.id
-
 TABLE account_bank_statement_cashbox
-{
-  id integer [pk]
-}
-
-TABLE account_bank_statement_closebalance
 {
   id integer [pk]
 }
@@ -438,31 +403,6 @@ REF: account_bank_statement.company_id > res_company.id
 REF: account_bank_statement.journal_id > account_journal.id
 REF: account_bank_statement.message_main_attachment_id > ir_attachment.id
 REF: account_bank_statement.previous_statement_id > account_bank_statement.id
-
-TABLE account_bank_statement_line
-{
-  id integer [not null] DEFAULT nextval{'account_bank_statement_line_id_seq'::regclass}
-  move_id integer [not null]
-  statement_id integer [not null]
-  sequence integer
-  account_number varchar
-  partner_name varchar
-  transaction_type varchar
-  payment_ref varchar [not null]
-  amount numeric
-  amount_currency numeric
-  foreign_currency_id integer
-  amount_residual double precision
-  currency_id integer
-  partner_id integer
-  is_reconciled boolean
-}
-
-REF: account_bank_statement_line.currency_id > res_currency.id
-REF: account_bank_statement_line.foreign_currency_id > res_currency.id
-REF: account_bank_statement_line.move_id > account_move.id
-REF: account_bank_statement_line.partner_id > res_partner.id
-REF: account_bank_statement_line.statement_id > account_bank_statement.id
 
 TABLE account_bank_statement_line
 {
@@ -514,62 +454,6 @@ TABLE account_incoterms
   code varchar{3} [not null]
   active boolean
 }
-
-TABLE account_journal_group
-{
-  id integer [pk]
-  name varchar [not null]
-  company_id integer [not null]
-  sequence integer
-}
-
-REF: account_journal_group.company_id > res_company.id
-
-TABLE account_journal
-{
-  id integer [pk]
-  message_main_attachment_id integer
-  name varchar [not null]
-  code varchar{5} [not null, unique]
-  active boolean
-  type varchar [not null]
-  default_account_id integer
-  suspense_account_id integer
-  restrict_mode_hash_table boolean
-  sequence integer
-  invoice_reference_type varchar [not null]
-  invoice_reference_model varchar [not null]
-  currency_id integer
-  company_id integer [not null, unique]
-  refund_sequence boolean
-  sequence_override_regex text
-  profit_account_id integer
-  loss_account_id integer
-  bank_account_id integer
-  bank_statements_source varchar
-  sale_activity_type_id integer
-  sale_activity_user_id integer
-  sale_activity_note text
-  alias_id integer
-  secure_sequence_id integer
-  show_on_dashboard boolean
-  color integer
-  check_manual_sequencing boolean
-  check_sequence_id integer
-}
-
-REF: account_journal.alias_id > mail_alias.id
-REF: account_journal.bank_account_id > res_partner_bank.id
-REF: account_journal.check_sequence_id > ir_sequence.id
-REF: account_journal.company_id > res_company.id
-REF: account_journal.currency_id > res_currency.id
-REF: account_journal.default_account_id > account_account.id
-REF: account_journal.loss_account_id > account_account.id
-REF: account_journal.profit_account_id > account_account.id
-REF: account_journal.sale_activity_type_id > mail_activity_type.id
-REF: account_journal.sale_activity_user_id > res_users.id
-REF: account_journal.secure_sequence_id > ir_sequence.id
-REF: account_journal.suspense_account_id > account_account.id
 
 TABLE account_move_line
 {
@@ -665,14 +549,6 @@ REF: account_partial_reconcile.debit_currency_id > res_currency.id
 REF: account_partial_reconcile.debit_move_id > account_move_line.id
 REF: account_partial_reconcile.full_reconcile_id > account_full_reconcile.id
 
-TABLE account_payment_method
-{
-  id integer [pk]
-  name varchar [not null]
-  code varchar [not null, unique]
-  payment_type varchar [not null, unique]
-}
-
 TABLE account_payment_method_line
 {
   id integer [pk]
@@ -701,74 +577,19 @@ TABLE account_payment_term
 
 REF: account_payment_term.company_id > res_company.id
 
-TABLE account_payment_term_line
-{
-  id integer [not null]
-  value varchar [not null]
-  value_amount numeric
-  days integer [not null]
-  day_of_the_month integer
-  option varchar [not null]
-  payment_id integer [not null]
-  sequence integer
-}
+-- TABLE account_payment_term_line
+-- {
+--   id integer [not null]
+--   value varchar [not null]
+--   value_amount numeric
+--   days integer [not null]
+--   day_of_the_month integer
+--   option varchar [not null]
+--   payment_id integer [not null]
+--   sequence integer
+-- }
 
-REF: account_payment_term_line.payment_id > account_payment_term.id
-
-TABLE account_payment
-{
-  id integer [pk]
-  message_main_attachment_id integer
-  move_id integer [not null]
-  is_reconciled boolean
-  is_matched boolean
-  partner_bank_id integer
-  is_internal_transfer boolean
-  paired_internal_transfer_payment_id integer
-  payment_method_line_id integer
-  payment_method_id integer
-  amount numeric
-  payment_type varchar [not null]
-  partner_type varchar [not null]
-  payment_reference varchar
-  currency_id integer
-  partner_id integer
-  outstanding_account_id integer
-  destination_account_id integer
-  destination_journal_id integer
-  payment_transaction_id integer
-  payment_token_id integer
-  source_payment_id integer
-  check_amount_in_words varchar
-  check_number varchar
-}
-
-REF: account_payment.currency_id > res_currency.id
-REF: account_payment.destination_account_id > account_account.id
-REF: account_payment.destination_journal_id > account_journal.id
-REF: account_payment.message_main_attachment_id > ir_attachment.id
-REF: account_payment.move_id > account_move.id
-REF: account_payment.outstanding_account_id > account_account.id
-REF: account_payment.paired_internal_transfer_payment_id > account_payment.id
-REF: account_payment.partner_bank_id > res_partner_bank.id
-REF: account_payment.partner_id > res_partner.id
-REF: account_payment.payment_method_id > account_payment_method.id
-REF: account_payment.payment_method_line_id > account_payment_method_line.id
-REF: account_payment.payment_token_id > payment_token.id
-REF: account_payment.payment_transaction_id > payment_transaction.id
-REF: account_payment.source_payment_id > account_payment.id
-
-TABLE account_reconcile_model_partner_mapping
-{
-  id integer [pk]
-  model_id integer [not null]
-  partner_id integer [not null]
-  payment_ref_regex varchar
-  narration_regex varchar
-}
-
-REF: account_reconcile_model_partner_mapping.model_id > account_reconcile_model.id
-REF: account_reconcile_model_partner_mapping.partner_id > res_partner.id
+-- REF: account_payment_term_line.payment_id > account_payment_term.id
 
 TABLE account_reconcile_model
 {
@@ -807,42 +628,27 @@ TABLE account_reconcile_model
 REF: account_reconcile_model.company_id > res_company.id
 REF: account_reconcile_model.message_main_attachment_id > ir_attachment.id
 
-TABLE account_reconcile_model_line
-{
-  id integer [pk]
-  model_id integer
-  company_id integer
-  sequence integer [not null]
-  account_id integer [not null]
-  journal_id integer
-  label varchar
-  amount_type varchar [not null]
-  force_tax_included boolean
-  amount double
-  amount_string varchar [not null]
-  analytic_account_id integer
-}
+-- TABLE account_reconcile_model_line
+-- {
+--   id integer [pk]
+--   model_id integer
+--   company_id integer
+--   sequence integer [not null]
+--   account_id integer [not null]
+--   journal_id integer
+--   label varchar
+--   amount_type varchar [not null]
+--   force_tax_included boolean
+--   amount double
+--   amount_string varchar [not null]
+--   analytic_account_id integer
+-- }
 
-REF: account_reconcile_model_line.account_id > account_account.id
-REF: account_reconcile_model_line.analytic_account_id > account_analytic_account.id
-REF: account_reconcile_model_line.company_id > res_company.id
-REF: account_reconcile_model_line.journal_id > account_journal.id
-REF: account_reconcile_model_line.model_id > account_reconcile_model.id
-
-TABLE account_tax_carryover_line
-{
-  id integer [pk]
-  name varchar [not null]
-  amount double [not null]
-  date date [not null]
-  tax_report_line_id integer
-  company_id integer [not null]
-  foreign_vat_fiscal_position_id integer
-}
-
-REF: account_tax_carryover_line.company_id > res_company.id
-REF: account_tax_carryover_line.foreign_vat_fiscal_position_id > account_fiscal_position.id
-REF: account_tax_carryover_line.tax_report_line_id > account_tax_report_line.id
+-- REF: account_reconcile_model_line.account_id > account_account.id
+-- REF: account_reconcile_model_line.analytic_account_id > account_analytic_account.id
+-- REF: account_reconcile_model_line.company_id > res_company.id
+-- REF: account_reconcile_model_line.journal_id > account_journal.id
+-- REF: account_reconcile_model_line.model_id > account_reconcile_model.id
 
 TABLE account_tax_report
 {
@@ -852,29 +658,6 @@ TABLE account_tax_report
 }
 
 REF: account_tax_report.country_id > res_country.id
-
-TABLE account_tax_report_line
-{
-  id integer [pk]
-  name varchar [not null]
-  report_action_id integer
-  parent_id integer
-  sequence integer [not null]
-  parent_path varchar
-  report_id integer [not null]
-  tag_name varchar
-  code varchar
-  formula varchar
-  carry_over_condition_method varchar
-  carry_over_destination_line_id integer
-  is_carryover_persistent boolean
-  is_carryover_used_in_balance boolean
-}
-
-REF: account_tax_report_line.carry_over_destination_line_id > account_tax_report_line.id
-REF: account_tax_report_line.parent_id > account_tax_report_line.id
-REF: account_tax_report_line.report_action_id > ir_act_window.id
-REF: account_tax_report_line.report_id > account_tax_report.id
 
 TABLE account_tax_group
 {
@@ -953,50 +736,6 @@ TABLE account_fiscal_position
 REF: account_fiscal_position.company_id > res_company.id
 REF: account_fiscal_position.country_group_id > res_country_group.id
 REF: account_fiscal_position.country_id > res_country.id
-
-TABLE account_fiscal_position_tax
-{
-  id integer [pk]
-  position_id integer [not null, unique]
-  company_id integer
-  tax_src_id integer [not null, unique]
-  tax_dest_id integer [unique]
-}
-
-REF: account_fiscal_position_tax.company_id > res_company.id
-REF: account_fiscal_position_tax.position_id > account_fiscal_position.id
-REF: account_fiscal_position_tax.tax_dest_id > account_tax.id
-REF: account_fiscal_position_tax.tax_src_id > account_tax.id
-
-TABLE account_fiscal_position_account
-{
-  id integer [pk]
-  position_id integer [not null, unique]
-  company_id integer
-  account_src_id integer [not null, unique]
-  account_dest_id integer [not null, unique]
-}
-
-REF: account_fiscal_position_account.account_dest_id > account_account.id
-REF: account_fiscal_position_account.account_src_id > account_account.id
-REF: account_fiscal_position_account.company_id > res_company.id
-REF: account_fiscal_position_account.position_id > account_fiscal_position.id
-
--- NOT FIND
--- account_root
--- sequence_mixin
-
--- TEMPLATE
--- account_group_template
--- account_account_template
--- account_chart_template
--- account_tax_template
--- account_tax_repartition_line_template
--- account_fiscal_position_template
--- account_fiscal_position_tax_template
--- account_fiscal_position_account_template
--- account_reconcile_model_template
--- account_reconcile_model_line_template
 
 -- ==================================================
 
@@ -1295,6 +1034,7 @@ Ref: account_payment.paired_internal_transfer_payment_id > account_payment.id
 Ref: account_payment.partner_bank_id > res_partner_bank.id
 Ref: account_payment.partner_id > res_partner.id
 Ref: account_payment.payment_method_id > account_payment_method.id
+REF: account_payment.payment_method_line_id > account_payment_method_line.id
 Ref: account_payment.payment_token_id > payment_token.id
 Ref: account_payment.payment_transaction_id > payment_transaction.id
 Ref: account_payment.source_payment_id > account_payment.id
