@@ -157,3 +157,24 @@ TABLE hr_work_location
 REF: hr_work_location.address_id > res_partner.id
 REF: hr_work_location.company_id > res_company.id
 
+TABLE barcode_rule
+{
+  id integer [pk]
+  name varchar{32} [not null]
+  barcode_nomenclature_id integer
+  sequence integer
+  encoding varchar [not null]
+  type varchar [not null]
+  pattern varchar{32} [not null]
+  alias varchar{32} [not null]
+}
+
+REF: barcode_rule.barcode_nomenclature_id > barcode_nomenclature.id
+
+TABLE barcode_nomenclature
+{
+  id integer [pk]
+  name varchar{32} [not null]
+  upc_ean_conv varchar [not null]
+}
+
