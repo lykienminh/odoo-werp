@@ -18,6 +18,8 @@ __pycache__/
 status
 # odoo filestore
 odoo/filestore
+# odoo sessions
+odoo/sessions
 # maintenance migration scripts
 odoo/addons/base/maintenance
 
