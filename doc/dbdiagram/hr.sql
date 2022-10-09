@@ -1,3 +1,7 @@
+-- ============================================
+-- HR Modules: Employee, Attendance, Time off
+-- ============================================
+
 TABLE hr_plan_activity_type
 {
   id integer [pk]
