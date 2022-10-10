@@ -111,11 +111,9 @@ Table procurement_group {
     partner_id integer
     name varchar [not null]
     move_type varchar [not null]
-    sale_id integer
 }
 
 Ref: procurement_group.parent_id > res_partner.id
-Ref: procurement_group.sale_id > sale_order.id
 
 Table stock_picking_type {
     id integer [pk]
@@ -169,15 +167,11 @@ Table stock_location {
     last_inventory_date date
     next_inventory_date date
     storage_category_id integer
-    valuation_in_account_id integer
-    valuation_out_account_id integer
 }
 
 Ref: stock_location.location_id > stock_location.id
 Ref: stock_location.removal_strategy_id > product_removal.id
 Ref: stock_location.storage_category_id > stock_storage_category.id
-Ref: stock_location.valuation_in_account_id > account_account.id
-Ref: stock_location.valuation_out_account_id > account_account.id
 
 Table stock_warehouse {
     id integer [pk]
@@ -293,13 +287,6 @@ Table product_removal {
     method varchar [not null]
 }
 
-TABLE product_removal
-{
-  id integer [pk]
-  name varchar [not null]
-  method varchar [not null]
-}
-
 TABLE stock_putaway_rule
 {
   id integer [pk]
@@ -318,52 +305,6 @@ REF: stock_putaway_rule.location_in_id > stock_location.id
 REF: stock_putaway_rule.location_out_id > stock_location.id
 REF: stock_putaway_rule.product_id > product_product.id
 REF: stock_putaway_rule.storage_category_id > stock_storage_category.id
-
-TABLE stock_location
-{
-  id integer [pk]
-  name varchar [not null]
-  complete_name varchar
-  active boolean
-  usage varchar [not null]
-  location_id integer
-  comment text
-  posx integer
-  posy integer
-  posz integer
-  parent_path varchar
-  company_id integer [unique]
-  scrap_location boolean
-  return_location boolean
-  removal_strategy_id integer
-  barcode varchar [unique]
-  cyclic_inventory_frequency integer
-  last_inventory_date date
-  next_inventory_date date
-  storage_category_id integer
-}
-
-REF: stock_location.location_id > stock_location.id
-REF: stock_location.removal_strategy_id > product_removal.id
-REF: stock_location.storage_category_id > stock_storage_category.id
-
-TABLE stock_location_route
-{
-  id integer [not null]
-  name varchar [not null]
-  active boolean
-  sequence integer
-  product_selectable boolean
-  product_categ_selectable boolean
-  warehouse_selectable boolean
-  packaging_selectable boolean
-  supplied_wh_id integer
-  supplier_wh_id integer
-  company_id integer
-}
-
-REF: stock_location_route.supplied_wh_id > stock_warehouse.id
-REF: stock_location_route.supplier_wh_id > stock_warehouse.id
 
 TABLE stock_move_line
 {
@@ -550,38 +491,6 @@ REF: stock_picking.owner_id > res_partner.id
 REF: stock_picking.partner_id > res_partner.id
 REF: stock_picking.picking_type_id > stock_picking_type.id
 
-TABLE stock_picking_type
-{
-  id integer [pk]
-  name varchar [not null]
-  color integer
-  sequence integer
-  sequence_id integer
-  sequence_code varchar [not null]
-  default_location_src_id integer
-  default_location_dest_id integer
-  code varchar [not null]
-  return_picking_type_id integer
-  show_entire_packs boolean
-  warehouse_id integer
-  active boolean
-  use_create_lots boolean
-  use_existing_lots boolean
-  print_label boolean
-  show_operations boolean
-  show_reserved boolean
-  reservation_method varchar [not null]
-  reservation_days_before integer
-  reservation_days_before_priority integer
-  barcode varchar
-  company_id integer [not null]
-}
-
-REF: stock_picking_type.default_location_dest_id > stock_location.id
-REF: stock_picking_type.default_location_src_id > stock_location.id
-REF: stock_picking_type.return_picking_type_id > stock_picking_type.id
-REF: stock_picking_type.warehouse_id > stock_warehouse.id
-
 TABLE stock_production_lot
 {
   id integer [pk]
@@ -634,50 +543,6 @@ TABLE stock_quant_package
 REF: stock_quant_package.location_id > stock_location.id
 REF: stock_quant_package.package_type_id > stock_package_type.id
 
-TABLE stock_rule
-{
-  id integer [pk]
-  name varchar [not null]
-  active boolean
-  group_propagation_option varchar
-  group_id integer
-  action varchar [not null]
-  sequence integer
-  company_id integer
-  location_id integer [not null]
-  location_src_id integer
-  route_id integer [not null]
-  procure_method varchar [not null]
-  route_sequence integer
-  picking_type_id integer [not null]
-  delay integer
-  partner_address_id integer
-  propagate_cancel boolean
-  propagate_carrier boolean
-  warehouse_id integer
-  propagate_warehouse_id integer
-  auto varchar [not null]
-}
-
-REF: stock_rule.group_id > procurement_group.id
-REF: stock_rule.location_id > stock_location.id
-REF: stock_rule.location_src_id > stock_location.id
-REF: stock_rule.partner_address_id > res_partner.id
-REF: stock_rule.picking_type_id > stock_picking_type.id
-REF: stock_rule.propagate_warehouse_id > stock_warehouse.id
-REF: stock_rule.route_id > stock_location_route.id
-REF: stock_rule.warehouse_id > stock_warehouse.id
-
-TABLE procurement_group
-{
-  id integer [pk]
-  partner_id integer
-  name varchar [not null]
-  move_type varchar [not null]
-}
-
-REF: procurement_group.partner_id > res_partner.id
-
 TABLE stock_scrap
 {
   id integer [pk]
@@ -709,15 +574,6 @@ REF: stock_scrap.product_id > product_product.id
 REF: stock_scrap.product_uom_id > uom_uom.id
 REF: stock_scrap.scrap_location_id > stock_location.id
 
-TABLE stock_storage_category
-{
-  id integer [pk]
-  name varchar [not null]
-  max_weight numeric
-  allow_new_product varchar [not null]
-  company_id integer
-}
-
 TABLE stock_storage_category_capacity
 {
   id integer [pk]
@@ -730,53 +586,6 @@ TABLE stock_storage_category_capacity
 REF: stock_storage_category_capacity.package_type_id > stock_package_type.id
 REF: stock_storage_category_capacity.product_id > product_product.id
 REF: stock_storage_category_capacity.storage_category_id > stock_storage_category.id
-
-TABLE stock_warehouse
-{
-  id integer [pk]
-  name varchar [not null]
-  active boolean
-  company_id integer [not null]
-  partner_id integer
-  view_location_id integer [not null]
-  lot_stock_id integer [not null]
-  code varchar{5} [not null]
-  reception_steps varchar [not null]
-  delivery_steps varchar [not null]
-  wh_input_stock_loc_id integer
-  wh_qc_stock_loc_id integer
-  wh_output_stock_loc_id integer
-  wh_pack_stock_loc_id integer
-  mto_pull_id integer
-  pick_type_id integer
-  pack_type_id integer
-  out_type_id integer
-  in_type_id integer
-  int_type_id integer
-  return_type_id integer
-  crossdock_route_id integer
-  reception_route_id integer
-  delivery_route_id integer
-  sequence integer
-}
-
-REF: stock_warehouse.crossdock_route_id > stock_location_route.id
-REF: stock_warehouse.delivery_route_id > stock_location_route.id
-REF: stock_warehouse.in_type_id > stock_picking_type.id
-REF: stock_warehouse.int_type_id > stock_picking_type.id
-REF: stock_warehouse.lot_stock_id > stock_location.id
-REF: stock_warehouse.mto_pull_id > stock_rule.id
-REF: stock_warehouse.out_type_id > stock_picking_type.id
-REF: stock_warehouse.pack_type_id > stock_picking_type.id
-REF: stock_warehouse.partner_id > res_partner.id
-REF: stock_warehouse.pick_type_id > stock_picking_type.id
-REF: stock_warehouse.reception_route_id > stock_location_route.id
-REF: stock_warehouse.return_type_id > stock_picking_type.id
-REF: stock_warehouse.view_location_id > stock_location.id
-REF: stock_warehouse.wh_input_stock_loc_id > stock_location.id
-REF: stock_warehouse.wh_output_stock_loc_id > stock_location.id
-REF: stock_warehouse.wh_pack_stock_loc_id > stock_location.id
-REF: stock_warehouse.wh_qc_stock_loc_id > stock_location.id
 
 TABLE barcode_rule
 {
