@@ -314,7 +314,6 @@ TABLE stock_putaway_rule
 }
 
 REF: stock_putaway_rule.category_id > product_category.id
-REF: stock_putaway_rule.company_id > res_company.id
 REF: stock_putaway_rule.location_in_id > stock_location.id
 REF: stock_putaway_rule.location_out_id > stock_location.id
 REF: stock_putaway_rule.product_id > product_product.id
@@ -344,7 +343,6 @@ TABLE stock_location
   storage_category_id integer
 }
 
-REF: stock_location.company_id > res_company.id
 REF: stock_location.location_id > stock_location.id
 REF: stock_location.removal_strategy_id > product_removal.id
 REF: stock_location.storage_category_id > stock_storage_category.id
@@ -364,7 +362,6 @@ TABLE stock_location_route
   company_id integer
 }
 
-REF: stock_location_route.company_id > res_company.id
 REF: stock_location_route.supplied_wh_id > stock_warehouse.id
 REF: stock_location_route.supplier_wh_id > stock_warehouse.id
 
@@ -393,7 +390,6 @@ TABLE stock_move_line
   description_picking text
 }
 
-REF: stock_move_line.company_id > res_company.id
 REF: stock_move_line.location_dest_id > stock_location.id
 REF: stock_move_line.location_id > stock_location.id
 REF: stock_move_line.lot_id > stock_production_lot.id
@@ -448,7 +444,6 @@ TABLE stock_move
   product_packaging_id integer
 }
 
-REF: stock_move.company_id > res_company.id
 REF: stock_move.group_id > procurement_group.id
 REF: stock_move.location_dest_id > stock_location.id
 REF: stock_move.location_id > stock_location.id
@@ -485,7 +480,6 @@ TABLE stock_warehouse_orderpoint
   qty_to_order double
 }
 
-REF: stock_warehouse_orderpoint.company_id > res_company.id
 REF: stock_warehouse_orderpoint.group_id > procurement_group.id
 REF: stock_warehouse_orderpoint.location_id > stock_location.id
 REF: stock_warehouse_orderpoint.product_category_id > product_category.id
@@ -502,7 +496,6 @@ TABLE stock_package_level
   company_id integer [not null]
 }
 
-REF: stock_package_level.company_id > res_company.id
 REF: stock_package_level.location_dest_id > stock_location.id
 REF: stock_package_level.package_id > stock_quant_package.id
 REF: stock_package_level.picking_id > stock_picking.id
@@ -519,8 +512,6 @@ TABLE stock_package_type
   barcode varchar [unique]
   company_id integer
 }
-
-REF: stock_package_type.company_id > res_company.id
 
 TABLE stock_picking
 {
@@ -552,11 +543,9 @@ TABLE stock_picking
 }
 
 REF: stock_picking.backorder_id > stock_picking.id
-REF: stock_picking.company_id > res_company.id
 REF: stock_picking.group_id > procurement_group.id
 REF: stock_picking.location_dest_id > stock_location.id
 REF: stock_picking.location_id > stock_location.id
-REF: stock_picking.message_main_attachment_id > ir_attachment.id
 REF: stock_picking.owner_id > res_partner.id
 REF: stock_picking.partner_id > res_partner.id
 REF: stock_picking.picking_type_id > stock_picking_type.id
@@ -588,11 +577,9 @@ TABLE stock_picking_type
   company_id integer [not null]
 }
 
-REF: stock_picking_type.company_id > res_company.id
 REF: stock_picking_type.default_location_dest_id > stock_location.id
 REF: stock_picking_type.default_location_src_id > stock_location.id
 REF: stock_picking_type.return_picking_type_id > stock_picking_type.id
-REF: stock_picking_type.sequence_id > ir_sequence.id
 REF: stock_picking_type.warehouse_id > stock_warehouse.id
 
 TABLE stock_production_lot
@@ -607,8 +594,6 @@ TABLE stock_production_lot
   company_id integer [not null]
 }
 
-REF: stock_production_lot.company_id > res_company.id
-REF: stock_production_lot.message_main_attachment_id > ir_attachment.id
 REF: stock_production_lot.product_id > product_product.id
 REF: stock_production_lot.product_uom_id > uom_uom.id
 
@@ -630,7 +615,6 @@ TABLE stock_quant
   user_id integer
 }
 
-REF: stock_quant.company_id > res_company.id
 REF: stock_quant.location_id > stock_location.id
 REF: stock_quant.lot_id > stock_production_lot.id
 REF: stock_quant.owner_id > res_partner.id
@@ -647,7 +631,6 @@ TABLE stock_quant_package
   package_use varchar [not null]
 }
 
-REF: stock_quant_package.company_id > res_company.id
 REF: stock_quant_package.location_id > stock_location.id
 REF: stock_quant_package.package_type_id > stock_package_type.id
 
@@ -676,7 +659,6 @@ TABLE stock_rule
   auto varchar [not null]
 }
 
-REF: stock_rule.company_id > res_company.id
 REF: stock_rule.group_id > procurement_group.id
 REF: stock_rule.location_id > stock_location.id
 REF: stock_rule.location_src_id > stock_location.id
@@ -717,10 +699,8 @@ TABLE stock_scrap
   date_done timestamp
 }
 
-REF: stock_scrap.company_id > res_company.id
 REF: stock_scrap.location_id > stock_location.id
 REF: stock_scrap.lot_id > stock_production_lot.id
-REF: stock_scrap.message_main_attachment_id > ir_attachment.id
 REF: stock_scrap.move_id > stock_move.id
 REF: stock_scrap.owner_id > res_partner.id
 REF: stock_scrap.package_id > stock_quant_package.id
@@ -737,8 +717,6 @@ TABLE stock_storage_category
   allow_new_product varchar [not null]
   company_id integer
 }
-
-REF: stock_storage_category.company_id > res_company.id
 
 TABLE stock_storage_category_capacity
 {
@@ -782,7 +760,6 @@ TABLE stock_warehouse
   sequence integer
 }
 
-REF: stock_warehouse.company_id > res_company.id
 REF: stock_warehouse.crossdock_route_id > stock_location_route.id
 REF: stock_warehouse.delivery_route_id > stock_location_route.id
 REF: stock_warehouse.in_type_id > stock_picking_type.id
@@ -844,8 +821,6 @@ TABLE digest_digest
   kpi_res_users_connected boolean
   kpi_mail_message_total boolean
 }
-
-REF: digest_digest.company_id > res_company.id
 
 TABLE product_attribute
 {
@@ -928,9 +903,6 @@ TABLE product_pricelist
   discount_policy varchar [not null]
 }
 
-REF: product_pricelist.company_id > res_company.id
-REF: product_pricelist.currency_id > res_currency.id
-
 TABLE product_pricelist_item
 {
   id integer [pk]
@@ -959,8 +931,6 @@ TABLE product_pricelist_item
 
 REF: product_pricelist_item.base_pricelist_id > product_pricelist.id
 REF: product_pricelist_item.categ_id > product_category.id
-REF: product_pricelist_item.company_id > res_company.id
-REF: product_pricelist_item.currency_id > res_currency.id
 REF: product_pricelist_item.pricelist_id > product_pricelist.id
 REF: product_pricelist_item.product_id > product_product.id
 REF: product_pricelist_item.product_tmpl_id > product_template.id
@@ -999,8 +969,6 @@ TABLE product_template
 }
 
 REF: product_template.categ_id > product_category.id
-REF: product_template.company_id > res_company.id
-REF: product_template.message_main_attachment_id > ir_attachment.id
 REF: product_template.uom_id > uom_uom.id
 REF: product_template.uom_po_id > uom_uom.id
 
@@ -1032,7 +1000,6 @@ TABLE product_product
   can_image_variant_1024_be_zoomed boolean
 }
 
-REF: product_product.message_main_attachment_id > ir_attachment.id
 REF: product_product.product_tmpl_id > product_template.id
 
 TABLE product_packaging
@@ -1047,7 +1014,6 @@ TABLE product_packaging
   package_type_id integer
 }
 
-REF: product_packaging.company_id > res_company.id
 REF: product_packaging.package_type_id > stock_package_type.id
 REF: product_packaging.product_id > product_product.id
 
@@ -1069,9 +1035,60 @@ TABLE product_supplierinfo
   delay integer [not null]
 }
 
-REF: product_supplierinfo.company_id > res_company.id
-REF: product_supplierinfo.currency_id > res_currency.id
 REF: product_supplierinfo.name > res_partner.id
 REF: product_supplierinfo.product_id > product_product.id
 REF: product_supplierinfo.product_tmpl_id > product_template.id
 
+TABLE res_partner
+{
+  id integer [pk]
+  name varchar
+  company_id integer
+  display_name varchar
+  date date
+  title integer
+  parent_id integer
+  ref varchar
+  lang varchar
+  tz varchar
+  user_id integer
+  vat varchar
+  website varchar
+  comment text
+  credit_limit double
+  active boolean
+  employee boolean
+  function varchar
+  type varchar
+  street varchar
+  street2 varchar
+  zip varchar
+  city varchar
+  state_id integer
+  country_id integer
+  partner_latitude numeric
+  partner_longitude numeric
+  email varchar
+  phone varchar
+  mobile varchar
+  is_company boolean
+  industry_id integer
+  color integer
+  partner_share boolean
+  commercial_partner_id integer
+  commercial_company_name varchar
+  company_name varchar
+  message_main_attachment_id integer
+  email_normalized varchar
+  message_bounce integer
+  signup_token varchar
+  signup_type varchar
+  signup_expiration timestamp
+  partner_gid integer
+  additional_info varchar
+  phone_sanitized varchar
+  picking_warn varchar
+  picking_warn_msg text
+}
+
+REF: res_partner.commercial_partner_id > res_partner.id
