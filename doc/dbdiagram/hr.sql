@@ -135,6 +135,21 @@ Ref: hr_employee.resource_calendar_id > resource_calendar.id
 Ref: hr_employee.resource_id > resource_resource.id
 Ref: hr_employee.work_location_id > hr_work_location.id
 
+Table hr_employee_category {
+    id [pk]
+}
+
+Table employee_category_rel {
+    emp_id integer
+    category_id integer
+    Indexes{
+        (emp_id, category_id) [pk]
+    }
+}
+
+Ref: employee_category_rel.emp_id - hr_employee.id
+Ref: employee_category_rel.category_id - hr_employee_category.id
+
 Table hr_department {
     id integer [pk]
     name varchar [not null]
