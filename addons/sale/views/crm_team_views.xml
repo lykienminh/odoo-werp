@@ -37,7 +37,7 @@
 
     <!-- Sales Team Dashboard Views -->
     <record id="action_quotation_form" model="ir.actions.act_window">
-        <field name="name">New Quotation</field>
+        <field name="name">New Quotation Mint</field>
         <field name="res_model">sale.order</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">form</field>
