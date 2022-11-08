@@ -6,20 +6,24 @@ _build/
 !.gitignore
 !.github
 !.mailmap
+
 # compiled python files
 *.py[co]
 __pycache__/
+
 # setup.py egg_info
 *.egg-info
+
 # emacs backup files
 *~
+
 # hg stuff
 *.orig
 status
-# odoo filestore
-odoo/filestore
-# odoo sessions
-odoo/sessions
+
+# odoo data
+odoo/data
+
 # maintenance migration scripts
 odoo/addons/base/maintenance
 
@@ -46,6 +50,7 @@ package.json
 /man/
 /share/
 /src/
+/venv/
 
 # avoid adding it after generation from tsconfig command
 tsconfig.json
