@@ -54,26 +54,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-6 o_setting_box" id="quality_control">
-                                <div class="o_setting_left_pane">
-                                    <field name="module_quality_control" widget="upgrade_boolean"/>
-                                </div>
-                                <div class="o_setting_right_pane">
-                                    <label for="module_quality_control"/>
-                                    <div class="text-muted">
-                                        Add quality checks to your transfer operations
-                                    </div>
-                                    <div class="row mt-2" attrs="{'invisible': [('module_quality_control','=',False)]}">
-                                        <field name="module_quality_control_worksheet" widget="upgrade_boolean" class="col-lg-1 ml16 mr0"/>
-                                        <div class="col pl-0">
-                                            <label for="module_quality_control_worksheet"/>
-                                            <div class="text-muted">
-                                                Create customizable worksheets for your quality checks
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-12 col-lg-6 o_setting_box" id="annual_inventory_date" groups='stock.group_stock_manager'>
                                 <div class="o_setting_right_pane">
                                     <label for="annual_inventory_day" string="Annual Inventory Day and Month"/>
@@ -103,25 +83,6 @@
                                                 Automatically open reception report when a receipt is validated.
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <h2>Barcode</h2>
-                        <div class="row mt16 o_settings_container" name="barcode_setting_container">
-                            <div class="col-12 col-lg-6 o_setting_box" id="process_operations_barcodes">
-                                <div class="o_setting_left_pane">
-                                    <field name="module_stock_barcode" widget="upgrade_boolean"/>
-                                </div>
-                                <div class="o_setting_right_pane" id="barcode_settings">
-                                    <label for="module_stock_barcode"/>
-                                    <a href="https://www.odoo.com/documentation/15.0/applications/inventory_and_mrp/inventory/barcode/setup/software.html" title="Documentation" class="mr-2 o_doc_link" target="_blank"></a>
-                                    <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." groups="base.group_multi_company"/>
-                                    <div class="text-muted" name="stock_barcode">
-                                        Process operations faster with barcodes
-                                    </div>
-                                    <div class="content-group">
-                                        <div id="use_product_barcode"/>
                                     </div>
                                 </div>
                             </div>
@@ -159,17 +120,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-6 o_setting_box" id="signature_delivery_orders">
-                                <div class="o_setting_left_pane">
-                                    <field name="group_stock_sign_delivery"/>
-                                </div>
-                                <div class="o_setting_right_pane">
-                                    <label for="group_stock_sign_delivery"/>
-                                    <div class="text-muted">
-                                        Require a signature on your delivery orders
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-12 col-lg-6 o_setting_box" id="delivery" title="Shipping connectors allow to compute accurate shipping costs, print shipping labels and request carrier picking at your warehouse to ship to the customer. Apply shipping connector from delivery methods.">
                                 <div class="o_setting_left_pane">
                                     <field name="module_delivery"/>
@@ -178,100 +128,6 @@
                                     <label for="module_delivery"/>
                                     <div class="text-muted" id="delivery_carrier">
                                         Compute shipping costs
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <h2>Shipping Connectors</h2>
-                        <div class="row mt16 o_settings_container" name="product_setting_container">
-                            <div class="col-12 col-lg-6 o_setting_box" id="compute_shipping_costs_ups">
-                                <div class="o_setting_left_pane">
-                                    <field name="module_delivery_ups" widget="upgrade_boolean"/>
-                                </div>
-                                <div class="o_setting_right_pane">
-                                    <label for="module_delivery_ups"/>
-                                    <a href="https://www.odoo.com/documentation/15.0/applications/inventory_and_mrp/inventory/shipping/setup/third_party_shipper.html" title="Documentation" class="o_doc_link" target="_blank"></a>
-                                    <div class="text-muted">
-                                        Compute shipping costs and ship with UPS
-                                    </div>
-                                    <div class="content-group">
-                                        <div id="stock_delivery_ups"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6 o_setting_box" id="compute_shipping_costs_dhl">
-                                <div class="o_setting_left_pane">
-                                    <field name="module_delivery_dhl" widget="upgrade_boolean"/>
-                                </div>
-                                <div class="o_setting_right_pane">
-                                    <label for="module_delivery_dhl"/>
-                                    <a href="https://www.odoo.com/documentation/15.0/applications/inventory_and_mrp/inventory/shipping/setup/third_party_shipper.html" title="Documentation" class="o_doc_link" target="_blank"></a>
-                                    <div class="text-muted">
-                                        Compute shipping costs and ship with DHL
-                                    </div>
-                                    <div class="content-group">
-                                        <div id="stock_delivery_dhl"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6 o_setting_box" id="compute_shipping_costs_fedex">
-                                <div class="o_setting_left_pane">
-                                    <field name="module_delivery_fedex" widget="upgrade_boolean"/>
-                                </div>
-                                <div class="o_setting_right_pane">
-                                    <label for="module_delivery_fedex"/>
-                                    <a href="https://www.odoo.com/documentation/15.0/applications/inventory_and_mrp/inventory/shipping/setup/third_party_shipper.html" title="Documentation" class="o_doc_link" target="_blank"></a>
-                                    <div class="text-muted">
-                                        Compute shipping costs and ship with FedEx
-                                    </div>
-                                    <div class="content-group">
-                                        <div id="stock_delivery_fedex"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6 o_setting_box" id="compute_shipping_costs_usps">
-                                <div class="o_setting_left_pane">
-                                    <field name="module_delivery_usps" widget="upgrade_boolean"/>
-                                </div>
-                                <div class="o_setting_right_pane">
-                                    <label for="module_delivery_usps"/>
-                                    <a href="https://www.odoo.com/documentation/15.0/applications/inventory_and_mrp/inventory/shipping/setup/third_party_shipper.html" title="Documentation" class="o_doc_link" target="_blank"></a>
-                                    <div class="text-muted">
-                                        Compute shipping costs and ship with USPS
-                                    </div>
-                                    <div class="content-group">
-                                        <div id="stock_delivery_usps"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6 o_setting_box" id="compute_shipping_costs_bpost">
-                                <div class="o_setting_left_pane">
-                                    <field name="module_delivery_bpost" widget="upgrade_boolean"/>
-                                </div>
-                                <div class="o_setting_right_pane">
-                                    <label for="module_delivery_bpost"/>
-                                    <a href="https://www.odoo.com/documentation/15.0/applications/inventory_and_mrp/inventory/shipping/setup/third_party_shipper.html" title="Documentation" class="o_doc_link" target="_blank"></a>
-                                    <div class="text-muted">
-                                        Compute shipping costs and ship with bpost
-                                    </div>
-                                    <div class="content-group">
-                                        <div id="stock_delivery_bpost"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-lg-6 o_setting_box" id="compute_shipping_costs_easypost">
-                                <div class="o_setting_left_pane">
-                                    <field name="module_delivery_easypost" widget="upgrade_boolean"/>
-                                </div>
-                                <div class="o_setting_right_pane">
-                                    <label for="module_delivery_easypost"/>
-                                    <a href="https://www.odoo.com/documentation/15.0/applications/inventory_and_mrp/inventory/shipping/setup/third_party_shipper.html" title="Documentation" class="o_doc_link" target="_blank"></a>
-                                    <div class="text-muted">
-                                        Compute shipping costs and ship with Easypost
-                                    </div>
-                                    <div class="content-group">
-                                        <div id="stock_delivery_easypost"/>
                                     </div>
                                 </div>
                             </div>
@@ -291,23 +147,6 @@
                                     <div class="content-group">
                                         <div class="mt8" attrs="{'invisible': [('group_product_variant', '=', False)]}">
                                             <button name="%(product.attribute_action)d" icon="fa-arrow-right" type="action" string="Attributes" class="btn-link"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6 o_setting_box" id="sell_purchase_uom">
-                                <div class="o_setting_left_pane">
-                                    <field name="group_uom"/>
-                                </div>
-                                <div class="o_setting_right_pane">
-                                    <label for="group_uom"/>
-                                    <a href="https://www.odoo.com/documentation/15.0/applications/inventory_and_mrp/inventory/management/products/uom.html" title="Documentation" class="o_doc_link" target="_blank"></a>
-                                    <div class="text-muted">
-                                        Sell and purchase products in different units of measure
-                                    </div>
-                                    <div class="content-group">
-                                        <div class="mt8" attrs="{'invisible': [('group_uom', '=', False)]}">
-                                            <button name="%(uom.product_uom_categ_form_action)d" icon="fa-arrow-right" type="action" string="Units Of Measure" class="btn-link"/>
                                         </div>
                                     </div>
                                 </div>
