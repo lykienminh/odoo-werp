@@ -1089,7 +1089,7 @@ msgstr ""
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__create_date
 #: model_terms:ir.ui.view,arch_db:sale.view_quotation_tree
-msgid "Creation Date"
+msgid "Creation Date MinMin"
 msgstr ""
 
 #. module: sale
