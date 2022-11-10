@@ -72,25 +72,6 @@ export function preferencesItem(env) {
     };
 }
 
-function odooAccountItem(env) {
-    return {
-        type: "item",
-        id: "account",
-        description: env._t("My Odoo.com account"),
-        callback: () => {
-            env.services
-                .rpc("/web/session/account")
-                .then((url) => {
-                    browser.location.href = url;
-                })
-                .catch(() => {
-                    browser.location.href = "https://accounts.odoo.com/account";
-                });
-        },
-        sequence: 60,
-    };
-}
-
 function logOutItem(env) {
     const route = "/web/session/logout";
     return {
@@ -112,5 +93,4 @@ registry
     .add("shortcuts", shortCutsItem)
     .add("separator", separator)
     .add("profile", preferencesItem)
-    .add("odoo_account", odooAccountItem)
     .add("log_out", logOutItem);
