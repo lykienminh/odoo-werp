@@ -6,33 +6,33 @@ import { registry } from "../../core/registry";
 import { _lt } from "../../core/l10n/translation";
 import { session } from "@web/session";
 
-function documentationItem(env) {
-    const documentationURL = "https://www.odoo.com/documentation/15.0";
-    return {
-        type: "item",
-        id: "documentation",
-        description: env._t("Documentation"),
-        href: documentationURL,
-        callback: () => {
-            browser.open(documentationURL, "_blank");
-        },
-        sequence: 10,
-    };
-}
+// function documentationItem(env) {
+//     const documentationURL = "https://www.odoo.com/documentation/15.0";
+//     return {
+//         type: "item",
+//         id: "documentation",
+//         description: env._t("Documentation"),
+//         href: documentationURL,
+//         callback: () => {
+//             browser.open(documentationURL, "_blank");
+//         },
+//         sequence: 10,
+//     };
+// }
 
-function supportItem(env) {
-    const url = session.support_url;
-    return {
-        type: "item",
-        id: "support",
-        description: env._t("Support"),
-        href: url,
-        callback: () => {
-            browser.open(url, "_blank");
-        },
-        sequence: 20,
-    };
-}
+// function supportItem(env) {
+//     const url = session.support_url;
+//     return {
+//         type: "item",
+//         id: "support",
+//         description: env._t("Support"),
+//         href: url,
+//         callback: () => {
+//             browser.open(url, "_blank");
+//         },
+//         sequence: 20,
+//     };
+// }
 
 class ShortCutsDialog extends Dialog {}
 ShortCutsDialog.bodyTemplate = "web.UserMenu.shortcutsTable";
@@ -88,8 +88,8 @@ function logOutItem(env) {
 
 registry
     .category("user_menuitems")
-    .add("documentation", documentationItem)
-    .add("support", supportItem)
+    // .add("documentation", documentationItem)
+    // .add("support", supportItem)
     .add("shortcuts", shortCutsItem)
     .add("separator", separator)
     .add("profile", preferencesItem)

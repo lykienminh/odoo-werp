@@ -22,7 +22,7 @@ __pycache__/
 status
 
 # odoo data
-odoo/data
+/data
 
 # maintenance migration scripts
 odoo/addons/base/maintenance
