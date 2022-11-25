@@ -1,6 +1,7 @@
-FROM ubuntu:20.04
+# FROM ubuntu:20.04
+FROM debian:bullseye-slim
 
-SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
+# SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 
 # Generate locale C.UTF-8 for postgres and general locale data
 ENV LANG C.UTF-8
@@ -33,8 +34,6 @@ RUN apt-get update && \
         python3-xlrd \
         python3-xlwt \
         libpq-dev \
-        postgresql \
-        postgresql-contrib \
         python3-dev \
         xz-utils
     # && curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.buster_amd64.deb \
@@ -42,73 +41,31 @@ RUN apt-get update && \
     # && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
     # && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
-# Install Odoo python dependencies
-# RUN pip3 install \
-#     Babel \
-#     chardet \
-#     cryptography \
-#     decorator \
-#     docutils \
-#     ebaysdk \
-#     freezegun \
-#     gevent \
-#     greenlet \
-#     idna \
-#     Jinja2 \
-#     libsass \
-#     lxml \
-#     MarkupSafe \
-#     num2words \
-#     ofxparse \
-#     passlib \
-#     Pillow \
-#     polib \
-#     psutil \
-#     psycopg2 \
-#     pydot \
-#     pyopenssl \
-#     PyPDF2 \
-#     pyserial \
-#     python-dateutil \
-#     python-ldap \
-#     python-stdnum \
-#     pytz \
-#     pyusb \
-#     qrcode \
-#     reportlab \
-#     requests \
-#     urllib3 \
-#     vobject \
-#     wheel \
-#     Werkzeug \
-#     xlrd \
-#     XlsxWriter \
-#     xlwt \
-#     zeep
-
 # install latest postgresql-client
-RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
-    && GNUPGHOME="$(mktemp -d)" \
-    && export GNUPGHOME \
-    && repokey='B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8' \
-    && gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "${repokey}" \
-    && gpg --batch --armor --export "${repokey}" > /etc/apt/trusted.gpg.d/pgdg.gpg.asc \
-    && gpgconf --kill all \
-    && rm -rf "$GNUPGHOME" \
-    && apt-get update  \
-    && apt-get install --no-install-recommends -y postgresql-client \
-    && rm -f /etc/apt/sources.list.d/pgdg.list \
-    && rm -rf /var/lib/apt/lists/*
+# RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
+#     && GNUPGHOME="$(mktemp -d)" \
+#     && export GNUPGHOME \
+#     && repokey='B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8' \
+#     && gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "${repokey}" \
+#     && gpg --batch --armor --export "${repokey}" > /etc/apt/trusted.gpg.d/pgdg.gpg.asc \
+#     && gpgconf --kill all \
+#     && rm -rf "$GNUPGHOME" \
+#     && apt-get update  \
+#     && apt-get install --no-install-recommends -y postgresql-client \
+#     && rm -f /etc/apt/sources.list.d/pgdg.list \
+#     && rm -rf /var/lib/apt/lists/*
 
 # Install rtlcss (on Debian buster)
-# RUN npm install -g rtlcss
+RUN npm install -g rtlcss
 
-WORKDIR /app
-COPY . .
-
-# RUN apt-get install libgmp-dev portaudio19-dev
 RUN apt-get update -y
-RUN apt-get install -y libhdf5-dev
+
+RUN apt-get install -y gcc build-essential
+
+RUN apt-get install --no-install-recommends -y postgresql-client
+
+# WORKDIR /app
+COPY . .
 
 RUN pip3 install -r requirements.txt
 
@@ -126,11 +83,14 @@ RUN pip3 install -r requirements.txt
 COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
 
+# Create the odoo user
+RUN useradd --system --create-home --home-dir /opt/odoo --no-log-init odoo
+
 # Set permissions and Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
-# RUN chown odoo /etc/odoo/odoo.conf \
-#     && mkdir -p /mnt/extra-addons \
-#     && chown -R odoo /mnt/extra-addons
-VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
+RUN chown odoo /etc/odoo/odoo.conf \
+    && mkdir -p /mnt/extra-addons \
+    && chown -R odoo /mnt/extra-addons
+# VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
 
 # Expose Odoo services
 EXPOSE 8069 8071 8072
@@ -141,7 +101,7 @@ ENV ODOO_RC /etc/odoo/odoo.conf
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 
 # Set default user when running the container
-# USER odoo
+USER odoo
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["odoo"]
