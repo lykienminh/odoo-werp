@@ -4,7 +4,7 @@ import { Dialog } from "../../core/dialog/dialog";
 import { browser } from "../../core/browser/browser";
 import { registry } from "../../core/registry";
 import { _lt } from "../../core/l10n/translation";
-import { session } from "@web/session";
+// import { session } from "@web/session";
 
 // function documentationItem(env) {
 //     const documentationURL = "https://www.odoo.com/documentation/15.0";
