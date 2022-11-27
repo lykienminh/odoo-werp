@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <record model="ir.module.category" id="module_category_version">
+            <field name="name">Recommended Version</field>
+            <field name="sequence">1</field>
+        </record>
+
         <record model="ir.module.category" id="module_category_hidden">
             <field name="name">Technical</field>
             <field name="sequence">60</field>
@@ -10,19 +15,6 @@
         <record model="ir.module.category" id="module_category_accounting">
             <field name="name">Accounting</field>
             <field name="sequence">15</field>
-        </record>
-
-        <record model="ir.module.category" id="module_category_accounting_localizations">
-            <field name="name">Localization</field>
-            <field name="sequence">65</field>
-            <field name="visible" eval="0" />
-            <field name="parent_id" ref="module_category_accounting"/>
-        </record>
-
-        <record model="ir.module.category" id="module_category_accounting_localizations_account_charts">
-            <field name="parent_id" ref="module_category_accounting_localizations" />
-            <field name="name">Account Charts</field>
-            <field name="visible" eval="0" />
         </record>
 
         <record model="ir.module.category" id="module_category_user_type">
@@ -44,17 +36,6 @@
         <record model="ir.module.category" id="module_category_human_resources">
             <field name="name">Human Resources</field>
             <field name="sequence">45</field>
-        </record>
-
-        <record model="ir.module.category" id="module_category_website">
-            <field name="name">Website</field>
-            <field name="sequence">35</field>
-        </record>
-
-        <record model="ir.module.category" id="module_category_theme">
-            <field name="name">Theme</field>
-            <field name="exclusive" eval="0"/>
-            <field name="sequence">50</field>
         </record>
 
         <record model="ir.module.category" id="module_category_administration">

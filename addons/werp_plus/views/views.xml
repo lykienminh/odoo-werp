@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="werp_plus.list">
+      <field name="name">werp_plus list</field>
+      <field name="model">werp_plus.werp_plus</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="werp_plus.action_window">
+      <field name="name">werp_plus window</field>
+      <field name="res_model">werp_plus.werp_plus</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="werp_plus.action_server">
+      <field name="name">werp_plus server</field>
+      <field name="model_id" ref="model_werp_plus_werp_plus"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="werp_plus" id="werp_plus.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="werp_plus.menu_1" parent="werp_plus.menu_root"/>
+    <menuitem name="Menu 2" id="werp_plus.menu_2" parent="werp_plus.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="werp_plus.menu_1_list" parent="werp_plus.menu_1"
+              action="werp_plus.action_window"/>
+    <menuitem name="Server to list" id="werp_plus" parent="werp_plus.menu_2"
+              action="werp_plus.action_server"/>
+-->
+  </data>
+</odoo>
