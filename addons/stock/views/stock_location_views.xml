@@ -37,7 +37,6 @@
                             <field name="usage"/>
                             <field name="storage_category_id" attrs="{'invisible': [('usage', '!=', 'internal')]}" groups="stock.group_stock_storage_categories"/>
                             <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
-                            <field name="scrap_location" attrs="{'invisible': [('usage', 'not in', ('inventory', 'internal'))]}"/>
                             <field name="return_location"/>
                         </group>
                         <group string="Cyclic Inventory" attrs="{'invisible': ['|', ('usage', 'not in', ('internal', 'transit')), ('company_id', '=', False)]}">

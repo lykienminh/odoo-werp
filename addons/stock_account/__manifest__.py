@@ -19,7 +19,7 @@ Dashboard / Reports for Warehouse Management includes:
 ------------------------------------------------------
 * Stock Inventory Value at given date (support dates in the past)
     """,
-    'depends': ['stock', 'account'],
+    'depends': ['stock', 'account', 'stock_scrap'],
     'category': 'Hidden',
     'sequence': 16,
     'data': [

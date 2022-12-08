@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_picking_form_inherit_scrap" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit.scrap</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field eval="12" name="priority"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='do_unreserve']" position="after">
+                <button name="button_scrap" type="object" string="Scrap" attrs="{'invisible': ['|', '&amp;', ('picking_type_code', '=', 'incoming'), ('state', '!=', 'done'), '&amp;', ('picking_type_code', '=', 'outgoing'), ('state', '=', 'done')]}" data-hotkey="y"/>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_button_box')]/field[@name='has_tracking']" position="before">
+                <field name="has_scrap_move" invisible="True"/>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_button_box')]/button[@name='action_see_packages']" position="before">
+                <button name="action_see_move_scrap" string="Scraps" type="object"
+                        class="oe_stat_button" icon="fa-arrows-v"
+                        attrs="{'invisible': [('has_scrap_move', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//tree[@name='stock_move_operations']/field[@name='picking_code']" position="before">
+                <field name="scrapped" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

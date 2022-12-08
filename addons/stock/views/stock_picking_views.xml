@@ -246,7 +246,6 @@
                     <button name="%(action_report_delivery)d" string="Print" attrs="{'invisible': [('state', '!=', 'done')]}" type="action" groups="base.group_user" data-hotkey="o"/>
                     <button name="%(act_stock_return_picking)d" string="Return" attrs="{'invisible': [('state', '!=', 'done')]}" type="action" groups="base.group_user" data-hotkey="k"/>
                     <button name="do_unreserve" string="Unreserve" groups="base.group_user" type="object" attrs="{'invisible': ['|', '|', '|', ('picking_type_code', '=', 'incoming'), ('immediate_transfer', '=', True), '&amp;', ('state', '!=', 'assigned'), ('move_type', '!=', 'one'), '&amp;', ('state', 'not in', ('assigned', 'confirmed')), ('move_type', '=', 'one')]}" data-hotkey="w"/>
-                    <button name="button_scrap" type="object" string="Scrap" attrs="{'invisible': ['|', '&amp;', ('picking_type_code', '=', 'incoming'), ('state', '!=', 'done'), '&amp;', ('picking_type_code', '=', 'outgoing'), ('state', '=', 'done')]}" data-hotkey="y"/>
                     <button name="action_toggle_is_locked" attrs="{'invisible': ['|', ('state', 'in', ('draft','cancel')), ('is_locked', '=', False)]}" string="Unlock" groups="stock.group_stock_manager" type="object" help="If the picking is unlocked you can edit initial demand (for a draft picking) or done quantities (for a done picking)." data-hotkey="l"/>
                     <button name="action_toggle_is_locked" attrs="{'invisible': [('is_locked', '=', True)]}" string="Lock" groups="stock.group_stock_manager" type="object" data-hotkey="l"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,assigned,done" />
@@ -254,11 +253,7 @@
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <field name="has_scrap_move" invisible="True"/>
                         <field name="has_tracking" invisible="True"/>
-                        <button name="action_see_move_scrap" string="Scraps" type="object"
-                            class="oe_stat_button" icon="fa-arrows-v"
-                            attrs="{'invisible': [('has_scrap_move', '=', False)]}"/>
                         <button name="action_see_packages" string="Packages" type="object"
                             class="oe_stat_button" icon="fa-cubes"
                             attrs="{'invisible': [('has_packages', '=', False)]}"/>
@@ -350,7 +345,7 @@
                                 attrs="{'readonly': ['&amp;', ('state', '=', 'done'), ('is_locked', '=', True)]}"
                                 context="{'default_company_id': company_id, 'default_date': scheduled_date, 'default_date_deadline': date_deadline, 'picking_type_code': picking_type_code, 'default_picking_id': id, 'form_view_ref':'stock.view_move_form', 'address_in_id': partner_id, 'default_picking_type_id': picking_type_id, 'default_location_id': location_id, 'default_location_dest_id': location_dest_id, 'default_partner_id': partner_id}"
                                 add-label="Add a Product">
-                                <tree decoration-danger="not parent.immediate_transfer and state != 'done' and quantity_done > reserved_availability and show_reserved_availability" decoration-muted="scrapped == True or state == 'cancel' or (state == 'done' and is_locked == True)" string="Stock Moves" editable="bottom">
+                                <tree name="stock_move_operations" decoration-danger="not parent.immediate_transfer and state != 'done' and quantity_done > reserved_availability and show_reserved_availability" decoration-muted="state == 'cancel' or (state == 'done' and is_locked == True)" string="Stock Moves" editable="bottom">
                                     <field name="company_id" invisible="1"/>
                                     <field name="name" invisible="1"/>
                                     <field name="state" invisible="1" readonly="0"/>
@@ -358,7 +353,6 @@
                                     <field name="location_id" invisible="1"/>
                                     <field name="location_dest_id" invisible="1"/>
                                     <field name="partner_id" invisible="1"/>
-                                    <field name="scrapped" invisible="1"/>
                                     <field name="picking_code" invisible="1"/>
                                     <field name="product_type" invisible="1"/>
                                     <field name="show_details_visible" invisible="1"/>

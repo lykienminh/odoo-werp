@@ -43,6 +43,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-12 col-lg-6 o_setting_box" id="process_scrap">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_stock_scrap"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_stock_scrap"/>
+                                    <div class="text-muted">
+                                        Process scrap/damaged goods
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-12 col-lg-6 o_setting_box" id="warning_info">
                                 <div class="o_setting_left_pane">
                                     <field name="group_warning_stock"/>

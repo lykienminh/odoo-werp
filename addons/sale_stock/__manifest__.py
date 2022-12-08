@@ -16,10 +16,10 @@ Preferences
 -----------
 * Shipping: Choice of delivery at once or partial delivery
 * Invoicing: choose how invoices will be paid
-* Incoterms: International Commercial terms
+* Incoterms: International Commercial termss
 
 """,
-    'depends': ['sale', 'stock_account'],
+    'depends': ['sale', 'stock_account', 'stock_scrap'],
     'data': [
         'security/sale_stock_security.xml',
         'security/ir.model.access.csv',

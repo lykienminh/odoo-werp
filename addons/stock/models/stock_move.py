@@ -118,8 +118,6 @@ class StockMove(models.Model):
              "The other possibility allows you to directly create a procurement on the source location (and thus ignore "
              "its current stock) to gather products. If we want to chain moves and have this one to wait for the previous, "
              "this second option should be chosen.")
-    scrapped = fields.Boolean('Scrapped', related='location_dest_id.scrap_location', readonly=True, store=True)
-    scrap_ids = fields.One2many('stock.scrap', 'move_id')
     group_id = fields.Many2one('procurement.group', 'Procurement Group', default=_default_group_id)
     rule_id = fields.Many2one(
         'stock.rule', 'Stock Rule', ondelete='restrict', help='The stock rule that created this stock move',
@@ -731,9 +729,8 @@ class StockMove(models.Model):
     def _do_unreserve(self):
         moves_to_unreserve = OrderedSet()
         for move in self:
-            if move.state == 'cancel' or (move.state == 'done' and move.scrapped):
+            if move.state == 'cancel' or move.state == 'done':
                 # We may have cancelled move in an open picking in a "propagate_cancel" scenario.
-                # We may have done move in an open picking in a scrap scenario.
                 continue
             elif move.state == 'done':
                 raise UserError(_("You cannot unreserve a stock move that has been set to 'Done'."))
@@ -807,7 +804,7 @@ class StockMove(models.Model):
     def _prepare_merge_moves_distinct_fields(self):
         fields = [
             'product_id', 'price_unit', 'procure_method', 'location_id', 'location_dest_id',
-            'product_uom', 'restrict_partner_id', 'scrapped', 'origin_returned_move_id',
+            'product_uom', 'restrict_partner_id', 'origin_returned_move_id',
             'package_level_id', 'propagate_cancel', 'description_picking', 'date_deadline',
             'product_packaging_id',
         ]
@@ -1575,9 +1572,9 @@ class StockMove(models.Model):
         StockMove.browse(moves_to_redirect).move_line_ids._apply_putaway_strategy()
 
     def _action_cancel(self):
-        if any(move.state == 'done' and not move.scrapped for move in self):
+        if move.state == 'done':
             raise UserError(_('You cannot cancel a stock move that has been set to \'Done\'. Create a return in order to reverse the moves which took place.'))
-        moves_to_cancel = self.filtered(lambda m: m.state != 'cancel' and not (m.state == 'done' and m.scrapped))
+        moves_to_cancel = self.filtered(lambda m: m.state != 'cancel' and not m.state == 'done')
         # self cannot contain moves that are either cancelled or done, therefore we can safely
         # unlink all associated move_line_ids
         moves_to_cancel._do_unreserve()
@@ -1695,11 +1692,6 @@ class StockMove(models.Model):
             move_dests_per_company[move_dest.company_id.id] |= move_dest
         for company_id, move_dests in move_dests_per_company.items():
             move_dests.sudo().with_company(company_id)._action_assign()
-
-        # We don't want to create back order for scrap moves
-        # Replace by a kwarg in master
-        if self.env.context.get('is_scrap'):
-            return moves_todo
 
         if picking and not cancel_backorder:
             backorder = picking._create_backorder()

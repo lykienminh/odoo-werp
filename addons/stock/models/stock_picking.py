@@ -328,8 +328,6 @@ class Picking(models.Model):
         states={'draft': [('readonly', False)]})
     move_lines = fields.One2many('stock.move', 'picking_id', string="Stock Moves", copy=True)
     move_ids_without_package = fields.One2many('stock.move', 'picking_id', string="Stock moves not in package", compute='_compute_move_without_package', inverse='_set_move_without_package')
-    has_scrap_move = fields.Boolean(
-        'Has Scrap Moves', compute='_has_scrap_move')
     picking_type_id = fields.Many2one(
         'stock.picking.type', 'Operation Type',
         required=True, readonly=True,
@@ -518,9 +516,7 @@ class Picking(models.Model):
             picking_moves_state_map[picking_id.id].update({
                 'any_draft': picking_moves_state_map[picking_id.id].get('any_draft', False) or move_state == 'draft',
                 'all_cancel': picking_moves_state_map[picking_id.id].get('all_cancel', True) and move_state == 'cancel',
-                'all_cancel_done': picking_moves_state_map[picking_id.id].get('all_cancel_done', True) and move_state in ('cancel', 'done'),
-                'all_done_are_scrapped': picking_moves_state_map[picking_id.id].get('all_done_are_scrapped', True) and (move.scrapped if move_state == 'done' else True),
-                'any_cancel_and_not_scrapped': picking_moves_state_map[picking_id.id].get('any_cancel_and_not_scrapped', False) or (move_state == 'cancel' and not move.scrapped),
+                'all_cancel_done': picking_moves_state_map[picking_id.id].get('all_cancel_done', True) and move_state in ('cancel', 'done')
             })
             picking_move_lines[picking_id.id].add(move.id)
         for picking in self:
@@ -532,10 +528,7 @@ class Picking(models.Model):
             elif picking_moves_state_map[picking_id]['all_cancel']:
                 picking.state = 'cancel'
             elif picking_moves_state_map[picking_id]['all_cancel_done']:
-                if picking_moves_state_map[picking_id]['all_done_are_scrapped'] and picking_moves_state_map[picking_id]['any_cancel_and_not_scrapped']:
-                    picking.state = 'cancel'
-                else:
-                    picking.state = 'done'
+                picking.state = 'done'
             else:
                 relevant_move_state = self.env['stock.move'].browse(picking_move_lines[picking_id])._get_relevant_state_among_moves()
                 if picking.immediate_transfer and relevant_move_state not in ('draft', 'cancel', 'done'):
@@ -567,11 +560,6 @@ class Picking(models.Model):
             if picking.state in ('done', 'cancel'):
                 raise UserError(_("You cannot change the Scheduled Date on a done or cancelled transfer."))
             picking.move_lines.write({'date': picking.scheduled_date})
-
-    def _has_scrap_move(self):
-        for picking in self:
-            # TDE FIXME: better implementation
-            picking.has_scrap_move = bool(self.env['stock.move'].search_count([('picking_id', '=', picking.id), ('scrapped', '=', True)]))
 
     def _compute_move_line_exist(self):
         for picking in self:
@@ -764,7 +752,7 @@ class Picking(models.Model):
         if 'partner_id' in vals:
             after_vals['partner_id'] = vals['partner_id']
         if after_vals:
-            self.mapped('move_lines').filtered(lambda move: not move.scrapped).write(after_vals)
+            self.mapped('move_lines').write(after_vals)
         if vals.get('move_lines'):
             self._autoconfirm_picking()
 
@@ -876,7 +864,7 @@ class Picking(models.Model):
                             move_ids_without_package |= move
                     else:
                         move_ids_without_package |= move
-        return move_ids_without_package.filtered(lambda move: not move.scrap_ids)
+        return move_ids_without_package
 
     def _check_move_lines_map_quant_package(self, package):
         """ This method checks that all product of the package (quant) are well present in the move_line_ids of the picking. """
@@ -1447,32 +1435,6 @@ class Picking(models.Model):
                 return res
             else:
                 raise UserError(_("Please add 'Done' quantities to the picking to create a new pack."))
-
-    def button_scrap(self):
-        self.ensure_one()
-        view = self.env.ref('stock.stock_scrap_form_view2')
-        products = self.env['product.product']
-        for move in self.move_lines:
-            if move.state not in ('draft', 'cancel') and move.product_id.type in ('product', 'consu'):
-                products |= move.product_id
-        return {
-            'name': _('Scrap'),
-            'view_mode': 'form',
-            'res_model': 'stock.scrap',
-            'view_id': view.id,
-            'views': [(view.id, 'form')],
-            'type': 'ir.actions.act_window',
-            'context': {'default_picking_id': self.id, 'product_ids': products.ids, 'default_company_id': self.company_id.id},
-            'target': 'new',
-        }
-
-    def action_see_move_scrap(self):
-        self.ensure_one()
-        action = self.env["ir.actions.actions"]._for_xml_id("stock.action_stock_scrap")
-        scraps = self.env['stock.scrap'].search([('picking_id', '=', self.id)])
-        action['domain'] = [('id', 'in', scraps.ids)]
-        action['context'] = dict(self._context, create=False)
-        return action
 
     def action_see_packages(self):
         self.ensure_one()

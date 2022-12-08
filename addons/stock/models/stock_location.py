@@ -68,7 +68,6 @@ class Location(models.Model):
         'res.company', 'Company',
         default=lambda self: self.env.company, index=True,
         help='Let this field empty if this location is shared between companies')
-    scrap_location = fields.Boolean('Is a Scrap Location?', default=False, help='Check this box to allow using this location to put scrapped/damaged goods.')
     return_location = fields.Boolean('Is a Return Location?', help='Check this box to allow using this location as a return location.')
     removal_strategy_id = fields.Many2one(
         'product.removal', 'Removal Strategy',
@@ -165,7 +164,7 @@ class Location(models.Model):
     @api.onchange('usage')
     def _onchange_usage(self):
         if self.usage not in ('internal', 'inventory'):
-            self.scrap_location = False
+            pass
 
     def write(self, values):
         if 'company_id' in values:
@@ -175,18 +174,17 @@ class Location(models.Model):
         if 'usage' in values and values['usage'] == 'view':
             if self.mapped('quant_ids'):
                 raise UserError(_("This location's usage cannot be changed to view as it contains products."))
-        if 'usage' in values or 'scrap_location' in values:
+        if 'usage' in values:
             modified_locations = self.filtered(
                 lambda l: any(l[f] != values[f] if f in values else False
-                              for f in {'usage', 'scrap_location'}))
+                              for f in {'usage'}))
             reserved_quantities = self.env['stock.move.line'].search_count([
                 ('location_id', 'in', modified_locations.ids),
                 ('product_qty', '>', 0),
             ])
             if reserved_quantities:
                 raise UserError(_(
-                    "You cannot change the location type or its use as a scrap"
-                    " location as there are products reserved in this location."
+                    "You cannot change the location type as there are products reserved in this location."
                     " Please unreserve the products first."
                 ))
         if 'active' in values:
@@ -344,7 +342,7 @@ class Location(models.Model):
 
     def should_bypass_reservation(self):
         self.ensure_one()
-        return self.usage in ('supplier', 'customer', 'inventory', 'production') or self.scrap_location or (self.usage == 'transit' and not self.company_id)
+        return self.usage in ('supplier', 'customer', 'inventory', 'production') or (self.usage == 'transit' and not self.company_id)
 
     def _check_can_be_used(self, product, quantity=0, package=None, location_qty=0):
         """Check if product/package can be stored in the location. Quantity

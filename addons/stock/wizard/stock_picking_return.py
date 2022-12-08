@@ -56,8 +56,6 @@ class ReturnPicking(models.TransientModel):
         for move in self.picking_id.move_lines:
             if move.state == 'cancel':
                 continue
-            if move.scrapped:
-                continue
             if move.move_dest_ids:
                 move_dest_exists = True
             product_return_moves_data = dict(product_return_moves_data_tmpl)

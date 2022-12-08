@@ -50,8 +50,6 @@ access_barcode_nomenclature_stock_user,barcode.nomenclature.stock.user,barcodes.
 access_barcode_nomenclature_stock_manager,barcode.nomenclature.stock.manager,barcodes.model_barcode_nomenclature,stock.group_stock_manager,1,1,1,1
 access_barcode_rule_stock_user,barcode.rule.stock.user,barcodes.model_barcode_rule,stock.group_stock_user,1,0,0,0
 access_barcode_rule_stock_manager,barcode.rule.stock.manager,barcodes.model_barcode_rule,stock.group_stock_manager,1,1,1,1
-access_stock_scrap_user,stock.scrap.user,model_stock_scrap,stock.group_stock_user,1,1,1,0
-access_stock_scrap_manager,stock.scrap.manager,model_stock_scrap,stock.group_stock_manager,1,1,1,1
 access_product_attribute_manager,product.attribute manager,product.model_product_attribute,stock.group_stock_manager,1,1,1,1
 access_product_attribute_value_manager,product.attribute manager value,product.model_product_attribute_value,stock.group_stock_manager,1,1,1,1
 access_product_product_attribute_manager,product.product.attribute manager value,product.model_product_template_attribute_value,stock.group_stock_manager,1,1,1,1
@@ -70,7 +68,6 @@ access_stock_backorder_confirmation_line,access.stock.backorder.confirmation.lin
 access_stock_backorder_confirmation,access.stock.backorder.confirmation,model_stock_backorder_confirmation,stock.group_stock_user,1,1,1,0
 access_stock_quantity_history,access.stock.quantity.history,model_stock_quantity_history,stock.group_stock_user,1,1,1,0
 access_stock_rules_report,access.stock.rules.report,model_stock_rules_report,stock.group_stock_user,1,1,1,0
-access_stock_warn_insufficient_qty_scrap,access.stock.warn.insufficient.qty.scrap,model_stock_warn_insufficient_qty_scrap,stock.group_stock_user,1,1,1,0
 access_product_replenish,access.product.replenish,model_product_replenish,stock.group_stock_user,1,1,1,0
 access_stock_track_confirmation,access.stock.track.confirmation,model_stock_track_confirmation,stock.group_stock_user,1,1,1,0
 access_stock_track_line,access.stock.track.line,model_stock_track_line,stock.group_stock_user,1,1,1,0

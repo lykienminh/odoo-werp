@@ -8,7 +8,7 @@
     'sequence': 60,
     'summary': 'Purchase Orders, Receipts, Vendor Bills for Stock',
     'description': "",
-    'depends': ['stock_account', 'purchase'],
+    'depends': ['stock_account', 'purchase', 'stock_scrap'],
     'data': [
         'security/ir.model.access.csv',
         'data/purchase_stock_data.xml',
