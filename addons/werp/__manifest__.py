@@ -17,14 +17,14 @@
         'base',
         'stock',
         'product',
+        'purchase',
         'account',
         'sale_management',
-        'sale_stock',
-        'sales_team',
+        'contacts',
         'hr',
         'hr_holidays',
         'hr_holidays_attendance',
-        'hr_presence',
+        'board',
     ],
 
     # always loaded

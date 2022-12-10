@@ -13,7 +13,7 @@
         'views/payment_views.xml',
         'data/payment_acquirer_data.xml',  # Depends on views/payment_adyen_templates.xml
     ],
-    'application': True,
+    'application': False,
     'uninstall_hook': 'uninstall_hook',
     'assets': {
         'web.assets_frontend': [

@@ -14,17 +14,12 @@
 
     # any module necessary for this one to work correctly
     'depends': [
-        'base',
-        'stock',
-        'product',
-        'account',
-        'sale_management',
-        'sale_stock',
-        'sales_team',
-        'hr',
-        'hr_holidays',
-        'hr_holidays_attendance',
+        'werp',
+        'stock_scrap',
+        'hr_attendance_kiosk',
         'hr_presence',
+        'hr_contract',
+        'hr_skills',
     ],
 
     # always loaded
@@ -40,6 +35,6 @@
     
     'installable': True,
     'auto_install': False,
-    'application': True,
+    'application': False,
     'license': 'LGPL-3'
 }

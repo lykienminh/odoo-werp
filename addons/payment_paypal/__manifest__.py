@@ -14,7 +14,7 @@
         'data/payment_acquirer_data.xml',
         'data/payment_paypal_email_data.xml',
     ],
-    'application': True,
+    'application': False,
     'uninstall_hook': 'uninstall_hook',
     'license': 'LGPL-3',
 }

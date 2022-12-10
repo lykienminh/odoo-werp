@@ -39,7 +39,7 @@
     ],
     'installable': True,
     'auto_install': False,
-    'application': True,
+    'application': False,
     'assets': {
         'web.assets_backend': [
             'hr_recruitment/static/src/scss/hr_job.scss',

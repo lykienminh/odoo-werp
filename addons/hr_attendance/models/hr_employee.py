@@ -128,16 +128,6 @@ class HrEmployee(models.Model):
             att = employee.last_attendance_id.sudo()
             employee.attendance_state = att and not att.check_out and 'checked_in' or 'checked_out'
 
-    @api.model
-    def attendance_scan(self, barcode):
-        """ Receive a barcode scanned from the Kiosk Mode and change the attendances of corresponding employee.
-            Returns either an action or a warning.
-        """
-        employee = self.sudo().search([('barcode', '=', barcode)], limit=1)
-        if employee:
-            return employee._attendance_action('hr_attendance.hr_attendance_action_kiosk_mode')
-        return {'warning': _("No employee corresponding to Badge ID '%(barcode)s.'") % {'barcode': barcode}}
-
     def attendance_manual(self, next_action, entered_pin=None):
         self.ensure_one()
         attendance_user_and_no_pin = self.user_has_groups(
@@ -153,14 +143,13 @@ class HrEmployee(models.Model):
     def _attendance_action(self, next_action):
         """ Changes the attendance of the employee.
             Returns an action to the check in/out message,
-            next_action defines which menu the check in/out message should return to. ("My Attendances" or "Kiosk Mode")
+            next_action defines which menu the check in/out message should return to. ("My Attendances")
         """
         self.ensure_one()
         employee = self.sudo()
         action_message = self.env["ir.actions.actions"]._for_xml_id("hr_attendance.hr_attendance_action_greeting_message")
         action_message['previous_attendance_change_date'] = employee.last_attendance_id and (employee.last_attendance_id.check_out or employee.last_attendance_id.check_in) or False
         action_message['employee_name'] = employee.name
-        action_message['barcode'] = employee.barcode
         action_message['next_action'] = next_action
         action_message['hours_today'] = employee.hours_today
 

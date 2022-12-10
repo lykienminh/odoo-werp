@@ -10,14 +10,32 @@
                 <div class="app_settings_block" data-string="Attendances" string="Attendances" data-key="hr_attendance" groups="hr_attendance.group_hr_attendance_manager">
                     <h2>Check-In/Out</h2>
                     <div class="row mt16 o_settings_container" name="pincode_setting_container">
-                        <div class="col-12 col-lg-6 o_setting_box" title="Set PIN codes in the employee detail form (in HR Settings tab).">
+                        <div class="col-12 col-lg-6 o_setting_box" id="manage_kiosk_mode">
                             <div class="o_setting_left_pane">
-                                <field name="group_attendance_use_pin"/>
+                                <field name="module_hr_attendance_kiosk"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <span class="o_form_label">Employee PIN</span>
+                                <label for="module_hr_attendance_kiosk"/>
                                 <div class="text-muted">
-                                    Use PIN codes to check in in Kiosk Mode
+                                    Manage attendance in Kiosk Mode
+                                </div>
+                                <!-- <div class="row mt-2" attrs="{'invisible': [('module_hr_attendance_kiosk','=',False)]}">
+                                    <field name="group_attendance_use_pin" class="col-lg-1 ml16 mr0"/>
+                                    <div class="col pl-0">
+                                        <label for="group_attendance_use_pin"/>
+                                        <div class="text-muted">Use PIN codes to check in</div>
+                                    </div>
+                                </div> -->
+                                <div class="col-12 col-lg-6 o_setting_box" title="Set PIN codes in the employee detail form (in HR Settings tab)." attrs="{'invisible': [('module_hr_attendance_kiosk','=',False)]}">
+                                    <div class="o_setting_left_pane">
+                                        <field name="group_attendance_use_pin"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <span class="o_form_label">Employee PIN</span>
+                                        <div class="text-muted">
+                                            Use PIN codes to check in
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
