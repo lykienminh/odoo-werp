@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payment_acquirer_form" model="ir.ui.view">
+        <field name="name">MoMo Acquirer Form</field>
+        <field name="model">payment.acquirer</field>
+        <field name="inherit_id" ref="payment.payment_acquirer_form"/>
+        <field name="arch" type="xml">
+            <xpath expr='//group[@name="acquirer"]' position='inside'>
+                <group attrs="{'invisible': [('provider', '!=', 'momo')]}">
+                    <!-- <field name="momo_endpoint" groups="base.group_no_one"/> -->
+                    <field name="momo_endpoint"/>
+                    <field name="momo_partner_code"/>
+                    <field name="momo_access_key"
+                           attrs="{'required':[('provider', '=', 'momo'), ('state', '!=', 'disabled')]}"/>
+                    <field name="momo_secret_key"
+                           attrs="{'required':[('provider', '=', 'momo'), ('state', '!=', 'disabled')]}"/>
+                    <a href="https://developers.momo.vn/v3/docs/payment/onboarding/integration-process#credentials"
+                       target="_blank"
+                       colspan="2">
+                        How to configure your momo account?
+                    </a>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- <record id="payment_transaction_form" model="ir.ui.view">
+        <field name="name">MoMo Transaction Form</field>
+        <field name="model">payment.transaction</field>
+        <field name="inherit_id" ref="payment.payment_transaction_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='acquirer_reference']" position="after">
+                <field name="paypal_type"
+                       readonly="1"
+                       attrs="{'invisible': [('provider', '!=', 'paypal')]}"
+                       groups="base.group_no_one"/>
+            </xpath>
+        </field>
+    </record> -->
+
+</odoo>

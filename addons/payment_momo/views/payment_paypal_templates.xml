@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- https://developer.paypal.com/docs/paypal-payments-standard/integration-guide/formbasics -->
+    <template id="redirect_form">
+        <form action="/payment/momo/create" method="post">
+            <input type="hidden" name="apiUrl" t-att-value="api_url"/>
+            <input type="hidden" name="partnerCode" t-att-value="partner_code"/>
+            <input type="hidden" name="partnerName" t-att-value="partner_name"/>
+            <input type="hidden" name="storeId" t-att-value="store_id"/>
+            <input type="hidden" name="orderId" t-att-value="order_id"/>
+            <input type="hidden" name="orderInfo" t-att-value="order_info"/>
+            <input type="hidden" name="requestId" t-att-value="request_id"/>
+            <input type="hidden" name="amount" t-att-value="amount"/>
+            <input type="hidden" name="lang" t-att-value="lang"/>
+            <input type="hidden" name="extraData" t-att-value="extra_data"/>
+            <input type="hidden" name="requestType" t-att-value="request_type"/>
+            <input type="hidden" name="signature" t-att-value="signature"/>
+            <input type="hidden" name="redirectUrl" t-att-value="redirect_url"/>
+            <input type="hidden" name="ipnUrl" t-att-value="ipn_url"/>
+        </form>
+    </template>
+
+</odoo>

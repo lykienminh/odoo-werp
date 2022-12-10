@@ -83,4 +83,18 @@
         </field>
     </record>
 
+    <record id="payment_acquirer_momo" model="payment.acquirer">
+        <field name="name">MOMO</field>
+        <field name="sequence">50</field>
+        <field  name="image_128"
+                type="base64"
+                file="payment_momo/static/description/icon.png"/>
+        <field name="module_id" ref="base.module_payment_momo"/>
+        <field name="description" type="html">
+            <p>
+                Provide instructions to customers so that they can pay their orders by MOMO.
+            </p>
+        </field>
+    </record>
+
 </odoo>
