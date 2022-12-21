@@ -20,7 +20,7 @@
             <field name="name">Operating Costs</field>
             <field name="group_id" ref="analytic.analytic_group_internal"/>
         </record>
-        <record id="analytic_our_super_product" model="account.analytic.account">
+        <!-- <record id="analytic_our_super_product" model="account.analytic.account">
             <field name="name">Our Super Product</field>
             <field name="partner_id" ref="base.res_partner_2"/>
             <field name="group_id" ref="analytic.analytic_group_projects"/>
@@ -84,7 +84,7 @@
             <field name="name">Camp to Camp</field>
             <field name="partner_id" ref="base.res_partner_12"/>
             <field name="group_id" ref="analytic.analytic_group_projects"/>
-        </record>
+        </record> -->
         <record id="analytic_administratif" model="account.analytic.account">
             <field name="name">Administrative</field>
             <field name="group_id" ref="analytic.analytic_group_departments"/>

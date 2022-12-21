@@ -32,7 +32,7 @@
         <t t-if="object.invoice_origin">
             (with reference: <t t-out="object.invoice_origin or ''">SUB003</t>)
         </t>
-        amounting in <strong t-out="format_amount(object.amount_total, object.currency_id) or ''">$ 143,750.00</strong>
+        amounting in <strong t-out="format_amount(object.amount_total, object.currency_id) or ''">150000 đ</strong>
         from <t t-out="object.company_id.name or ''">YourCompany</t>.
         <t t-if="object.payment_state in ('paid', 'in_payment')">
             This invoice is already paid.
@@ -48,7 +48,7 @@
         Do not hesitate to contact us if you have any questions.
         <t t-if="object.invoice_user_id.signature">
             <br />
-            <t t-out="object.invoice_user_id.signature or ''">--<br/>Mitchell Admin</t>
+            <t t-out="object.invoice_user_id.signature or ''">--<br/>Admin</t>
         </t>
     </p>
 </div>
@@ -77,7 +77,7 @@
         Best regards,
         <t t-if="user.signature">
             <br/>
-            <t t-out="user.signature or ''">--<br/>Mitchell Admin</t>
+            <t t-out="user.signature or ''">--<br/>Admin</t>
         </t>
     </p>
 </div>
@@ -115,13 +115,13 @@
         <t t-if="object.invoice_origin">
             (with reference: <t t-out="object.invoice_origin or ''">SUB003</t>)
         </t>
-        amounting in <strong t-out="format_amount(object.amount_total, object.currency_id) or ''">$ 143,750.00</strong>
+        amounting in <strong t-out="format_amount(object.amount_total, object.currency_id) or ''">150000 đ</strong>
         from <t t-out="object.company_id.name or ''">YourCompany</t>.
         <br /><br />
         Do not hesitate to contact us if you have any questions.
         <t t-if="object.invoice_user_id.signature">
             <br />
-            <t t-out="object.invoice_user_id.signature or ''">--<br/>Mitchell Admin</t>
+            <t t-out="object.invoice_user_id.signature or ''">--<br/>Admin</t>
         </t>
     </p>
 </div>

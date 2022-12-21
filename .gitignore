@@ -23,6 +23,7 @@ status
 
 # odoo data
 /data
+*.log
 
 # maintenance migration scripts
 odoo/addons/base/maintenance

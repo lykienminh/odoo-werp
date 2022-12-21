@@ -2,14 +2,14 @@
 <odoo>
     <data noupdate="1">
 
-        <record id="sale_line_services" model="sale.order.line">
+        <!-- <record id="sale_line_services" model="sale.order.line">
             <field name="order_id" ref="sale.sale_order_3"/>
             <field name="name" model="sale.order.line" eval="obj().env.ref('sale.advance_product_0').get_product_multiline_description_sale()"/>
             <field name="product_id" ref="sale.advance_product_0"/>
             <field name="product_uom" ref="uom.product_uom_unit"/>
             <field name="price_unit">150.0</field>
             <field name="product_uom_qty">5.0</field>
-        </record>
+        </record> -->
 
         <!-- Projects and Analytic Account -->
         <record id="account_analytic_account_project_support" model="account.analytic.account">
@@ -95,7 +95,7 @@
         </record>
 
         <!-- Sales orders -->
-        <record id="sale_order_1" model="sale.order">
+        <!-- <record id="sale_order_1" model="sale.order">
             <field name="partner_id" ref="base.res_partner_2"/>
             <field name="client_order_ref">AGR</field>
             <field name="user_id" ref="base.user_admin"/>
@@ -120,10 +120,10 @@
             <field name="sequence" eval="2"/>
             <field name="discount">10</field>
             <field name="product_uom_qty">50</field>
-        </record>
+        </record> -->
 
         <!-- Sale Order 'sale_order_2' (Delta PC) -->
-        <record id="sale_order_2" model="sale.order">
+        <!-- <record id="sale_order_2" model="sale.order">
             <field name="partner_id" ref="base.res_partner_4"/>
             <field name="client_order_ref">DPC</field>
             <field name="user_id" ref="base.user_admin"/>
@@ -141,10 +141,10 @@
             <field name="sequence" eval="2"/>
             <field name="product_id" ref="product_service_deliver_timesheet_2"/>
             <field name="product_uom_qty">10</field>
-        </record>
+        </record> -->
 
         <!-- Activity of sales order -->
-        <record id="sale_timesheet_activity_1" model="mail.activity">
+        <!-- <record id="sale_timesheet_activity_1" model="mail.activity">
             <field name="res_id" ref="sale_timesheet.sale_order_1"/>
             <field name="res_model_id" ref="sale.model_sale_order"/>
             <field name="activity_type_id" ref="mail.mail_activity_data_call"/>
@@ -152,26 +152,26 @@
             <field name="summary">Call to follow-up</field>
             <field name="create_uid" ref="base.user_admin"/>
             <field name="user_id" ref="base.user_admin"/>
-        </record>
+        </record> -->
 
         <!-- Confirm Sale Orders -->
-        <function model="sale.order" name="action_confirm" eval="[[ref('sale_order_1')]]"/>
-        <function model="sale.order" name="action_confirm" eval="[[ref('sale_order_2')]]"/>
+        <!-- <function model="sale.order" name="action_confirm" eval="[[ref('sale_order_1')]]"/>
+        <function model="sale.order" name="action_confirm" eval="[[ref('sale_order_2')]]"/> -->
 
         <!-- Add project to favorite list of admin -->
-        <function model="project.project" name="write">
+        <!-- <function model="project.project" name="write">
             <value model="project.project" eval="obj().search([('sale_line_id', '=', ref('sale_line_13'))]).ids"/>
             <value eval="{'favorite_user_ids': [(4, ref('base.user_admin'))]}"/>
-        </function>
+        </function> -->
 
         <!-- Assign sale order's task to admin -->
-        <function model="project.task" name="write">
+        <!-- <function model="project.task" name="write">
             <value model="project.task" eval="obj().search([('sale_line_id', '=', ref('sale_line_13'))]).ids"/>
             <value eval="{'user_ids': [(4, ref('base.user_admin'))]}"/>
-        </function>
+        </function> -->
 
         <!-- Timesheets on sale_order_1 -->
-        <record id="timesheet_1" model="account.analytic.line">
+        <!-- <record id="timesheet_1" model="account.analytic.line">
             <field name="name">Design</field>
             <field name="employee_id" ref="hr.employee_admin"/>
             <field name="date" eval="(DateTime.now() + relativedelta(weekday=3,weeks=-2)).strftime('%Y-%m-%d')"/>
@@ -283,10 +283,10 @@
             <field name="unit_amount">1.00</field>
             <field name="project_id" ref="project_support"/>
             <field name="task_id" search="[('sale_line_id', '=', ref('sale_line_11'))]"/>
-        </record>
+        </record> -->
 
         <!-- Timesheets on sale_order_2 -->
-        <record id="timesheet_15" model="account.analytic.line">
+        <!-- <record id="timesheet_15" model="account.analytic.line">
             <field name="name">Research and Development</field>
             <field name="employee_id" ref="hr.employee_qdp"/>
             <field name="date" eval="(DateTime.now() + relativedelta(weekday=1,weeks=-2)).strftime('%Y-%m-%d')"/>
@@ -350,7 +350,7 @@
             <field name="unit_amount">4.00</field>
             <field name="project_id" ref="project_support"/>
             <field name="task_id" search="[('sale_line_id', '=', ref('sale_line_21'))]"/>
-        </record>
+        </record> -->
 
         <!-- Non billable Timesheets in project_support -->
         <record id="timesheet_23" model="account.analytic.line">
@@ -387,7 +387,7 @@
         </record>
 
         <!-- Vendor bill for sale_order_1 -->
-        <record id="account_analytic_line_inv_1" model="account.analytic.line">
+        <!-- <record id="account_analytic_line_inv_1" model="account.analytic.line">
             <field name="name" model="account.analytic.line" eval="obj().env.ref('product.product_product_3').get_product_multiline_description_sale()"/>
             <field name="account_id" search="[('partner_id', '=', ref('base.res_partner_2'))]"/>
             <field name="partner_id" ref="base.partner_root"/>
@@ -396,10 +396,10 @@
             <field name="product_id" ref="product.product_product_3"/>
             <field name="product_uom_id" ref="uom.product_uom_unit"/>
             <field name="unit_amount">10.00</field>
-        </record>
+        </record> -->
 
         <!-- Expense bill for sale_order_1 -->
-        <record id="account_analytic_line_exp_1" model="account.analytic.line">
+        <!-- <record id="account_analytic_line_exp_1" model="account.analytic.line">
             <field name="name" model="account.analytic.line" eval="obj().env.ref('product.expense_product').get_product_multiline_description_sale()"/>
             <field name="account_id" search="[('partner_id', '=', ref('base.res_partner_2'))]"/>
             <field name="partner_id" ref="base.partner_root"/>
@@ -408,10 +408,10 @@
             <field name="product_id" ref="product.expense_product"/>
             <field name="product_uom_id" ref="uom.product_uom_unit"/>
             <field name="unit_amount">1.00</field>
-        </record>
+        </record> -->
 
         <!-- Vendor bill for sale_order_2 -->
-        <record id="account_analytic_line_inv_2" model="account.analytic.line">
+        <!-- <record id="account_analytic_line_inv_2" model="account.analytic.line">
             <field name="name" model="account.analytic.line" eval="obj().env.ref('product.product_product_3').get_product_multiline_description_sale()"/>
             <field name="account_id" search="[('partner_id', '=', ref('base.res_partner_4'))]"/>
             <field name="partner_id" ref="base.partner_root"/>
@@ -420,10 +420,10 @@
             <field name="product_id" ref="product.product_product_3"/>
             <field name="product_uom_id" ref="uom.product_uom_unit"/>
             <field name="unit_amount">15.00</field>
-        </record>
+        </record> -->
 
         <!-- Expense bill for sale_order_2 -->
-        <record id="account_analytic_line_exp_2" model="account.analytic.line">
+        <!-- <record id="account_analytic_line_exp_2" model="account.analytic.line">
             <field name="name" model="account.analytic.line" eval="obj().env.ref('product.expense_hotel').get_product_multiline_description_sale()"/>
             <field name="account_id" search="[('partner_id', '=', ref('base.res_partner_4'))]"/>
             <field name="partner_id" ref="base.partner_demo"/>
@@ -483,10 +483,10 @@
             <field name="sale_order_id" ref="sale_timesheet.sale_order_1" />
             <field name="partner_id" ref="base.res_partner_2" />
             <field name="user_ids" eval="[(4, ref('base.user_admin'))]"/>
-        </record>
+        </record> -->
 
         <!-- Timesheet for those tasks -->
-        <record id="account_analytic_line_0" model="account.analytic.line">
+        <!-- <record id="account_analytic_line_0" model="account.analytic.line">
             <field name="name">On Site Visit</field>
             <field name="employee_id" ref="hr.employee_fme"/>
             <field name="date" eval="(DateTime.now() + relativedelta(days=-1)).strftime('%Y-%m-%d')"/>
@@ -1703,6 +1703,6 @@
             <field name="user_id" eval="ref('base.user_admin')"/>
             <field name="progress" eval="30"/>
             <field name="status">at_risk</field>
-        </record>
+        </record> -->
     </data>
 </odoo>

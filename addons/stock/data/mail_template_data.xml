@@ -34,7 +34,7 @@
         Thank you,
         <t t-if="user.signature">
             <br />
-            <t t-out="user.signature or ''">--<br/>Mitchell Admin</t>
+            <t t-out="user.signature or ''">--<br/>Admin</t>
         </t>
     </p>
 </div>

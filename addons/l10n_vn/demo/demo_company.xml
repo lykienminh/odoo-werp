@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="partner_demo_company_vn" model="res.partner">
+    <!-- <record id="partner_demo_company_vn" model="res.partner">
         <field name="name">VN Company</field>
         <field name="vat"></field>
         <field name="street">Lê A</field>
@@ -30,5 +30,5 @@
     <function model="account.chart.template" name="try_loading">
         <value eval="[ref('l10n_vn.vn_template')]"/>
         <value model="res.company" eval="obj().env.ref('l10n_vn.demo_company_vn')"/>
-    </function>
+    </function> -->
 </odoo>

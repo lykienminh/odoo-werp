@@ -124,8 +124,8 @@ CREATE TABLE res_partner (
 ---------------------------------
 -- Default data
 ---------------------------------
-insert into res_currency (id, name, symbol) VALUES (1, 'USE', '$');
-insert into ir_model_data (name, module, model, noupdate, res_id) VALUES ('USD', 'base', 'res.currency', true, 1);
+insert into res_currency (id, name, symbol) VALUES (1, 'USE', 'đ');
+insert into ir_model_data (name, module, model, noupdate, res_id) VALUES ('VND', 'base', 'res.currency', true, 1);
 select setval('res_currency_id_seq', 1);
 
 insert into res_company (id, name, partner_id, currency_id, create_date) VALUES (1, 'My Company', 1, 1, now() at time zone 'UTC');

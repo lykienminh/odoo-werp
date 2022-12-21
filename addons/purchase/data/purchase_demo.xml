@@ -6,7 +6,7 @@
             <field eval="[(4, ref('group_purchase_user'))]" name="groups_id"/>
         </record>
 
-        <record id="base.res_partner_1" model="res.partner">
+        <!-- <record id="base.res_partner_1" model="res.partner">
             <field name="receipt_reminder_email">True</field>
         </record>
 
@@ -225,7 +225,7 @@
             <field name="summary">Check competitors</field>
             <field name="create_uid" ref="base.user_admin"/>
             <field name="user_id" ref="base.user_admin"/>
-        </record>
+        </record> -->
 
     </data>
 </odoo>

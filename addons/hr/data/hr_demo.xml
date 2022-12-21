@@ -143,23 +143,24 @@ If you have development competencies, we can propose you specific traineeships</
       <!-- Address -->
 
       <record id="hr.res_partner_admin_private_address" model="res.partner">
-          <field name="name">Mitchell Admin</field>
-          <field name="street">215 Vine St</field>
-          <field name="city">Scranton</field>
-          <field name="zip">18503</field>
-          <field name="country_id" ref="base.us"/>
-          <field name='state_id' ref="base.state_us_39"/>
-          <field name="phone">+1 555-555-5555</field>
-          <field name="email">admin@yourcompany.example.com</field>
+          <field name="name">Admin</field>
+          <field name="street">268 Lý Thường Kiệt</field>
+          <field name="city">Tp.Hồ Chí Minh</field>
+          <field name="zip">72500</field>
+          <field name="country_id" ref="base.vn"/>
+          <field name='state_id' ref="base.state_vn_VN-SG"/>
+          <field name="phone">+84 348 349 448</field>
+          <field name="email">admin@werp.com</field>
       </record>
+
       <record id="res_partner_demo_private_address" model="res.partner">
-          <field name="name">Mark Demo</field>
-          <field name="street">361-7936 Feugiat St.</field>
-          <field name="zip">58521</field>
-          <field name="city">Williston</field>
-          <field name="country_id" ref="base.us"/>
-          <field name="phone">+1 555-555-5757</field>
-          <field name="email">demo@yourcompany.example.com</field>
+          <field name="name">Ngọc Quý</field>
+          <field name="street">196 Tô Hiệu</field>
+          <field name="zip">72000</field>
+          <field name="city">Hồ Chí Minh</field>
+          <field name="country_id" ref="base.vn"/>
+          <field name="phone">+84 348 349 448</field>
+          <field name="email">ngocquy@gmail.com</field>
           <field name="type">private</field>
       </record>
 
@@ -175,7 +176,7 @@ If you have development competencies, we can propose you specific traineeships</
           <field name="department_id" ref="dep_management"/>
       </record>
 
-      <record id="employee_al" model="hr.employee">
+     <!-- <record id="employee_al" model="hr.employee">
           <field name="name">Ronnie Hart</field>
           <field name="department_id" ref="dep_rd"/>
           <field name="job_id" ref="hr.job_cto"/>
@@ -238,10 +239,9 @@ If you have development competencies, we can propose you specific traineeships</
           <field name="work_phone">(157)-363-8229</field>
           <field name="work_email">jennie.fletcher76@example.com</field>
           <field name="image_1920" type="base64" file="hr/static/img/employee_chs-image.jpg"/>
-      </record>
-
+      </record> -->
       <record id="employee_qdp" model="hr.employee">
-          <field name="name">Marc Demo</field>
+          <field name="name">Ngọc Quý</field>
           <field name="user_id" ref="base.user_demo"/>
           <field name="department_id" ref="dep_rd"/>
           <field name="parent_id" ref="employee_admin"/>
@@ -250,12 +250,12 @@ If you have development competencies, we can propose you specific traineeships</
           <field name="job_title">Experienced Developer</field>
           <field name="category_ids" eval="[(6, 0, [ref('employee_category_4')])]"/>
           <field name="work_location_id" ref="work_location_1"/>
-          <field name="work_phone">+3281813700</field>
-          <field name="work_email">gilles@odoo.com</field>
+          <field name="work_phone">+84 123 456 789</field>
+          <field name="work_email">ngocquy@werp.com</field>
           <field name="image_1920" type="base64" file="hr/static/img/employee_qdp-image.png"/>
       </record>
 
-      <record id="employee_fme" model="hr.employee">
+      <!-- <record id="employee_fme" model="hr.employee">
           <field name="name">Keith Byrd</field>
           <field name="department_id" ref="dep_rd"/>
           <field name="parent_id" ref="employee_al"/>
@@ -406,6 +406,6 @@ If you have development competencies, we can propose you specific traineeships</
           <field name="work_email">abigail.peterson39@example.com</field>
           <field name="work_phone">(482)-233-3393</field>
           <field name="image_1920" type="base64" file="hr/static/img/employee_hne-image.jpg"/>
-      </record>
+      </record> -->
     </data>
 </odoo>

@@ -114,7 +114,7 @@ class Query(object):
         ...     "id",
         ...     "partner_id",           # partner_id is the "link" from res_users to res_partner
         ...     "{lhs}.\"name\" != %s",
-        ...     ("Mitchell Admin",),
+        ...     ("Admin",),
         ... )
         >>> rhs_alias
         res_users_res_partner__partner_id
@@ -125,7 +125,7 @@ class Query(object):
             FROM "res_users" AS "res_users"
             JOIN "res_partner" AS "res_users_res_partner__partner_id"
                 ON "res_users"."partner_id" = "res_users_res_partner__partner_id"."id"
-                AND "res_users"."name" != 'Mitchell Admin'
+                AND "res_users"."name" != 'Admin'
             WHERE ...
 
         """

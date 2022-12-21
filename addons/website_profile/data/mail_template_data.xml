@@ -42,7 +42,7 @@
                 <tr>
                     <td valign="top" style="font-size: 13px;">
                         <p style="margin: 0px; padding: 0px; font-size: 13px;">
-                            Hello <t t-out="object.name or ''">Marc Demo</t>,<br /><br />
+                            Hello <t t-out="object.name or ''">Ngọc Quý</t>,<br /><br />
                             You have been invited to validate your email in order to get access to "<t t-out="object.company_id.name or ''">YourCompany</t>" website.
                             To validate your email, please click on the following link:
                             <div style="margin: 16px 0px 16px 0px;">

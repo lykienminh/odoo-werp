@@ -2,11 +2,11 @@
 <odoo>
     <data noupdate="1">
 
-        <record id="cal_contact_1" model="calendar.filters">
+        <!-- <record id="cal_contact_1" model="calendar.filters">
             <field name="active" eval="True"/>
             <field name="user_id" ref="base.user_admin"/>
             <field name="partner_id" ref="base.res_partner_1"/>
-        </record>
+        </record> -->
 
         <record id="cal_contact_2" model="calendar.filters">
             <field name="active" eval="True"/>
@@ -34,7 +34,7 @@
             <field name="name">Feedback Meeting</field>
         </record>
 
-        <record id="calendar_event_1" model="calendar.event">
+        <!-- <record id="calendar_event_1" model="calendar.event">
             <field name="active" eval="True"/>
             <field name="user_id" ref="base.user_admin"/>
             <field name="partner_ids" eval="[(6,0,[ref('base.res_partner_1')])]"/>
@@ -45,7 +45,7 @@
             <field name="stop" eval="time.strftime('%Y-%m-03 16:30:00')"/>
             <field name="duration" eval="6.3"/>
             <field name="allday" eval="False"/>
-        </record>
+        </record> 
 
         <record id="calendar_event_2" model="calendar.event">
             <field name="active" eval="True"/>
@@ -58,7 +58,7 @@
             <field name="stop" eval="time.strftime('%Y-%m-05 19:00:00')"/>
             <field name="allday" eval="False"/>
             <field name="duration" eval="7.0"/>
-        </record>
+        </record> -->
 
         <record id="calendar_event_3" model="calendar.event">
             <field name="active" eval="True"/>
@@ -73,7 +73,7 @@
             <field name="allday" eval="False"/>
         </record>
 
-        <record id="calendar_event_4" model="calendar.event">
+        <!-- <record id="calendar_event_4" model="calendar.event">
             <field name="active" eval="True"/>
             <field name="user_id" ref="base.user_demo"/>
             <field name="partner_ids" eval="[(6,0,[ref('base.partner_demo'),ref('base.res_partner_1')])]"/>
@@ -118,7 +118,7 @@
             <field name="stop" eval="time.strftime('%Y-%m-16')"/>
             <field name="duration" eval="8.5"/>
             <field name="allday" eval="True"/>
-        </record>
+        </record> -->
 
 
     </data>

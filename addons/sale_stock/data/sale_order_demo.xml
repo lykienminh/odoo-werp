@@ -2,7 +2,7 @@
 <odoo>
     <data noupdate="1">
 
-        <record id="sale.sale_order_1" model="sale.order">
+        <!-- <record id="sale.sale_order_1" model="sale.order">
             <field name="warehouse_id" ref="stock.warehouse0"/>
         </record>
 
@@ -24,10 +24,10 @@
 
         <record id="sale.sale_order_8" model="sale.order">
             <field name="warehouse_id" ref="stock.warehouse0"/>
-        </record>
+        </record> -->
 
         <!-- Create some new sale orders to have more data for the forecast report -->
-        <record id="sale_order_19" model="sale.order">
+        <!-- <record id="sale_order_19" model="sale.order">
             <field name="partner_id" ref="base.res_partner_3"/>
             <field name="partner_invoice_id" ref="base.res_partner_address_25"/>
             <field name="partner_shipping_id" ref="base.res_partner_address_25"/>
@@ -143,10 +143,10 @@
             ref('sale_order_20'),
             ref('sale_order_21'),
             ref('sale_order_22'),
-        ]]"/>
+        ]]"/> -->
 
         <!-- Change date of those sale orders' delivery -->
-        <function model="stock.picking" name="write">
+        <!-- <function model="stock.picking" name="write">
             <value model="stock.picking" search="[('sale_id', '=', obj().env.ref('sale_stock.sale_order_19').id)]"/>
             <value eval="{'scheduled_date': (datetime.now() + relativedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')}"/>
         </function>
@@ -157,7 +157,7 @@
         <function model="stock.picking" name="write">
             <value model="stock.picking" search="[('sale_id', '=', obj().env.ref('sale_stock.sale_order_21').id)]"/>
             <value eval="{'scheduled_date': (datetime.now() + relativedelta(days=3)).strftime('%Y-%m-%d %H:%M:%S')}"/>
-        </function>
+        </function> -->
 
 
         <!-- Inventory for new Customizable Desks -->

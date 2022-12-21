@@ -137,17 +137,17 @@
 
         <!--        Child Company 1-->
         <record id="res_partner_company_1" model="res.partner">
-            <field name="name">My Company, Chicago</field>
+            <field name="name">Công ty VN</field>
             <field name="is_company">1</field>
             <field eval="1" name="active"/>
-            <field name="street">90 Streets Avenue</field>
-            <field model="res.country" name="country_id" search="[('code','ilike','us')]"/>
-            <field model="res.country.state" name="state_id" search="[('code','ilike','il')]"/>
-            <field name="zip">60610</field>
-            <field name="city">Chicago</field>
-            <field name="email">chicago@yourcompany.com</field>
-            <field name="phone">+1 312 349 3030</field>
-            <field name="website">www.example.com</field>
+            <field name="street">268 Lý Thường Kiệt</field>
+            <field model="res.country" name="country_id" search="[('code','ilike','vn')]"/>
+            <field model="res.country.state" name="state_id" search="[('code','ilike','VN-SG')]"/>
+            <field name="zip">72500</field>
+            <field name="city">Quận 10</field>
+            <field name="email">vietnam@werp.com</field>
+            <field name="phone">+84 348 349 448</field>
+            <field name="website">www.werp.com</field>
             <field name="company_id" eval="False"/>
         </record>
 
@@ -161,9 +161,9 @@
         </record>
 
         <record id="res_company_1" model="res.company">
-            <field name="currency_id" ref="base.USD"/>
+            <field name="currency_id" ref="base.VND"/>
             <field name="partner_id" ref="res_partner_company_1"/>
-            <field name="name">My Company (Chicago)</field>
+            <field name="name">Công ty VN</field>
             <field name="user_ids" eval="[(4, ref('base.user_admin')), (4, ref('base.user_demo'))]"/>
         </record>
 
@@ -185,12 +185,12 @@
         </function>
 
         <record id="stock.stock_warehouse_shop0" model="stock.warehouse">
-            <field name="name">Chicago 1</field>
-            <field name="code">CHIC1</field>
+            <field name="name">Việt Nam</field>
+            <field name="code">VN</field>
             <field name="partner_id" ref="res_partner_address_41"/>
         </record>
 
-        <!-- Inventory for Chicago Warehouse -->
+        <!-- Inventory for VN Warehouse -->
 
         <record id="stock_inventory_16" model="stock.quant">
             <field name="product_id" ref="product.product_product_6"/>

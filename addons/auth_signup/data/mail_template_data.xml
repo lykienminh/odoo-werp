@@ -19,7 +19,7 @@
                 <tr><td valign="middle">
                     <span style="font-size: 10px;">Your Account</span><br/>
                     <span style="font-size: 20px; font-weight: bold;">
-                        <t t-out="object.name or ''">Marc Demo</t>
+                        <t t-out="object.name or ''">Ngọc Quý</t>
                     </span>
                 </td><td valign="middle" align="right">
                     <img t-attf-src="/logo.png?company={{ object.company_id.id }}" style="padding: 0px; margin: 0px; height: auto; width: 80px;" t-att-alt="object.company_id.name"/>
@@ -36,7 +36,7 @@
             <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
                 <tr><td valign="top" style="font-size: 13px;">
                     <div>
-                        Dear <t t-out="object.name or ''">Marc Demo</t>,<br/><br/>
+                        Dear <t t-out="object.name or ''">Ngọc Quý</t>,<br/><br/>
                         A password reset was requested for the Odoo account linked to this email.
                         You may change your password by following this link which will remain valid during 24 hours:<br/>
                         <div style="margin: 16px 0px 16px 0px;">
@@ -49,7 +49,7 @@
                         Thanks,
                         <t t-if="user.signature">
                             <br/>
-                            <t t-out="user.signature or ''">--<br/>Mitchell Admin</t>
+                            <t t-out="user.signature or ''">--<br/>Admin</t>
                         </t>
                     </div>
                 </td></tr>
@@ -114,7 +114,7 @@
                 <tr><td valign="middle">
                     <span style="font-size: 10px;">Welcome to Odoo</span><br/>
                     <span style="font-size: 20px; font-weight: bold;">
-                        <t t-out="object.name or ''">Marc Demo</t>
+                        <t t-out="object.name or ''">Ngọc Quý</t>
                     </span>
                 </td><td valign="middle" align="right">
                     <img t-attf-src="/logo.png?company={{ object.company_id.id }}" style="padding: 0px; margin: 0px; height: auto; width: 80px;" t-att-alt="object.company_id.name"/>
@@ -131,7 +131,7 @@
             <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
                 <tr><td valign="top" style="font-size: 13px;">
                     <div>
-                        Dear <t t-out="object.name or ''">Marc Demo</t>,<br /><br />
+                        Dear <t t-out="object.name or ''">Ngọc Quý</t>,<br /><br />
                         You have been invited by <t t-out="object.create_uid.name or ''">OdooBot</t> of <t t-out="object.company_id.name or ''">YourCompany</t> to connect on Odoo.
                         <div style="margin: 16px 0px 16px 0px;">
                             <a t-att-href="object.signup_url"
@@ -214,7 +214,7 @@
                 </td>
                 <tr><td valign="top" style="font-size: 13px;">
                     <div>
-                        Dear <t t-out="object.name or ''">Mitchell Admin</t>,<br/> <br/>
+                        Dear <t t-out="object.name or ''">Admin</t>,<br/> <br/>
                         You added the following user(s) to your database but they haven't registered yet:
                         <ul>
                             <t t-foreach="invited_users" t-as="invited_user">
@@ -260,7 +260,7 @@
                 <tr><td valign="middle">
                     <span style="font-size: 10px;">Your Account</span><br/>
                     <span style="font-size: 20px; font-weight: bold;">
-                        <t t-out="object.name or ''">Marc Demo</t>
+                        <t t-out="object.name or ''">Ngọc Quý</t>
                     </span>
                 </td><td valign="middle" align="right">
                     <img t-attf-src="/logo.png?company={{ object.company_id.id }}" style="padding: 0px; margin: 0px; height: auto; width: 80px;" t-att-alt="object.company_id.name"/>
@@ -277,7 +277,7 @@
             <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
                 <tr><td valign="top" style="font-size: 13px;">
                     <div>
-                        Dear <t t-out="object.name or ''">Marc Demo</t>,<br/><br/>
+                        Dear <t t-out="object.name or ''">Ngọc Quý</t>,<br/><br/>
                         Your account has been successfully created!<br/>
                         Your login is <strong><t t-out="object.email or ''">mark.brown23@example.com</t></strong><br/>
                         To gain access to your account, you can use the following link:
@@ -290,7 +290,7 @@
                         Thanks,<br/>
                         <t t-if="user.signature">
                             <br/>
-                            <t t-out="user.signature or ''">--<br/>Mitchell Admin</t>
+                            <t t-out="user.signature or ''">--<br/>Admin</t>
                         </t>
                     </div>
                 </td></tr>

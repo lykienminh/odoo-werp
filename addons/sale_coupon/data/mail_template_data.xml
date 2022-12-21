@@ -87,7 +87,7 @@
         Thank you,
         <t t-if="object.order_id.user_id.signature">
             <br />
-            <t t-out="object.order_id.user_id.signature or ''">--<br/>Mitchell Admin</t>
+            <t t-out="object.order_id.user_id.signature or ''">--<br/>Admin</t>
         </t>
     </td></tr>
 </tbody></table>

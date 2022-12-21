@@ -3,30 +3,30 @@
     <data noupdate="1">
 
         <record id="partner_demo" model="res.partner">
-            <field name="name">Marc Demo</field>
+            <field name="name">Ngọc Quý</field>
             <field name="company_id" ref="main_company"/>
-            <field name="company_name">YourCompany</field>
-            <field name="street">3575  Buena Vista Avenue</field>
-            <field name="city">Eugene</field>
-            <field name="state_id"  model="res.country.state" search="[('code','ilike','OR')]"/>
-            <field name="zip">97401</field>
-            <field name="country_id" ref="us"/>
-            <field name="tz">Europe/Brussels</field>
-            <field name="email">mark.brown23@example.com</field>
-            <field name="phone">(441)-695-2334</field>
+            <field name="company_name">Werp</field>
+            <field name="street">196 Tô Hiệu</field>
+            <field name="city">Hồ Chí Minh</field>
+            <field name="state_id"  model="res.country.state" search="[('code','ilike','VN-SG')]"/>
+            <field name="zip">72000</field>
+            <field name="country_id" ref="vn"/>
+            <field name="tz">Asia/Saigon</field>
+            <field name="email">ngocquy@gmail.com</field>
+            <field name="phone">+84 348 349 448</field>
         </record>
 
         <record id="main_partner" model="res.partner">
-            <field name="name">YourCompany</field>
-            <field name="company_name">YourCompany</field>
-            <field name="street">250 Executive Park Blvd, Suite 3400</field>
-            <field name="city">San Francisco</field>
-            <field name="zip">94134</field>
-            <field name='country_id' ref='base.us'/>
-            <field name='state_id' ref='state_us_5'/>
-            <field name="phone">+1 (650) 555-0111 </field>
-            <field name="email">info@yourcompany.example.com</field>
-            <field name="website">www.example.com</field>
+            <field name="name">Werp</field>
+            <field name="company_name">Werp</field>
+            <field name="street">196 Tô Hiệu</field>
+            <field name="city">Hồ Chí Minh</field>
+            <field name="zip">72000</field>
+            <field name='country_id' ref='base.vn'/>
+            <field name='state_id' ref='state_vn_VN-SG'/>
+            <field name="phone">+84 348 349 448</field>
+            <field name="email">info@werp.com</field>
+            <field name="website">www.werp.com</field>
         </record>
 
         <record id="user_demo" model="res.users">
@@ -40,30 +40,30 @@
         </record>
 
         <record model="res.partner" id="base.partner_root">
-            <field name="email">root@yourcompany.example.com</field>
-            <field name="tz">Europe/Brussels</field>
+            <field name="email">root@werp.com</field>
+            <field name="tz">Asia/Saigon</field>
         </record>
 
         <record model="res.partner" id="base.partner_admin">
-            <field name="name">Mitchell Admin</field>
-            <field name="company_name">YourCompany</field>
-            <field name="street">215 Vine St</field>
-            <field name="city">Scranton</field>
-            <field name="zip">18503</field>
-            <field name='country_id' ref='base.us'/>
-            <field name='state_id' ref='state_us_39'/>
-            <field name="phone">+1 555-555-5555</field>
-            <field name="email">admin@yourcompany.example.com</field>
-            <field name="tz">Europe/Brussels</field>
+            <field name="name">Admin</field>
+            <field name="company_name">WERP</field>
+            <field name="street">196 Tô Hiệu</field>
+            <field name="city">Hồ Chí Minh</field>
+            <field name="zip">72000</field>
+            <field name='country_id' ref='base.vn'/>
+            <field name='state_id' ref='state_vn_VN-SG'/>
+            <field name="phone">+84 348 349 448</field>
+            <field name="email">admin@werp.com</field>
+            <field name="tz">Asia/Saigon</field>
             <field name="image_1920" type="base64" file="base/static/img/partner_root-image.jpg"/>
         </record>
 
         <record id="base.user_admin" model="res.users">
-            <field name="signature" type="xml"><span>-- <br/>Mitchell Admin</span></field>
+            <field name="signature" type="xml"><span>-- <br/>Admin</span></field>
         </record>
 
         <!-- Portal : partner and user -->
-        <record id="partner_demo_portal" model="res.partner">
+        <!-- <record id="partner_demo_portal" model="res.partner">
             <field name="name">Joel Willis</field>
             <field name="email">joel.willis63@example.com</field>
             <field name="street">858 Lynn Street</field>
@@ -78,13 +78,13 @@
         <record id="demo_user0" model="res.users" context="{'no_reset_password': True}">
             <field name="partner_id" ref="partner_demo_portal"/>
             <field name="login">portal</field>
-            <field name="password">portal</field>
-            <field name="signature"><![CDATA[<span>-- <br/>Mr Demo Portal</span>]]></field>
-            <field name="groups_id" eval="[Command.clear()]"/><!-- Avoid auto-including this user in any default group -->
+            <field name="password">portal</field> 
+            <field name="signature"><![CDATA[<span> <br/>Mr Demo Portal</span>]]></field>
+            <field name="groups_id" eval="[Command.clear()]"/>
         </record>
 
-        <record id="base.group_portal" model="res.groups"><!-- Add the demo user to the portal (and therefore to the portal member group) -->
+        <record id="base.group_portal" model="res.groups">
             <field name="users" eval="[Command.link(ref('demo_user0'))]"/>
-        </record>
+        </record> -->
     </data>
 </odoo>

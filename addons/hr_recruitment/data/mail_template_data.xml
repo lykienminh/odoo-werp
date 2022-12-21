@@ -37,7 +37,7 @@
                 <div style="font-size: 11px; color: grey;">
                     <t t-if="object.user_id">
                         -- <br/>
-                        <strong t-out="object.user_id.name or ''">Mitchell Admin</strong><br/>
+                        <strong t-out="object.user_id.name or ''">Admin</strong><br/>
                         Email: <t t-out="object.user_id.email or ''">admin@yourcompany.example.com</t><br/>
                         Phone: <t t-out="object.user_id.phone or ''">+1 650-123-4567</t>
                     </t>
@@ -90,7 +90,7 @@
                                 <img t-attf-src="/web/image/res.users/{{ object.user_id.id }}/avatar_128" alt="Avatar" style="vertical-align:baseline; width: 64px; height: 64px; object-fit: cover;" />
                             </td>
                             <td>
-                                <strong t-out="object.user_id.name or ''">Mitchell Admin</strong><br/>
+                                <strong t-out="object.user_id.name or ''">Admin</strong><br/>
                                 <span>Email: <t t-out="object.user_id.email or ''">admin@yourcompany.example.com</t></span><br/>
                                 <span>Phone: <t t-out="object.user_id.phone or ''">+1 650-123-4567</t></span>
                             </td>
@@ -189,7 +189,7 @@
                                 <img t-attf-src="/web/image/res.users/{{ object.user_id.id }}/avatar_128" alt="Avatar" style="vertical-align:baseline; width: 64px; height: 64px; object-fit: cover;" />
                             </td>
                             <td>
-                                <strong t-out="object.user_id.name or ''">Mitchell Admin</strong><br/>
+                                <strong t-out="object.user_id.name or ''">Admin</strong><br/>
                                 <span>Email: <t t-out="object.user_id.email or ''">admin@yourcompany.example.com</t></span><br/>
                                 <span>Phone: <t t-out="object.user_id.phone or ''">+1 650-123-4567</t></span>
                             </td>
@@ -262,7 +262,7 @@
                 <div style="font-size: 11px; color: grey;">
                     <t t-if="object.user_id">
                         -- <br/>
-                        <strong t-out="object.user_id.name or ''">Marc Demo</strong><br/>
+                        <strong t-out="object.user_id.name or ''">Ngọc Quý</strong><br/>
                         Email: <t t-out="object.user_id.email or ''">mark.brown23@example.com</t><br/>
                         Phone: <t t-out="object.user_id.phone or ''">+1 650-123-4567</t>
                     </t>

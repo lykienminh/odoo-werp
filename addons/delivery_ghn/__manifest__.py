@@ -1,5 +1,5 @@
 {
-    'name': "GHN",
+    'name': "Giao hàng nhanh",
     'summary': """Integration App In Odoo With Delivery In Company GHN""",
     # 'description': """ ghn API """,
     'author': "Magenest",

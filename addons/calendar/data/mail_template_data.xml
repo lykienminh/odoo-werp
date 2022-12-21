@@ -100,7 +100,7 @@
                     <li t-foreach="object.event_id.attendee_ids" t-as="attendee">
                         <div t-attf-style="display: inline-block; border-radius: 50%; width: 10px; height: 10px; background:{{ colors.get(attendee.state) or 'white' }};"> </div>
                         <t t-if="attendee.common_name != object.common_name">
-                            <span style="margin-left:5px" t-out="attendee.common_name or ''">Mitchell Admin</span>
+                            <span style="margin-left:5px" t-out="attendee.common_name or ''">Admin</span>
                         </t>
                         <t t-else="">
                             <span style="margin-left:5px">You</span>
@@ -121,7 +121,7 @@
     Thank you,
     <t t-if="object.event_id.user_id.signature">
         <br />
-        <t t-out="object.event_id.user_id.signature or ''">--<br/>Mitchell Admin</t>
+        <t t-out="object.event_id.user_id.signature or ''">--<br/>Admin</t>
     </t>
 </div>
             </field>
@@ -225,7 +225,7 @@
                     <li t-foreach="object.event_id.attendee_ids" t-as="attendee">
                         <div t-attf-style="display: inline-block; border-radius: 50%; width: 10px; height: 10px; background: {{ colors.get(attendee.state) or 'white' }};"> </div>
                         <t t-if="attendee.common_name != object.common_name">
-                            <span style="margin-left:5px" t-out="attendee.common_name or ''">Mitchell Admin</span>
+                            <span style="margin-left:5px" t-out="attendee.common_name or ''">Admin</span>
                         </t>
                         <t t-else="">
                             <span style="margin-left:5px">You</span>
@@ -246,7 +246,7 @@
     Thank you,
     <t t-if="object.event_id.user_id.signature">
         <br />
-        <t t-out="object.event_id.user_id.signature or ''">--<br/>Mitchell Admin</t>
+        <t t-out="object.event_id.user_id.signature or ''">--<br/>Admin</t>
     </t>
 </div>
             </field>
@@ -326,7 +326,7 @@
                     <li t-foreach="object.event_id.attendee_ids" t-as="attendee">
                         <div t-attf-style="display: inline-block; border-radius: 50%; width: 10px; height: 10px; background:{{ colors.get(attendee.state) or 'white' }};"> </div>
                         <t t-if="attendee.common_name != object.common_name">
-                            <span style="margin-left:5px" t-out="attendee.common_name or ''">Mitchell Admin</span>
+                            <span style="margin-left:5px" t-out="attendee.common_name or ''">Admin</span>
                         </t>
                         <t t-else="">
                             <span style="margin-left:5px">You</span>
@@ -347,7 +347,7 @@
     Thank you,
     <t t-if="object.event_id.user_id.signature">
         <br />
-        <t t-out="object.event_id.user_id.signature or ''">--<br/>Mitchell Admin</t>
+        <t t-out="object.event_id.user_id.signature or ''">--<br/>Admin</t>
     </t>
 </div>
             </field>

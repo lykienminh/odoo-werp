@@ -2,7 +2,7 @@
 <odoo>
     <data noupdate="0">
 
-        <record id="base.res_partner_address_1" model="res.partner">
+        <!-- <record id="base.res_partner_address_1" model="res.partner">
             <field name="image_1920" type="base64" file="base/static/img/res_partner_address_1.jpg"/>
         </record>
 
@@ -100,7 +100,7 @@
 
         <record id="base.res_partner_main2" model="res.partner">
             <field name="image_1920" type="base64" file="base/static/img/res_partner_main2.jpg"/>
-        </record>
+        </record> -->
 
     </data>
 </odoo>
