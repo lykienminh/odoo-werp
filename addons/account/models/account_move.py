@@ -370,6 +370,20 @@ class AccountMove(models.Model):
     inalterable_hash = fields.Char(string="Inalterability Hash", readonly=True, copy=False)
     string_to_hash = fields.Char(compute='_compute_string_to_hash', readonly=True)
 
+    # # ==== WERP Fields ====
+    # @api.model
+    # def get_display_payment_terms_default(self):
+    #     value = self.env['ir.config_parameter'].sudo().get_param('werp.account.payment_terms')
+    #     return False if not value else value
+
+    # # werp_config_payment_terms_id = fields.Many2one('account.move', string='Journal Entry',
+    #     # index=True, required=True, readonly=True, auto_join=True, ondelete="cascade")
+    # werp_config_payment_terms = fields.Boolean(
+    #     string='Hide/Unhide payment terms',
+    #     compute='get_display_payment_terms_default',
+    #     hange_default=True,
+    #     default=get_display_payment_terms_default)
+
     @api.model
     def _field_will_change(self, record, vals, field_name):
         if field_name not in vals:

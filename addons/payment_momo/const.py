@@ -2,7 +2,6 @@
 
 # ISO 4217 codes of currencies supported by PayPal
 SUPPORTED_CURRENCIES = (
-    'USD',
     'VND',
 )
 

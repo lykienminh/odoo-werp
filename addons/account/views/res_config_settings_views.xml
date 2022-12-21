@@ -23,6 +23,20 @@
                     <div class="app_settings_block" data-string="Invoicing" string="Invoicing" data-key="account" groups="account.group_account_manager">
                         <field name="has_chart_of_accounts" invisible="1"/>
                         <field name="has_accounting_entries" invisible="1"/>
+                        <h2>WERP Configuration</h2>
+                        <div class="row mt16 o_settings_container" name="werp_setting_container">
+                            <div class="col-12 col-lg-6 o_setting_box" id="variant_options">
+                                <div class="o_setting_left_pane">
+                                    <field name="werp_config_payment_terms"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="werp_config_payment_terms" string="Payment terms"/>
+                                    <div class="text-muted">
+                                        Hide/Unhide payment terms
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <h2 attrs="{'invisible': [('has_accounting_entries','!=',False)]}">Fiscal Localization</h2>
                         <div class="row mt16 o_settings_container" name="fiscal_localization_setting_container">
                             <div class="col-12 o_setting_box" attrs="{'invisible': [('has_accounting_entries','!=',False)]}">

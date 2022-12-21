@@ -139,6 +139,12 @@ class ResConfigSettings(models.TransientModel):
         string='Default Terms & Conditions',
         config_parameter='account.use_invoice_terms')
 
+    # WERP config
+    werp_config_payment_terms = fields.Boolean(
+        string='Hide/Unhide payment terms',
+        default=False,
+        config_parameter='werp.account.payment_terms')
+
     # Technical field to hide country specific fields from accounting configuration
     country_code = fields.Char(related='company_id.account_fiscal_country_id.code', readonly=True)
 
