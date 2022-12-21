@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 o_setting_box" id="product_configurator">
+                        <div class="col-12 col-lg-6 o_setting_box" id="product_configurator" invisible="1">
                             <div class="o_setting_left_pane">
                                 <field name="module_sale_product_configurator"/>
                             </div>
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 o_setting_box" id="product_matrix">
+                        <div class="col-12 col-lg-6 o_setting_box" id="product_matrix" invisible="1">
                             <div class="o_setting_left_pane">
                                 <field name="module_sale_product_matrix"/>
                             </div>
@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 o_setting_box"
+                        <div class="col-12 col-lg-6 o_setting_box" invisible="1"
                             id="email_template"
                             title="Sending an email is useful if you need to share specific information or content about a product (instructions, rules, links, media, etc.). Create and set the email template from the product detail form (in Sales tab).">
                             <div class="o_setting_left_pane">
@@ -79,7 +79,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 o_setting_box"
+                        <div class="col-12 col-lg-6 o_setting_box" invisible="1"
                             id="stock_packaging"
                             title="Ability to select a package type in sales orders and to force a quantity that is a multiple of the number of units per package.">
                             <div class="o_setting_left_pane">
@@ -95,7 +95,7 @@
                     </div>
                     <h2>Pricing</h2>
                     <div class="row mt16 o_settings_container" id="pricing_setting_container">
-                      <div class="col-12 col-lg-6 o_setting_box"
+                      <div class="col-12 col-lg-6 o_setting_box" invisible="1"
                            id="discount_sale_order_lines"
                            title="Apply manual discounts on sales order lines or display discounts computed from pricelists (option to activate in the pricelist configuration).">
                            <div class="o_setting_left_pane">
@@ -108,7 +108,7 @@
                                </div>
                            </div>
                        </div>
-                        <div class="col-12 col-lg-6 o_setting_box"
+                        <div class="col-12 col-lg-6 o_setting_box" invisible="1"
                             id="coupon_settings"
                             title="Boost your sales with two kinds of discount programs: promotions and coupon codes. Specific conditions can be set (products, customers, minimum purchase amount, period). Rewards can be discounts (% or amount) or free products.">
                             <div class="o_setting_left_pane">
@@ -136,13 +136,13 @@
                                         <field name="group_sale_pricelist" invisible="1"/>
                                         <field name="product_pricelist_setting" widget="radio" class="o_light_label"/>
                                     </div>
-                                    <div class="mt8">
+                                    <div class="mt8" invisible="1">
                                         <button name="%(product.product_pricelist_action2)d" icon="fa-arrow-right" type="action" string="Pricelists" groups="product.group_product_pricelist" class="btn-link"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 o_setting_box"
+                        <div class="col-12 col-lg-6 o_setting_box" invisible="1"
                             id="auth_signup_documents"
                             title=" To send invitations in B2B mode, open a contact or select several ones in list view and click on 'Portal Access Management' option in the dropdown menu *Action*.">
                             <div class="o_setting_left_pane">
@@ -157,7 +157,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 o_setting_box"
+                        <div class="col-12 col-lg-6 o_setting_box" invisible="1"
                             id="show_margins"
                             title="The margin is computed as the sum of product sales prices minus the cost set in their detail form.">
                             <div class="o_setting_left_pane">
@@ -173,7 +173,7 @@
                     </div>
                     <h2>Quotations &amp; Orders</h2>
                     <div class="row mt16 o_settings_container" name="quotation_order_setting_container">
-                        <div class="col-12 col-lg-6 o_setting_box" id="sale_config_online_confirmation_sign">
+                        <div class="col-12 col-lg-6 o_setting_box" id="sale_config_online_confirmation_sign" invisible="1">
                             <div class="o_setting_left_pane">
                                 <field name="portal_confirmation_sign"/>
                             </div>
@@ -202,7 +202,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 o_setting_box" id="confirmation_email_setting" attrs="{'invisible': [('portal_confirmation_pay', '=', False) , ('portal_confirmation_sign', '=', False)]}" groups="base.group_no_one">
+                        <div class="col-12 col-lg-6 o_setting_box" id="confirmation_email_setting" attrs="{'invisible': [('portal_confirmation_pay', '=', False) , ('portal_confirmation_sign', '=', False)]}" groups="base.group_no_one" invisible="1">
                             <div class="o_setting_right_pane">
                                 <span class="o_form_label">Confirmation Email</span>
                                 <div class="text-muted">
@@ -214,7 +214,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 o_setting_box" id="invoice_delivery_addresses">
+                        <div class="col-12 col-lg-6 o_setting_box" id="invoice_delivery_addresses" invisible="1">
                             <div class="o_setting_left_pane">
                                 <field name="group_sale_delivery_address"/>
                             </div>
@@ -226,7 +226,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 o_setting_box" id="quotation_validity_days">
+                        <div class="col-12 col-lg-6 o_setting_box" id="quotation_validity_days" invisible="1">
                             <div class="o_setting_left_pane">
                                 <field name="use_quotation_validity_days"/>
                             </div>
@@ -243,7 +243,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 o_setting_box" id="order_warnings">
+                        <div class="col-12 col-lg-6 o_setting_box" id="order_warnings" invisible="1">
                             <div class="o_setting_left_pane">
                                 <field name="group_warning_sale"/>
                             </div>
@@ -254,7 +254,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 o_setting_box" id="no_edit_order">
+                        <div class="col-12 col-lg-6 o_setting_box" id="no_edit_order" invisible="1">
                             <div class="o_setting_left_pane">
                                 <field name="group_auto_done_setting"/>
                             </div>
@@ -265,7 +265,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 o_setting_box" id="proforma_configuration">
+                        <div class="col-12 col-lg-6 o_setting_box" id="proforma_configuration" invisible="1">
                             <div class="o_setting_left_pane">
                                 <field name="group_proforma_sales"/>
                             </div>
@@ -277,8 +277,8 @@
                             </div>
                         </div>
                     </div>
-                    <h2 class="mt32">Shipping</h2>
-                    <div class="row mt16 o_settings_container" name="shipping_setting_container">
+                    <h2 class="mt32" invisible="1">Shipping</h2>
+                    <div class="row mt16 o_settings_container" name="shipping_setting_container" invisible="1">
                         <div class="col-12 col-lg-6 o_setting_box" id="delivery">
                             <div class="o_setting_left_pane">
                                 <field name="module_delivery"/>
@@ -310,7 +310,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-md-6 o_setting_box"
+                        <div class="col-xs-12 col-md-6 o_setting_box" invisible="1"
                              id="automatic_invoicing"
                              attrs="{'invisible': ['|', ('default_invoice_policy', '!=', 'order'), ('portal_confirmation_pay', '=', False)]}">
                             <div class="o_setting_left_pane">
@@ -327,7 +327,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 o_setting_box" id="down_payments">
+                        <div class="col-12 col-lg-6 o_setting_box" id="down_payments" invisible="1">
                             <div class="o_setting_left_pane"/>
                             <div class="o_setting_right_pane">
                                 <span class="o_form_label">Down Payments</span>

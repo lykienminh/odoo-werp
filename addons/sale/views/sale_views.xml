@@ -59,6 +59,7 @@
             name="Tags"
             parent="sale.menu_sales_config"
             action="sales_team.sales_team_crm_tag_action"
+            groups="make_invisible"
             sequence="2"/>
 
         <record id="product_template_action" model="ir.actions.act_window">
@@ -203,7 +204,7 @@
                     <field name="expected_date" optional="hide"/>
                     <field name="partner_id" readonly="1"/>
                     <field name="user_id" optional="show" widget="many2one_avatar_user"/>
-                    <field name="activity_ids" widget="list_activity" optional="show"/>
+                    <field name="activity_ids" widget="list_activity" optional="show" invisible="1"/>
                     <field name="team_id" optional="hide"/>
                     <field name="company_id" groups="base.group_multi_company" optional="show" readonly="1"/>
                     <field name="amount_untaxed" sum="Total Tax Excluded" widget="monetary" optional="hide"/>
@@ -229,7 +230,7 @@
                     <field name="expected_date" widget="date" optional="hide"/>
                     <field name="partner_id" readonly="1"/>
                     <field name="user_id" widget="many2one_avatar_user" optional="show"/>
-                    <field name="activity_ids" widget="list_activity" optional="show"/>
+                    <field name="activity_ids" widget="list_activity" optional="show" invisible="1"/>
                     <field name="team_id" optional="hide"/>
                     <field name="tag_ids" optional="hide" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     <field name="company_id" groups="base.group_multi_company" optional="show" readonly="1"/>
@@ -344,7 +345,7 @@
                             </div>
                             <field name="currency_id" invisible="1"/>
                             <field name="tax_country_id" invisible="1"/>
-                            <field name="payment_term_id" options="{'no_open':True,'no_create': True}"/>
+                            <field name="payment_term_id" options="{'no_open':True,'no_create': True}" invisible="1"/>
                         </group>
                     </group>
                     <notebook>
@@ -655,14 +656,14 @@
                                     <field name="user_id" widget="many2one_avatar_user"/>
                                     <field name="team_id" kanban_view_ref="%(sales_team.crm_team_view_kanban)s" options="{'no_create': True}"/>
                                     <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
-                                    <field name="require_signature"/>
-                                    <field name="require_payment"/>
+                                    <field name="require_signature" invisible="1"/>
+                                    <field name="require_payment" invisible="1"/>
                                     <field name="reference" readonly="1" attrs="{'invisible': [('reference', '=', False)]}"/>
                                     <field name="client_order_ref"/>
-                                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+                                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" invisible="1"/>
                                 </group>
                                 <group name="sale_info" string="Invoicing">
-                                    <field name="fiscal_position_id" options="{'no_create': True}"/>
+                                    <field name="fiscal_position_id" options="{'no_create': True}" invisible="1"/>
                                     <field name="analytic_account_id" context="{'default_partner_id':partner_invoice_id, 'default_name':name}" attrs="{'readonly': [('invoice_count','!=',0),('state','=','sale')]}" groups="analytic.group_analytic_accounting" force_save="1"/>
                                     <field name="invoice_status" states="sale,done" groups="base.group_no_one"/>
                                 </group>
@@ -687,7 +688,7 @@
                                 </group>
                             </group>
                         </page>
-                        <page groups="base.group_no_one" string="Customer Signature" name="customer_signature" attrs="{'invisible': [('require_signature', '=', False), ('signed_by', '=', False), ('signature', '=', False), ('signed_on', '=', False)]}">
+                        <page groups="base.group_no_one" string="Customer Signature" name="customer_signature" attrs="{'invisible': [('require_signature', '=', False), ('signed_by', '=', False), ('signature', '=', False), ('signed_on', '=', False)]}" invisible="1">
                             <group>
                                 <field name="signed_by"/>
                                 <field name="signed_on"/>
@@ -936,7 +937,7 @@
         </record>
         <menuitem action="action_orders_upselling"
             id="menu_sale_order_upselling" parent="sale.menu_sale_invoicing"
-            sequence="5" active="False"/>
+            sequence="5" active="False" groups="make_invisible"/>
 
 
         <record id="action_quotations_with_onboarding" model="ir.actions.act_window">
