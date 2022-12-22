@@ -23,18 +23,27 @@ class MoMoController(http.Controller):
     def payment_momo(self, **data):
         endpoint = data['apiUrl']
         data.pop('apiUrl', None)
+        # data['storeId'] = 'MOMO0NLV20200803-2212220506168e58c419'
         data = json.dumps(data)
         clen = len(data)
         headers = {'Content-type': 'application/json; charset=UTF-8', 'Content-Length': str(clen)}
         try:
             response = requests.post(endpoint, data=data, headers=headers)
-            responseContent = json.loads(response.text) if response.text else response
-            if response.status_code < 200 or response.status_code > 299:
-                return None
+            responseContentRaw = json.loads(response.text if response.text else response)
+            responseContent = responseContentRaw if responseContentRaw else response
+            isSuccess = False if response.status_code < 200 or response.status_code > 299 or not responseContent['payUrl'] else True
+            if not isSuccess:
+                pass
             else:
                 return request.redirect(location=responseContent['payUrl'], local=False)
-        except (ConnectionError, HTTPError):
-            return None
+        except:
+            pass
+
+    @http.route('/payment/momo/error', type='http', methods=['GET', 'POST'], auth="public", csrf=False)
+    def payment_momo_error(self, **kwargs):
+        print("==============================================================")
+        print(kwargs)
+        print("==============================================================")
 
     @http.route(
         _return_url, type='http', auth='public', methods=['GET', 'POST'], csrf=False,
@@ -55,19 +64,14 @@ class MoMoController(http.Controller):
         retrieved and with it the transaction which will be immediately post-processed.
         """
         _logger.info("beginning DPN with post data:\n%s", pprint.pformat(data))
-        if not data['resultCode'] == 0:  # The customer has cancelled the payment
-            pass  # Redirect them to the status page to browse the draft transaction
-        else:
-            try:
-                notification_data = self._validate_pdt_data_authenticity(**data)
-            except ValidationError:
-                _logger.exception("could not verify the origin of the PDT; discarding it")
-            else:
-                request.env['payment.transaction'].sudo()._handle_feedback_data(
-                    'paypal', notification_data
-                )
-
-        return request.redirect('/payment/status')
+        resultCode = data['resultCode'] if data['resultCode'] else 404
+        resultMessage = data['message'] if data['message'] else 'Unexpected error'
+        print("==============================================================")
+        print(data)
+        print("==============================================================")
+        if resultCode == 0 or resultCode == '0':  # The customer has cancelled the payment
+            return request.redirect('/payment/status')
+        return f"Thanh toán thất bại, vui lòng thử lại sau. Mã lỗi {resultCode}, nội dung {resultMessage}"
 
     def _validate_pdt_data_authenticity(self, **data):
         """ Validate the authenticity of PDT data and return the retrieved notification data.

@@ -25,6 +25,15 @@
         </field>
     </record>
 
+    <template id="payment_momo_error" name="Payment MoMo Error">
+        <t t-call="portal.frontend_layout">
+            <t t-set="page_title" t-value="'Payment Status'"/>
+            <t t-set="additional_title"><t t-esc="page_title"/></t>
+            <field name="status"/>
+            <field name="message"/>
+        </t>
+    </template>
+
     <!-- <record id="payment_transaction_form" model="ir.ui.view">
         <field name="name">MoMo Transaction Form</field>
         <field name="model">payment.transaction</field>
