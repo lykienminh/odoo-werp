@@ -1494,6 +1494,11 @@ msgstr "Tính chi phí giao hàng"
 
 #. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.res_config_settings_view_form
+msgid "Integrate GHN"
+msgstr "Tích hợp GHN"
+
+#. module: stock
+#: model_terms:ir.ui.view,arch_db:stock.res_config_settings_view_form
 msgid "Compute shipping costs and ship with DHL"
 msgstr "Tính toán phí giao hàng và giao bằng DHL"
 
@@ -5745,6 +5750,11 @@ msgstr "Đặt vào gói"
 #: model_terms:ir.ui.view,arch_db:stock.res_config_settings_view_form
 msgid "Put your products in packs (e.g. parcels, boxes) and track them"
 msgstr "Đưa các sản phẩm vào các gói (vd: kiện, hộp) và theo dõi chúng"
+
+#. module: stock
+#: model_terms:ir.ui.view,arch_db:stock.res_config_settings_view_form
+msgid "Process scrap/damaged goods"
+msgstr "Xử lý sản phẩm hư hỏng/lỗi"
 
 #. module: stock
 #: model:ir.model,name:stock.model_stock_putaway_rule

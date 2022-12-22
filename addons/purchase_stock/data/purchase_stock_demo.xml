@@ -38,7 +38,7 @@
             <field name="route_ids" eval="[(4,ref('route_warehouse0_buy'))]"></field>
         </record>
 
-        <record id="purchase_order_8" model="purchase.order">
+        <!-- <record id="purchase_order_8" model="purchase.order">
             <field name="partner_id" ref="base.res_partner_4"/>
             <field name="user_id" ref="base.user_admin"/>
             <field name="state">draft</field>
@@ -55,7 +55,7 @@
             ]"/>
         </record>
 
-        <function model="purchase.order" name="button_confirm" eval="[[ref('purchase_order_8')]]"/>
+        <function model="purchase.order" name="button_confirm" eval="[[ref('purchase_order_8')]]"/> -->
 
     </data>
 

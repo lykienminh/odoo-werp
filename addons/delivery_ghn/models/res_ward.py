@@ -20,18 +20,19 @@ class ResWard(models.Model):
             'Content-type': 'application/json',
             'Token': ghn_token
         }
-        req = requests.get(request_url, headers=headers, params={"district_id": 1452})
-        req.raise_for_status()
-        content = req.json()
-        print(content)
-        data = content['data']
-        for rec in data:
-            existed_district = self.env['res.district'].sudo().search([('ghn_district_id', '=', rec['DistrictID'])],limit=1)
-            if existed_district:
-                vals = {}
-                vals['state_id'] = existed_district.state_id.id
-                vals['country_id'] = existed_district.country_id.id
-                vals['district_id'] = existed_district.id
-                vals['name'] = rec['WardName']
-                vals['ghn_ward_id'] = rec['WardCode']
-                self.env['res.ward'].sudo().create(vals)
+        districts = [1442, 1452, 1443, 1444, 1446, 1447, 1450, 1451, 1462, 1461, 1463, 1455, 1456, 3695]
+        for district_id in districts:
+            req = requests.get(request_url, headers=headers, params={"district_id": district_id})
+            req.raise_for_status()
+            content = req.json()
+            data = content['data']
+            for rec in data:
+                existed_district = self.env['res.district'].sudo().search([('ghn_district_id', '=', rec['DistrictID'])],limit=1)
+                if existed_district:
+                    vals = {}
+                    vals['state_id'] = existed_district.state_id.id
+                    vals['country_id'] = existed_district.country_id.id
+                    vals['district_id'] = existed_district.id
+                    vals['name'] = rec['WardName']
+                    vals['ghn_ward_id'] = rec['WardCode']
+                    self.env['res.ward'].sudo().create(vals)

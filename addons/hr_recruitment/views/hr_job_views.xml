@@ -17,14 +17,14 @@
                 <field name="alias_domain"/>
                 <field name="is_favorite"/>
                 <field name="department_id"/>
-                <field name="no_of_recruitment"/>
+                <field name="no_of_recruitment" invisible="1"/>
                 <field name="color"/>
-                <field name="new_application_count"/>
-                <field name="no_of_hired_employee"/>
+                <field name="new_application_count" invisible="1"/>
+                <field name="no_of_hired_employee" invisible="1"/>
                 <field name="manager_id"/>
-                <field name="state"/>
+                <field name="state" invisible="1"/>
                 <field name="user_id"/>
-                <field name="application_count"/>
+                <field name="application_count" invisible="1"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div t-attf-class="#{!selection_mode ? kanban_color(record.color.raw_value) : ''}">

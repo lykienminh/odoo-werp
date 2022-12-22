@@ -173,6 +173,10 @@ class SaleOrder(models.Model):
             "service_id": 0,
             "service_type_id": int(self.carrier_id.service)     # Input value 1: Express , 2: Standard or 3: Saving (if not input service_id) => But only Standard
         }
+        print("=========================")
+        print(json.dumps(data))
+        print(headers)
+        print("=========================")
         req = requests.post(request_url, data=json.dumps(data), headers=headers)
         req.raise_for_status()
         content = req.json()

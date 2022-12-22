@@ -26,16 +26,16 @@
                                         <div class="text-muted">Use PIN codes to check in</div>
                                     </div>
                                 </div> -->
-                                <div class="col-12 col-lg-6 o_setting_box" title="Set PIN codes in the employee detail form (in HR Settings tab)." attrs="{'invisible': [('module_hr_attendance_kiosk','=',False)]}">
-                                    <div class="o_setting_left_pane">
-                                        <field name="group_attendance_use_pin"/>
-                                    </div>
-                                    <div class="o_setting_right_pane">
-                                        <span class="o_form_label">Employee PIN</span>
-                                        <div class="text-muted">
-                                            Use PIN codes to check in
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" title="Set PIN codes in the employee detail form (in HR Settings tab)." attrs="{'invisible': [('module_hr_attendance_kiosk','=',False)]}">
+                            <div class="o_setting_left_pane">
+                                <field name="group_attendance_use_pin"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Employee PIN</span>
+                                <div class="text-muted">
+                                    Use PIN codes to check in
                                 </div>
                             </div>
                         </div>

@@ -6,7 +6,6 @@
         <field name="inherit_id" ref="delivery.choose_delivery_carrier_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='carrier_id']" position="after">
-<!--                <separator string="volume"/>-->
                 <field name="weight" required="1" attrs="{'invisible':[('delivery_type','!=','ghn_shipping')]}"/>
                 <separator string="Or volume Converted" attrs="{'invisible':[('delivery_type','!=','ghn_shipping')]}"/>
                 <field name="length" required="1" attrs="{'invisible':[('delivery_type','!=','ghn_shipping')]}"/>
@@ -16,8 +15,7 @@
                     <label for="convert_volume" />:
                     <span><field name="convert_volume" readonly="1" />g</span>
                 </div>
-<!--                <separator/>-->
-<!--                <separator string="Payment"/>-->
+
                 <field name="payment_type" widget="selection" attrs="{'invisible':[('delivery_type','!=','ghn_shipping')]}"/>
                 <field name="required_note" widget="selection" attrs="{'invisible':[('delivery_type','!=','ghn_shipping')]}"/>
             </xpath>

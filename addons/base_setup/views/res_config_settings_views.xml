@@ -292,7 +292,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-6 o_setting_box" id="oauth">
+                            <div class="col-12 col-lg-6 o_setting_box" id="oauth" invisible="1">
                                 <div class="o_setting_left_pane">
                                     <field name="module_auth_ldap"/>
                                 </div>
@@ -364,7 +364,7 @@
                         </div>
 
                         <widget name='res_config_dev_tool'/>
-                        <div id='about'>
+                        <div id='about' invisible="1">
                             <h2>About</h2>
                             <div class="row mt16 o_settings_container" name="about_setting_container">
                                 <div class='col-12 col-lg-6 o_setting_box' id='appstore'>

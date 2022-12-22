@@ -322,7 +322,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h2>Vendor Payments</h2>
+                        <h2 invisible="1">Vendor Payments</h2>
                         <div class="row mt16 o_settings_container" id="print_vendor_checks_setting_container">
                             <div class="col-12 col-lg-6 o_setting_box" id="print_checks" groups="account.group_account_user">
                                 <div class="o_setting_left_pane">

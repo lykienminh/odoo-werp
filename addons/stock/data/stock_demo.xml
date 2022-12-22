@@ -172,7 +172,7 @@
         </record>
 
         <record id="base.main_company" model="res.company">
-            <field name="name">My Company (San Francisco)</field>
+            <field name="name">My Company</field>
         </record>
 
         <!-- Create a ir data with the autocreated warehouse -->

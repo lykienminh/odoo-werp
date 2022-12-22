@@ -26,6 +26,7 @@
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box"
                             id="email_servers_setting"
+                            invisible="1"
                             title="Using your own email server is required to send/receive emails in Community and Enterprise versions. Online users already benefit from a ready-to-use email server (@mycompany.odoo.com).">
                             <div class="o_setting_left_pane">
                                 <field name="external_email_server_default"/>
@@ -45,7 +46,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="col-12 col-lg-6 o_setting_box" invisible="1">
                             <div class="o_setting_left_pane">
                                 <field name="use_twilio_rtc_servers"/>
                             </div>
@@ -66,7 +67,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="col-12 col-lg-6 o_setting_box" invisible="1">
                             <div class="o_setting_right_pane">
                                 <span class="o_form_label">Custom ICE server list</span>
                                 <div class="row">
@@ -82,6 +83,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-lg-6 o_setting_box"
+                            invisible="1"
                             id="restrict_template_rendering_setting">
                             <div class="o_setting_left_pane">
                                 <field name="restrict_template_rendering"/>

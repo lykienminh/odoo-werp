@@ -607,7 +607,7 @@
             <field name="name">account.move.form</field>
             <field name="model">account.move</field>
             <field name="arch" type="xml">
-                <form string="Account Entry">
+                <form string="Account Entry" create="false">
                     <header>
                         <!-- Post -->
                         <button name="action_post" string="Post" class="oe_highlight"

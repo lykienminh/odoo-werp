@@ -9,6 +9,7 @@ class ResConfigSettings(models.TransientModel):
 
     group_auto_done_setting = fields.Boolean("Lock Confirmed Sales", implied_group='sale.group_auto_done_setting')
     module_sale_margin = fields.Boolean("Margins")
+    module_delivery_ghn = fields.Boolean("Giao hàng nhanh")
     quotation_validity_days = fields.Integer(related='company_id.quotation_validity_days', string="Default Quotation Validity (Days)", readonly=False)
     use_quotation_validity_days = fields.Boolean("Default Quotation Validity", config_parameter='sale.use_quotation_validity_days')
     group_warning_sale = fields.Boolean("Sale Order Warnings", implied_group='sale.group_warning_sale')
@@ -36,12 +37,6 @@ class ResConfigSettings(models.TransientModel):
     ], string='Customer Account', default='b2b', config_parameter='auth_signup.invitation_scope')
 
     module_delivery = fields.Boolean("Delivery Methods")
-    module_delivery_dhl = fields.Boolean("DHL Express Connector")
-    module_delivery_fedex = fields.Boolean("FedEx Connector")
-    module_delivery_ups = fields.Boolean("UPS Connector")
-    module_delivery_usps = fields.Boolean("USPS Connector")
-    module_delivery_bpost = fields.Boolean("bpost Connector")
-    module_delivery_easypost = fields.Boolean("Easypost Connector")
 
     module_product_email_template = fields.Boolean("Specific Email")
     module_sale_coupon = fields.Boolean("Coupons & Promotions")

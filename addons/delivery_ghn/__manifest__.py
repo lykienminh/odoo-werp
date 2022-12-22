@@ -34,7 +34,7 @@
         ],
     },
     'installable': True,
-    'application': True, # application or technical module
+    'application': False, # application or technical module
     'auto_install': False,
     'license': 'OPL-1',
 }
