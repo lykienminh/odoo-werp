@@ -38,7 +38,7 @@ class PaymentTransaction(models.Model):
         partnerCode = self.acquirer_id.momo_partner_code
         accessKey = self.acquirer_id.momo_access_key
         secretKey = self.acquirer_id.momo_secret_key
-        orderInfo = f"{self.reference}: {self.partner_name}"
+        orderInfo = self.reference
         redirectUrl = urls.url_join(base_url, MoMoController._return_url)
         ipnUrl = urls.url_join(base_url, MoMoController._notify_url)
         amount = int(self.amount)
