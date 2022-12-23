@@ -8,21 +8,21 @@ class SaleOrder(models.Model):
 
     ghn_order_code = fields.Char('GHN Order Code', store=True)
 
-    weight = fields.Integer('Khối lượng(gram)', default=1, help='Tổng khối lượng sản phẩm')
-    length = fields.Integer('Chiều dài(cm)', default=1, help='Là khối lượng được tính dựa theo công thức (DxRxC/5000)')
-    width = fields.Integer('chiều rộng(cm)', default=1, help='Là khối lượng được tính dựa theo công thức (DxRxC/5000)')
-    height = fields.Integer('chiều cao(cm)', default=1, help='Là khối lượng được tính dựa theo công thức (DxRxC/5000)')
+    weight = fields.Integer('Weight (gram)', default=1, help='Total weight of order products')
+    length = fields.Integer('Length (cm)', default=1, help='Total length of order products')
+    width = fields.Integer('Width (cm)', default=1, help='Total width of order products')
+    height = fields.Integer('Height (cm)', default=1, help='Total height of order products')
     required_note = fields.Selection([
         ('KHONGCHOXEMHANG', 'Không cho xem hàng'),
         ('CHOXEMHANGKHONGTHU', 'Cho xem không cho thử'),
         ('CHOTHUHANG', 'Cho thử hàng')
-    ], string="Lưu ý giao hàng", default="KHONGCHOXEMHANG", readonly=True)
+    ], string="Shipping note", default="KHONGCHOXEMHANG", readonly=True)
     payment_type = fields.Selection([
         ('1', 'Bên gửi trả phí'),
         ('2', 'Bên nhận trả phí'),
-    ], string="Tùy chọn thanh toán", default="2", required=True)
-    convert_volume = fields.Integer('Khối lượng quy đổi(gram)', required=True, default=0,
-                                    help='Là khối lượng được tính dựa theo công thức (DxRxC/5000)')
+    ], string="Payment type", default="2", required=True)
+    convert_volume = fields.Integer('Converted volume (gram)', required=True, default=0,
+                                    help='The mass calculated according to the formula (DxRxC/5000)')
 
     def action_confirm(self):
         super(SaleOrder, self).action_confirm()
@@ -33,7 +33,7 @@ class SaleOrder(models.Model):
         if is_delivery:
             if self.carrier_id.service:
                 if not self.height and not self.length and not self.width:
-                    raise UserError(_('Vui lòng nhập đầy đủ thông tin kích thước hoặc khối lượng gói hàng.'))
+                    raise UserError(_('Please enter full package size or weight information.'))
                 ghn_order = self.create_ghn_order()
                 if 'data' in ghn_order:
                     if 'order_code' in ghn_order['data']:
@@ -88,7 +88,7 @@ class SaleOrder(models.Model):
 
     def create_ghn_order(self):
         self.ensure_one()
-        request_url = "https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create"
+        # request_url = "https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create"
         ghn_token = self.env['ir.config_parameter'].sudo().get_param('ghn_token')
         ghn_shop_id = self.warehouse_id.ghn_shop_id
         if ghn_shop_id and ghn_token:
@@ -98,12 +98,12 @@ class SaleOrder(models.Model):
                 'shop_id': ghn_shop_id
             }
         else:
-            raise UserError(_('Giá trị token hoặc shop_id không chính xác.'))
+            raise UserError(_('The token or Shop ID is incorrect.'))
 
         if not self.required_note:
-            raise UserError(_('Thông tin Lưu ý giao hàng là yêu cầu bắt buộc'))
+            raise UserError(_('Shipping Note information is required.'))
         if not self.payment_type:
-            raise UserError(_('Tùy chọn thanh toán là thông tin bắt buộc'))
+            raise UserError(_('Payment type are required.'))
         note = ''
         service_fee = 0.0
         is_reward_discount = False
@@ -146,7 +146,7 @@ class SaleOrder(models.Model):
             if self.partner_id.phone:
                 to_phone = ''.join(filter(lambda i: i.isdigit(), self.partner_id.phone.replace('+84', '0')))
             else:
-                raise UserError(_('Vui lòng nhập nhập số điện thoai khách hàng(Liên hệ)'))
+                raise UserError(_('Please enter customer phone number (Contact).'))
 
         data = {
             "payment_type_id": int(self.payment_type),    # who pay the ship, free ship = 1 (seller pay)
@@ -177,10 +177,10 @@ class SaleOrder(models.Model):
         print(json.dumps(data))
         print(headers)
         print("=========================")
-        req = requests.post(request_url, data=json.dumps(data), headers=headers)
-        req.raise_for_status()
-        content = req.json()
-        return content
+        # req = requests.post(request_url, data=json.dumps(data), headers=headers)
+        # req.raise_for_status()
+        # content = req.json()
+        # return content
 
     # GHN khong update tien_thu_ho_COD va ben_tra_phi
     # def write(self, values):

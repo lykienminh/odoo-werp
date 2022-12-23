@@ -7,9 +7,9 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     sale_id = fields.Many2one(related="group_id.sale_id", string="Sales Order", store=True, readonly=False)
-    ghn_order_status = fields.Char('GHN order status', readonly=True, help='Trạng thái đơn hàng của Giao hàng nhanh.')
+    ghn_order_status = fields.Char('GHN Order Status', readonly=True, help='Trạng thái đơn hàng của Giao hàng nhanh.')
     ghn_order_code = fields.Char('GHN Order Code', related='sale_id.ghn_order_code', store=True)
-    ghn_leadtime = fields.Date('GHN Ngày giao dự kiến', readonly=True)
+    ghn_leadtime = fields.Date('GHN Lead time', readonly=True)
 
     def action_cancel(self):
         super(StockPicking, self).action_cancel()
@@ -36,7 +36,7 @@ class StockPicking(models.Model):
                             for move_line in picking.move_line_ids:
                                 move_line.qty_done = move_line.product_uom_qty
                         else:
-                            raise UserError(_('Số lượng trong kho không đủ đáp ứng.'))
+                            raise UserError(_('The quantity in stock is not enough.'))
                         picking.button_validate()
 
     def check_single_ghn_order_status(self):
@@ -65,7 +65,7 @@ class StockPicking(models.Model):
                             for move_line in self.move_line_ids:
                                 move_line.qty_done = move_line.product_uom_qty
                         else:
-                            raise UserError(_('Số lượng trong kho không đủ đáp ứng.'))
+                            raise UserError(_('The quantity in stock is not enough.'))
                         self.button_validate()
 
     def ghn_order_info(self, order_code):
@@ -94,7 +94,7 @@ class StockPicking(models.Model):
                 'shop_id': ghn_shop_id
             }
         else:
-            raise UserError(_('Vui lòng kiểm tra lại thông tin token hoặc ship_id'))
+            raise UserError(_('Please double check your token or ship_id.'))
 
         data = {
             "order_codes": [self.sale_id.ghn_order_code],

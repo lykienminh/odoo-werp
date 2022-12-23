@@ -5,7 +5,7 @@ import json
 class ResCountryState(models.Model):
     _inherit = 'res.country.state'
 
-    ghn_province_id = fields.Integer(string="GHN mã tỉnh/TP", help='Mã tỉnh/TP theo Giao hàng Nhanh')
+    ghn_province_id = fields.Integer(string="GHN City/Province Code", help='City/Province code according to GHN')
 
     def fetch_all_province_id(self):
         request_url = "https://online-gateway.ghn.vn/shiip/public-api/master-data/province"

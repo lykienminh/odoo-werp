@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-16 13:19+0000\n"
-"PO-Revision-Date: 2021-11-16 13:19+0000\n"
+"POT-Creation-Date: 2022-11-16 13:19+0000\n"
+"PO-Revision-Date: 2022-11-16 13:19+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,264 @@ msgstr ""
 #. module: delivery_ghn
 #: code:addons/delivery_ghn/models/sale_order.py:0
 #, python-format
-msgid " (Estimated Cost: %s )"
+msgid "Please enter full package size or weight information."
 msgstr ""
 
+#. module: delivery_ghn
+#: code:addons/delivery_ghn/models/sale_order.py:0
+#, python-format
+msgid "The token or Shop ID is incorrect."
+msgstr ""
 
+#. module: delivery_ghn
+#: code:addons/delivery_ghn/models/sale_order.py:0
+#, python-format
+msgid "Shipping Note information is required."
+msgstr ""
+
+#. module: delivery_ghn
+#: code:addons/delivery_ghn/models/sale_order.py:0
+#, python-format
+msgid "Payment type are required."
+msgstr ""
+
+#. module: delivery_ghn
+#: code:addons/delivery_ghn/models/sale_order.py:0
+#, python-format
+msgid "Please enter customer phone number (Contact)."
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_sale_order__ghn_order_code
+#: model:ir.model.fields,field_description:delivery_ghn.field_stock_picking__ghn_order_code
+msgid "GHN Order Code"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_sale_order__weight
+msgid "Weight (gram)"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_sale_order__length
+msgid "Length (cm)"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_sale_order__width
+msgid "Width (cm)"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_sale_order__height
+msgid "Height (cm)"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_sale_order__required_note
+msgid "Shipping note"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_sale_order__payment_type
+msgid "Payment type"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_sale_order__convert_volume
+msgid "Converted volume (gram)"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_sale_order__weight
+msgid "Total weight of order products"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_sale_order__length
+msgid "Total length of order products"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_sale_order__width
+msgid "Total width of order products"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_sale_order__height
+msgid "Total height of order products"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_sale_order__convert_volume
+msgid "The mass calculated according to the formula (DxRxC/5000)"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_delivery_carrier__service
+msgid "GHN Service"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_delivery_carrier__service
+msgid "Choose your GHN shipping plan (Express, Standard or Bulky and Heavy)"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields.selection,name:delivery_ghn.selection__delivery_carrier__delivery_type__ghn_shipping
+msgid "GHN Shipping"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_company__district_id
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_partner__district_id
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_ward__district_id
+msgid "District"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_company__ward_id
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_partner__ward_id
+msgid "Ward"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_country_state__ghn_province_id
+msgid "GHN City/Province Code"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_res_country_state__ghn_province_id
+msgid "City/Province code according to GHN"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_district__name
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_ward__name
+msgid "Name"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_district__country_id
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_ward__country_id
+msgid "Country"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_district__state_id
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_ward__state_id
+msgid "State"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_district__ghn_district_id
+msgid "GHN District ID"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_res_district__ghn_district_id
+msgid "District ID according to GHN"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_ward__ghn_ward_id
+msgid "GHN Ward Code"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_res_ward__ghn_ward_id
+msgid "Ward Code according to GHN"
+msgstr ""
+
+#. module: delivery_ghn
+#: code:addons/delivery_ghn/models/stock_picking.py:0
+#, python-format
+msgid "The quantity in stock is not enough."
+msgstr ""
+
+#. module: delivery_ghn
+#: code:addons/delivery_ghn/models/stock_picking.py:0
+#, python-format
+msgid "Please double check your token or ship_id."
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_stock_picking__sale_id
+msgid "Sales Order"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_stock_picking__ghn_order_status
+msgid "GHN Order Status"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_stock_picking__ghn_leadtime
+msgid "GHN Lead time"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_stock_warehouse__ghn_shop_id
+msgid "GHN Shop ID"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_stock_warehouse__ghn_shop_id
+msgid "Shop ID helps to manage multiple stores on GHN"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.actions.server,name:delivery_ghn.model_call_api_state
+#: model:ir.model,name:base.model_res_country_state
+msgid "Get GHN City Code"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.actions.server,name:delivery_ghn.model_call_api_district
+#: model:ir.model,name:delivery_ghn.model_res_district
+msgid "Get GHN District Code"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.actions.server,name:delivery_ghn.model_call_api_ward
+#: model:ir.model,name:delivery_ghn.model_res_ward
+msgid "Get GHN Ward Code"
+msgstr ""
+
+#. module: delivery_ghn
+#: model_terms:ir.ui.view,arch_db:delivery_ghn.add_ward_to_res_company
+#: model_terms:ir.ui.view,arch_db:delivery_ghn.add_ward_to_res_partner
+msgid "Ward..."
+msgstr ""
+
+#. module: delivery_ghn
+#: model_terms:ir.ui.view,arch_db:delivery_ghn.add_ward_to_res_company
+#: model_terms:ir.ui.view,arch_db:delivery_ghn.add_ward_to_res_partner
+msgid "District..."
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.actions.act_window,name:delivery_ghn.action_district
+#: model:ir.model,name:delivery_ghn.model_res_district
+#: model:ir.ui.menu,name:delivery_ghn.menu_district_tree
+#: model_terms:ir.ui.view,arch_db:delivery_ghn.district_tree
+msgid "Districts"
+msgstr ""
+
+#. module: delivery_ghn
+#: model_terms:ir.actions.act_window,help:delivery_ghn.action_district
+msgid "Display Districts list"
+msgstr ""
+
+#. module: delivery_ghn
+#: model:ir.actions.act_window,name:delivery_ghn.action_ward
+#: model:ir.model,name:delivery_ghn.model_res_ward
+#: model:ir.ui.menu,name:delivery_ghn.menu_ward_tree
+#: model_terms:ir.ui.view,arch_db:delivery_ghn.ward_tree
+msgid "Wards"
+msgstr ""
+
+#. module: delivery_ghn
+#: model_terms:ir.actions.act_window,help:delivery_ghn.action_ward
+msgid "Display Wards list"
+msgstr ""

@@ -6,13 +6,276 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-16 13:19+0000\n"
-"PO-Revision-Date: 2021-09-14 12:21+0000\n"
-"Last-Translator: Vo Thanh Thuy, 2022\n"
-"Language-Team: Vietnamese (https://www.transifex.com/odoo/teams/41243/vi/)\n"
+"POT-Creation-Date: 2022-11-16 13:19+0000\n"
+"PO-Revision-Date: 2022-11-16 13:19+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#. module: delivery_ghn
+#: code:addons/delivery_ghn/models/sale_order.py:0
+#, python-format
+msgid "Please enter full package size or weight information."
+msgstr "Vui lòng nhập đầy đủ thông tin kích thước hoặc khối lượng gói hàng."
+
+#. module: delivery_ghn
+#: code:addons/delivery_ghn/models/sale_order.py:0
+#, python-format
+msgid "The token or Shop ID is incorrect."
+msgstr "Giá trị token hoặc Shop ID không chính xác."
+
+#. module: delivery_ghn
+#: code:addons/delivery_ghn/models/sale_order.py:0
+#, python-format
+msgid "Shipping Note information is required."
+msgstr "Thông tin Lưu ý giao hàng là yêu cầu bắt buộc."
+
+#. module: delivery_ghn
+#: code:addons/delivery_ghn/models/sale_order.py:0
+#, python-format
+msgid "Payment type are required."
+msgstr "Tùy chọn thanh toán là thông tin bắt buộc."
+
+#. module: delivery_ghn
+#: code:addons/delivery_ghn/models/sale_order.py:0
+#, python-format
+msgid "Please enter customer phone number (Contact)."
+msgstr "Vui lòng nhập nhập số điện thoai khách hàng (Liên hệ)."
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_sale_order__ghn_order_code
+#: model:ir.model.fields,field_description:delivery_ghn.field_stock_picking__ghn_order_code
+msgid "GHN Order Code"
+msgstr "Mã đơn GHN"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_sale_order__weight
+msgid "Weight (gram)"
+msgstr "Khối lượng (gram)"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_sale_order__length
+msgid "Length (cm)"
+msgstr "Chiều dài (cm)"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_sale_order__width
+msgid "Width (cm)"
+msgstr "Chiều rộng (cm)"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_sale_order__height
+msgid "Height (cm)"
+msgstr "Chiều cao (cm)"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_sale_order__required_note
+msgid "Shipping note"
+msgstr "Lưu ý khi giao hàng"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_sale_order__payment_type
+msgid "Payment type"
+msgstr "Tùy chọn thanh toán"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_sale_order__convert_volume
+msgid "Converted volume (gram)"
+msgstr "Khối lượng quy đổi (gram)"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_sale_order__weight
+msgid "Total weight of order products"
+msgstr "Tổng khối lượng sản phẩm"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_sale_order__length
+msgid "Total length of order products"
+msgstr "Tổng chiều dài của sản phẩm"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_sale_order__width
+msgid "Total width of order products"
+msgstr "Tổng chiều rộng của sản phẩm"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_sale_order__height
+msgid "Total height of order products"
+msgstr "Tổng chiều cao của sản phẩm"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_sale_order__convert_volume
+msgid "The mass calculated according to the formula (DxRxC/5000)"
+msgstr "Khối lượng được tính dựa theo công thức (DxRxC/5000)"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_delivery_carrier__service
+msgid "GHN Service"
+msgstr "Dịch vụ GHN"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_delivery_carrier__service
+msgid "Choose your GHN shipping plan (Express, Standard or Bulky and Heavy)"
+msgstr "Chọn gói vận chuyển GHN của bạn (Express, Standard hoặc Bulky and Heavy)"
+
+#. module: delivery_ghn
+#: model:ir.model.fields.selection,name:delivery_ghn.selection__delivery_carrier__delivery_type__ghn_shipping
+msgid "GHN Shipping"
+msgstr "Vận chuyển GHN"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_company__district_id
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_partner__district_id
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_ward__district_id
+msgid "District"
+msgstr "Quận/Huyện"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_company__ward_id
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_partner__ward_id
+msgid "Ward"
+msgstr "Phường/Xã"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_country_state__ghn_province_id
+msgid "GHN City/Province Code"
+msgstr "GHN mã tỉnh/TP"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_res_country_state__ghn_province_id
+msgid "City/Province code according to GHN"
+msgstr "Mã tỉnh/TP theo Giao Hàng Nhanh"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_district__name
+msgid "Name"
+msgstr "Tên"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_district__country_id
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_ward__country_id
+msgid "Country"
+msgstr "Quốc gia"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_district__state_id
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_ward__state_id
+msgid "State"
+msgstr "Tỉnh/Thành phố"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_district__ghn_district_id
+msgid "GHN District ID"
+msgstr "Mã GHN Quận/Huyện"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_res_district__ghn_district_id
+msgid "District ID according to GHN"
+msgstr "Mã quận/huyện theo Giao Hàng Nhanh"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_res_ward__ghn_ward_id
+msgid "GHN Ward Code"
+msgstr "Mã GHN Phường/Xã"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_res_ward__ghn_ward_id
+msgid "Ward Code according to GHN"
+msgstr "Mã phường/xã theo Giao Hàng Nhanh"
+
+#. module: delivery_ghn
+#: code:addons/delivery_ghn/models/stock_picking.py:0
+#, python-format
+msgid "The quantity in stock is not enough."
+msgstr "Số lượng trong kho không đủ đáp ứng."
+
+#. module: delivery_ghn
+#: code:addons/delivery_ghn/models/stock_picking.py:0
+#, python-format
+msgid "Please double check your token or ship_id."
+msgstr "Vui lòng kiểm tra lại thông tin token hoặc ship_id."
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_stock_picking__sale_id
+msgid "Sales Order"
+msgstr "Mã đơn hàng"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_stock_picking__ghn_order_status
+msgid "GHN Order Status"
+msgstr "Trạng thái đơn GHN"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_stock_picking__ghn_leadtime
+msgid "GHN Lead time"
+msgstr "GHN Ngày giao dự kiến"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,field_description:delivery_ghn.field_stock_warehouse__ghn_shop_id
+msgid "GHN Shop ID"
+msgstr "Mã Shop GHN"
+
+#. module: delivery_ghn
+#: model:ir.model.fields,help:delivery_ghn.field_stock_warehouse__ghn_shop_id
+msgid "Shop ID helps to manage multiple stores on GHN"
+msgstr "Shop ID giúp quản lý nhiều cửa hàng trên GHN"
+
+#. module: delivery_ghn
+#: model:ir.actions.server,name:delivery_ghn.model_call_api_state
+#: model:ir.model,name:base.model_res_country_state
+msgid "Get GHN City Code"
+msgstr "Lấy mã GHN Tỉnh/Thành phố"
+
+#. module: delivery_ghn
+#: model:ir.actions.server,name:delivery_ghn.model_call_api_district
+#: model:ir.model,name:delivery_ghn.model_res_district
+msgid "Get GHN District Code"
+msgstr "Lấy mã GHN Quận/Huyện"
+
+#. module: delivery_ghn
+#: model:ir.actions.server,name:delivery_ghn.model_call_api_ward
+#: model:ir.model,name:delivery_ghn.model_res_ward
+msgid "Get GHN Ward Code"
+msgstr "Lấy mã GHN Phường/Xã"
+
+#. module: delivery_ghn
+#: model_terms:ir.ui.view,arch_db:delivery_ghn.add_ward_to_res_company
+#: model_terms:ir.ui.view,arch_db:delivery_ghn.add_ward_to_res_partner
+msgid "Ward..."
+msgstr "Phường/Xã..."
+
+#. module: delivery_ghn
+#: model_terms:ir.ui.view,arch_db:delivery_ghn.add_ward_to_res_company
+#: model_terms:ir.ui.view,arch_db:delivery_ghn.add_ward_to_res_partner
+msgid "District..."
+msgstr "Quận/Huyện..."
+
+#. module: delivery_ghn
+#: model:ir.actions.act_window,name:delivery_ghn.action_district
+#: model:ir.model,name:delivery_ghn.model_res_district
+#: model:ir.ui.menu,name:delivery_ghn.menu_district_tree
+#: model_terms:ir.ui.view,arch_db:delivery_ghn.district_tree
+msgid "Districts"
+msgstr "Quận / Huyện"
+
+#. module: delivery_ghn
+#: model_terms:ir.actions.act_window,help:delivery_ghn.action_district
+msgid "Display Districts list"
+msgstr "Hiển thị danh sách Quận/Huyện"
+
+#. module: delivery_ghn
+#: model:ir.actions.act_window,name:delivery_ghn.action_ward
+#: model:ir.model,name:delivery_ghn.model_res_ward
+#: model:ir.ui.menu,name:delivery_ghn.menu_ward_tree
+#: model_terms:ir.ui.view,arch_db:delivery_ghn.ward_tree
+msgid "Wards"
+msgstr "Phường / Xã"
+
+#. module: delivery_ghn
+#: model_terms:ir.actions.act_window,help:delivery_ghn.action_ward
+msgid "Display Wards list"
+msgstr "Hiển thị danh sách Phường/Xã"

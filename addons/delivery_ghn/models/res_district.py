@@ -10,7 +10,7 @@ class ResDistrict(models.Model):
     name = fields.Char("Name", required=True, translate=True)
     country_id = fields.Many2one('res.country', string='Country', required=True)
     state_id = fields.Many2one('res.country.state', 'State', domain="[('country_id', '=', country_id)]")
-    ghn_district_id = fields.Integer('GHN District ID', help='Mã quận/huyện theo Giao hàng Nhanh')
+    ghn_district_id = fields.Integer('GHN District ID', help='District ID according to GHN')
 
     def create_district_data(self):
         request_url = "https://online-gateway.ghn.vn/shiip/public-api/master-data/district"

@@ -16,7 +16,7 @@
         'views/delivery_carrier.xml',
         'views/res_company.xml',
         'views/sale_order_view.xml',
-        'views/res_state_district_view.xml',
+        'views/res_district_view.xml',
         'views/res_ward_view.xml',
         'views/stock_picking.xml',
         'views/res_config_settings_view.xml',
@@ -24,7 +24,8 @@
         'views/res_country_state.xml',
         'views/lunch_call_api.xml',
         'wizard/choose_delivery_carrier_view.xml',
-
+        'data/res_district_demo.xml',
+        'data/res_ward_demo.xml',
     ],
     # 'css': ['static/src/css/crm.css'],
     # 'js': ['static/src/js/patient_ajax_2.js'],

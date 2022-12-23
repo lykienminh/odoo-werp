@@ -2,7 +2,7 @@
     <data>
         <!-- Get States Button in action menu  res_country_state-->
         <record id="model_call_api_state" model="ir.actions.server">
-            <field name="name">Lấy mã GHN Tỉnh/Thành phố</field>
+            <field name="name">Get GHN City Code</field>
             <field name="model_id" ref="base.model_res_country_state"/>
             <field name="binding_model_id" ref="base.model_res_country_state"/>
             <field name="state">code</field>
@@ -11,7 +11,7 @@
 
         <!-- Get Districts Button in action menu  model_account_move-->
         <record id="model_call_api_district" model="ir.actions.server">
-            <field name="name">Lấy mã GHN Quận/Huyện</field>
+            <field name="name">Get GHN District Code</field>
             <field name="model_id" ref="model_res_district"/>
             <field name="binding_model_id" ref="model_res_district"/>
             <field name="state">code</field>
@@ -20,7 +20,7 @@
 
         <!-- Get  Button in action menu  model_account_move-->
         <record id="model_call_api_ward" model="ir.actions.server">
-            <field name="name">Lấy mã GHN Phường/Xã</field>
+            <field name="name">Get GHN Ward Code</field>
             <field name="model_id" ref="model_res_ward"/>
             <field name="binding_model_id" ref="model_res_ward"/>
             <field name="state">code</field>

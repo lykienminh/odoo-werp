@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="stock.view_warehouse" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='code']" position="after" >
-                    <field name="ghn_shop_id" />
+                    <field name="ghn_shop_id">3554523</field>
                 </xpath>
             </field>
         </record>

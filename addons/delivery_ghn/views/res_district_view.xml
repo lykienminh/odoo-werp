@@ -22,6 +22,6 @@
 
     <menuitem id="menu_district_tree"
         action="action_district"
-        name="Districts" parent="contacts.menu_localisation"
+        parent="contacts.menu_localisation"
         sequence="2"/>
 </odoo>

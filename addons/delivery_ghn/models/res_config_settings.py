@@ -3,7 +3,7 @@ from odoo import api, fields, models, _
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    ghn_token = fields.Char('GHN Token', config_parameter='ghn_token')
+    ghn_token = fields.Char('GHN Token', config_parameter='ghn_token', default='01de3333-78b2-11ed-9dc6-f64f768dbc22')
     # ghn_shop_id = fields.Char('GHN shop_id', config_parameter='ghn_shop_id')
 
     @api.model
