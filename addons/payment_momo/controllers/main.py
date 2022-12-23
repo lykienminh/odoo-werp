@@ -47,7 +47,7 @@ class MoMoController(http.Controller):
 
     @http.route(
         _return_url, type='http', auth='public', methods=['GET', 'POST'], csrf=False,
-        save_session=False
+        save_session=False, website=True, sitemap=False
     )
     def momo_dpn(self, **data):
         """ Route used by the PDT notification.
@@ -66,12 +66,12 @@ class MoMoController(http.Controller):
         _logger.info("beginning DPN with post data:\n%s", pprint.pformat(data))
         resultCode = data['resultCode'] if data['resultCode'] else 404
         resultMessage = data['message'] if data['message'] else 'Unexpected error'
-        print("==============================================================")
-        print(data)
-        print("==============================================================")
         if resultCode == 0 or resultCode == '0':  # The customer has cancelled the payment
             return request.redirect('/payment/status')
-        return f"Thanh toán thất bại, vui lòng thử lại sau. Mã lỗi {resultCode}, nội dung {resultMessage}"
+        return request.render('http_routing.http_error', {
+            'status_code': _(resultCode),
+            'status_message': _(resultMessage),
+        })
 
     def _validate_pdt_data_authenticity(self, **data):
         """ Validate the authenticity of PDT data and return the retrieved notification data.
