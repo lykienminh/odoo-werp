@@ -112,6 +112,9 @@ class HrEmployeePrivate(models.Model):
     # misc
     notes = fields.Text('Notes', groups="hr.group_hr_user")
     color = fields.Integer('Color Index', default=0)
+    barcode = fields.Char(string="Badge ID", help="ID used for employee identification.", groups="hr.group_hr_user", copy=False)
+    pin = fields.Char(string="PIN", groups="hr.group_hr_user", copy=False,
+        help="PIN used to Check In/Out in the Kiosk Mode of the Attendance application (if enabled in Configuration) and to change the cashier in the Point of Sale application.")
     departure_reason_id = fields.Many2one("hr.departure.reason", string="Departure Reason", groups="hr.group_hr_user",
                                           copy=False, tracking=True, ondelete='restrict')
     departure_description = fields.Html(string="Additional Information", groups="hr.group_hr_user", copy=False, tracking=True)
@@ -121,6 +124,7 @@ class HrEmployeePrivate(models.Model):
     driving_license = fields.Binary(string="Driving License", groups="hr.group_hr_user")
 
     _sql_constraints = [
+        ('barcode_uniq', 'unique (barcode)', "The Badge ID must be unique, this one is already assigned to another employee."),
         ('user_uniq', 'unique (user_id, company_id)', "A user cannot be linked to multiple employees in the same company.")
     ]
 
@@ -249,6 +253,12 @@ class HrEmployeePrivate(models.Model):
 
         return res
 
+    @api.constrains('pin')
+    def _verify_pin(self):
+        for employee in self:
+            if employee.pin and not employee.pin.isdigit():
+                raise ValidationError(_("The PIN must be a sequence of digits."))
+
     @api.onchange('user_id')
     def _onchange_user(self):
         if self.user_id:
@@ -370,6 +380,10 @@ class HrEmployeePrivate(models.Model):
                 'title': _("Warning"),
                 'message': _("To avoid multi company issues (loosing the access to your previous contracts, leaves, ...), you should create another employee in the new company instead.")
             }}
+
+    def generate_random_barcode(self):
+        for employee in self:
+            employee.barcode = '041'+"".join(choice(digits) for i in range(9))
 
     @api.depends('address_home_id.parent_id')
     def _compute_is_address_home_a_company(self):

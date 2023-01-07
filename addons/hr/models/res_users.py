@@ -28,6 +28,7 @@ HR_WRITABLE_FIELDS = [
     'private_zip',
     'private_country_id',
     'address_id',
+    'barcode',
     'birthday',
     'category_ids',
     'children',
@@ -52,6 +53,7 @@ HR_WRITABLE_FIELDS = [
     'passport_id',
     'permit_no',
     'employee_phone',
+    'pin',
     'place_of_birth',
     'spouse_birthdate',
     'spouse_complete_name',
@@ -124,6 +126,8 @@ class User(models.Model):
     permit_no = fields.Char(related='employee_id.permit_no', readonly=False, related_sudo=False)
     visa_expire = fields.Date(related='employee_id.visa_expire', readonly=False, related_sudo=False)
     additional_note = fields.Text(related='employee_id.additional_note', readonly=False, related_sudo=False)
+    barcode = fields.Char(related='employee_id.barcode', readonly=False, related_sudo=False)
+    pin = fields.Char(related='employee_id.pin', readonly=False, related_sudo=False)
     certificate = fields.Selection(related='employee_id.certificate', readonly=False, related_sudo=False)
     study_field = fields.Char(related='employee_id.study_field', readonly=False, related_sudo=False)
     study_school = fields.Char(related='employee_id.study_school', readonly=False, related_sudo=False)

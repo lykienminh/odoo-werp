@@ -1,4 +1,4 @@
-odoo.define('hr_attendance_kiosk.kiosk_confirm', function (require) {
+odoo.define('hr_attendance.kiosk_confirm', function (require) {
 "use strict";
 
 var AbstractAction = require('web.AbstractAction');
@@ -62,7 +62,7 @@ var KioskConfirm = AbstractAction.extend({
 
     init: function (parent, action) {
         this._super.apply(this, arguments);
-        this.next_action = 'hr_attendance_kiosk.hr_attendance_action_kiosk_mode';
+        this.next_action = 'hr_attendance.hr_attendance_action_kiosk_mode';
         this.employee_id = action.employee_id;
         this.employee_name = action.employee_name;
         this.employee_state = action.employee_state;
@@ -91,7 +91,7 @@ var KioskConfirm = AbstractAction.extend({
     },
 });
 
-core.action_registry.add('hr_attendance_kiosk_kiosk_confirm', KioskConfirm);
+core.action_registry.add('hr_attendance_kiosk_confirm', KioskConfirm);
 
 return KioskConfirm;
 

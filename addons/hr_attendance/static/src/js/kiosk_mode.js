@@ -1,4 +1,4 @@
-odoo.define('hr_attendance_kiosk.kiosk_mode', function (require) {
+odoo.define('hr_attendance.kiosk_mode', function (require) {
 "use strict";
 
 var AbstractAction = require('web.AbstractAction');
@@ -85,7 +85,7 @@ var KioskMode = AbstractAction.extend({
 
 });
 
-core.action_registry.add('hr_attendance_kiosk_kiosk_mode', KioskMode);
+core.action_registry.add('hr_attendance_kiosk_mode', KioskMode);
 
 return KioskMode;
 

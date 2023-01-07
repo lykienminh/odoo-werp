@@ -27,7 +27,7 @@ var GreetingMessage = AbstractAction.extend({
             this.activeBarcode = false;
             this.getSession().user_has_group('hr_attendance.group_hr_attendance_user').then(function(has_group) {
                 if(has_group) {
-                    self.next_action = 'hr_attendance_kiosk.hr_attendance_action_kiosk_mode';
+                    self.next_action = 'hr_attendance.hr_attendance_action_kiosk_mode';
                 } else {
                     self.next_action = 'hr_attendance.hr_attendance_action_my_attendances';
                 }
@@ -37,7 +37,7 @@ var GreetingMessage = AbstractAction.extend({
 
         this.next_action = action.next_action || 'hr_attendance.hr_attendance_action_my_attendances';
         // no listening to barcode scans if we aren't coming from the kiosk mode (and thus not going back to it with next_action)
-        if (this.next_action != 'hr_attendance_kiosk.hr_attendance_action_kiosk_mode' && this.next_action.tag != 'hr_attendance_kiosk_kiosk_mode') {
+        if (this.next_action != 'hr_attendance.hr_attendance_action_kiosk_mode' && this.next_action.tag != 'hr_attendance_kiosk_mode') {
             this.activeBarcode = false;
         }
 
