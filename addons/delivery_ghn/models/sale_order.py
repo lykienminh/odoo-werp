@@ -88,7 +88,7 @@ class SaleOrder(models.Model):
 
     def create_ghn_order(self):
         self.ensure_one()
-        # request_url = "https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create"
+        request_url = "https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create"
         ghn_token = self.env['ir.config_parameter'].sudo().get_param('ghn_token')
         ghn_shop_id = self.warehouse_id.ghn_shop_id
         if ghn_shop_id and ghn_token:
@@ -134,10 +134,10 @@ class SaleOrder(models.Model):
             if line.product_id.product_tmpl_id.sale_ok:
                 insurance_value = insurance_value + line.price_subtotal
 
-        return_phone = ''
+        from_phone = ''
         company_phone = self.env.user.company_id.partner_id.phone
         if company_phone:
-            return_phone = ''.join(filter(lambda i: i.isdigit(), company_phone.replace('+84', '0')))
+            from_phone = ''.join(filter(lambda i: i.isdigit(), company_phone.replace('+84', '0')))
         to_phone = ''
         partner_shipping_phone = self.partner_shipping_id.phone
         if partner_shipping_phone:
@@ -147,21 +147,34 @@ class SaleOrder(models.Model):
                 to_phone = ''.join(filter(lambda i: i.isdigit(), self.partner_id.phone.replace('+84', '0')))
             else:
                 raise UserError(_('Please enter customer phone number (Contact).'))
+        to_name = ''
+        to_display_name = self.partner_shipping_id.display_name
+        if to_display_name:
+            to_name = to_display_name.split(", ")[0]
 
         data = {
             "payment_type_id": int(self.payment_type),    # who pay the ship, free ship = 1 (seller pay)
             "note": note,
             "required_note": self.required_note,
-            "return_phone": return_phone,         # only 10 numbers
-            "return_address": self.warehouse_id.partner_id.street,
-            "return_district_id": self.warehouse_id.partner_id.district_id.ghn_district_id,
-            "return_ward_code": self.warehouse_id.partner_id.ward_id.ghn_ward_id,
             "client_order_code": "",
-            "to_name": self.partner_id.name,
+            "from_name": self.warehouse_id.partner_id.name,
+            "from_phone": from_phone,
+            "from_address": self.warehouse_id.partner_id.street,
+            "from_ward_name": self.warehouse_id.partner_id.ward_id.name,
+            "from_district_name": self.warehouse_id.partner_id.district_id.name,
+            "from_province_name": self.warehouse_id.partner_id.state_id.name,
+            "return_name": self.warehouse_id.partner_id.name,
+            "return_phone": from_phone,
+            "return_address": self.warehouse_id.partner_id.street,
+            "return_ward_name": self.warehouse_id.partner_id.ward_id.name,
+            "return_district_name": self.warehouse_id.partner_id.district_id.name,
+            "return_province_name": self.warehouse_id.partner_id.state_id.name,
+            "to_name": to_name,
             "to_phone": to_phone,
             "to_address": self.partner_shipping_id.street,
-            "to_ward_code": self.partner_shipping_id.ward_id.ghn_ward_id,
-            "to_district_id": self.partner_shipping_id.district_id.ghn_district_id,
+            "to_ward_name": self.partner_shipping_id.ward_id.name,
+            "to_district_name": self.partner_shipping_id.district_id.name,
+            "to_province_name": self.partner_shipping_id.state_id.name,
             "cod_amount": int(cod_amount),
             "content": self.name,
             "weight": self.weight,
@@ -175,12 +188,11 @@ class SaleOrder(models.Model):
         }
         print("=========================")
         print(json.dumps(data))
-        print(headers)
         print("=========================")
-        # req = requests.post(request_url, data=json.dumps(data), headers=headers)
-        # req.raise_for_status()
-        # content = req.json()
-        # return content
+        req = requests.post(request_url, data=json.dumps(data), headers=headers)
+        req.raise_for_status()
+        content = req.json()
+        return content
 
     # GHN khong update tien_thu_ho_COD va ben_tra_phi
     # def write(self, values):
