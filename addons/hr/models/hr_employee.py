@@ -321,6 +321,30 @@ class HrEmployeePrivate(models.Model):
             self.env['mail.channel'].sudo().search([
                 ('subscription_department_ids', 'in', department_id)
             ])._subscribe_users_automatically()
+        if 'job_id' in vals:
+            job_id = vals.get('job_id')
+            category_group = {}
+            category_group_result = {}
+            if self.job_id.groups_id:
+                for group_id in self.job_id.groups_id:
+                    category_id = group_id.category_id.id
+                    if category_id not in category_group:
+                        category_group[category_id] = [group_id.id]
+                    else:
+                        category_group[category_id].append(group_id.id)
+                
+                for category_id, group_ids in category_group.items():
+                    category_group_key = self.env['res.groups'].sudo().search([('category_id', '=', category_id)])
+                    category_group_key = [str(item.id) for item in category_group_key]
+                    category_group_key.sort()
+                    category_group_key = '_'.join(category_group_key)
+                    category_group_key = f'in_group_{category_group_key}' if category_id == 1 else f'sel_groups_{category_group_key}'
+
+                    category_group_result[category_group_key] = max(group_ids)
+            
+            if self.user_id:
+                self.user_id.write(category_group_result)
+
         return res
 
     def unlink(self):
