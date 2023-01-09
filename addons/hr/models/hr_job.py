@@ -36,6 +36,8 @@ class Job(models.Model):
         ('no_of_recruitment_positive', 'CHECK(no_of_recruitment >= 0)', 'The expected number of new employees must be positive.')
     ]
 
+    groups_id = fields.Many2many('res.groups', 'res_groups_hr_job_rel', 'jid', 'gid', string='Groups')
+
     @api.depends('no_of_recruitment', 'employee_ids.job_id', 'employee_ids.active')
     def _compute_employees(self):
         employee_data = self.env['hr.employee'].read_group([('job_id', 'in', self.ids)], ['job_id'], ['job_id'])

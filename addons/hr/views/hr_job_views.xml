@@ -22,6 +22,9 @@
                             <page string="Job Description">
                                 <field name="description" options="{'collaborative': true}" attrs="{'invisible': [('state', '!=', 'recruit')]}"/>
                             </page>
+                            <page string="Permissions">
+                                <field name="groups_id" placeholder="Tags"/>
+                            </page>
                             <page string="Recruitment">
                                 <group>
                                     <group name="recruitment">

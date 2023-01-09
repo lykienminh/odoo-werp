@@ -140,6 +140,8 @@ class User(models.Model):
     can_edit = fields.Boolean(compute='_compute_can_edit')
     is_system = fields.Boolean(compute="_compute_is_system")
 
+    job_ids = fields.Many2many('hr.job', 'res_groups_hr_job_rel', 'gid', 'jid')
+
     @api.depends_context('uid')
     def _compute_is_system(self):
         self.is_system = self.env.user._is_system()
