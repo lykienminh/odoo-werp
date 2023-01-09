@@ -340,6 +340,9 @@ class Users(models.Model):
         # automatically encrypted at startup: look for passwords which don't
         # match the "extended" MCF and pass those through passlib.
         # Alternative: iterate on *all* passwords and use CryptContext.identify
+        print("====================================================================")
+        print(self, 344)
+        print("====================================================================")
         cr.execute("""
         SELECT id, password FROM res_users
         WHERE password IS NOT NULL
@@ -381,6 +384,9 @@ class Users(models.Model):
         instead.
         """
         """ Override this method to plug additional authentication methods"""
+        print("====================================================================")
+        print(self, password, env, 388)
+        print("====================================================================")
         assert password
         self.env.cr.execute(
             "SELECT COALESCE(password, '') FROM res_users WHERE id=%s",
@@ -415,12 +421,18 @@ class Users(models.Model):
 
     @api.depends('groups_id')
     def _compute_share(self):
+        print("====================================================================")
+        print(self, 425)
+        print("====================================================================")
         user_group_id = self.env['ir.model.data']._xmlid_to_res_id('base.group_user')
         internal_users = self.filtered_domain([('groups_id', 'in', [user_group_id])])
         internal_users.share = False
         (self - internal_users).share = True
 
     def _compute_companies_count(self):
+        print("====================================================================")
+        print(self, 434)
+        print("====================================================================")
         self.companies_count = self.env['res.company'].sudo().search_count([])
 
     @api.depends('tz')
@@ -430,6 +442,9 @@ class Users(models.Model):
 
     @api.depends('groups_id')
     def _compute_accesses_count(self):
+        print("====================================================================")
+        print(self, 446)
+        print("====================================================================")
         for user in self:
             groups = user.groups_id
             user.accesses_count = len(groups.model_access)
@@ -443,9 +458,15 @@ class Users(models.Model):
 
     @api.onchange('parent_id')
     def onchange_parent_id(self):
+        print("====================================================================")
+        print(self, 462)
+        print("====================================================================")
         return self.partner_id.onchange_parent_id()
 
     def _read(self, fields):
+        print("====================================================================")
+        print(self, 468)
+        print("====================================================================")
         super(Users, self)._read(fields)
         if set(USER_PRIVATE_FIELDS).intersection(fields):
             if self.check_access_rights('write', raise_exception=False):
@@ -478,6 +499,9 @@ class Users(models.Model):
 
     @api.constrains('groups_id')
     def _check_one_user_type(self):
+        print("====================================================================")
+        print(self, 503)
+        print("====================================================================")
         """We check that no users are both portal and users (same with public).
            This could typically happen because of implied groups.
         """
@@ -494,6 +518,9 @@ class Users(models.Model):
         :param group_ids: list of group ids
         :return: boolean: is there at least a user in at least 2 of the provided groups
         """
+        print("====================================================================")
+        print(self, 522)
+        print("====================================================================")
         if group_ids:
             args = [tuple(group_ids)]
             if len(self.ids) == 1:
@@ -515,12 +542,18 @@ class Users(models.Model):
             return False
 
     def toggle_active(self):
+        print("====================================================================")
+        print(self, 546)
+        print("====================================================================")
         for user in self:
             if not user.active and not user.partner_id.active:
                 user.partner_id.toggle_active()
         super(Users, self).toggle_active()
 
     def read(self, fields=None, load='_classic_read'):
+        print("====================================================================")
+        print(self, 555)
+        print("====================================================================")
         if fields and self == self.env.user:
             readable = self.SELF_READABLE_FIELDS
             for key in fields:
@@ -534,6 +567,9 @@ class Users(models.Model):
 
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
+        print("====================================================================")
+        print(self, 571)
+        print("====================================================================")
         groupby_fields = set([groupby] if isinstance(groupby, str) else groupby)
         if groupby_fields.intersection(USER_PRIVATE_FIELDS):
             raise AccessError(_("Invalid 'group by' parameter"))
@@ -550,6 +586,9 @@ class Users(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
+        print("====================================================================")
+        print(self, 590)
+        print("====================================================================")
         users = super(Users, self).create(vals_list)
         for user in users:
             # if partner is global we keep it that way
@@ -559,6 +598,9 @@ class Users(models.Model):
         return users
 
     def write(self, values):
+        print("====================================================================")
+        print(self, 602)
+        print("====================================================================")
         if values.get('active') and SUPERUSER_ID in self._ids:
             raise UserError(_("You cannot activate the superuser."))
         if values.get('active') == False and self._uid in self._ids:
@@ -1117,6 +1159,9 @@ class UsersImplied(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
+        print("====================================================================")
+        print(self, 1163)
+        print("====================================================================")
         for values in vals_list:
             if 'groups_id' in values:
                 # complete 'groups_id' with implied groups
@@ -1127,6 +1172,9 @@ class UsersImplied(models.Model):
         return super(UsersImplied, self).create(vals_list)
 
     def write(self, values):
+        print("====================================================================")
+        print(self, 1176)
+        print("====================================================================")
         if not values.get('groups_id'):
             return super(UsersImplied, self).write(values)
         users_before = self.filtered(lambda u: u.has_group('base.group_user'))
@@ -1204,6 +1252,9 @@ class GroupsView(models.Model):
 
     @api.model
     def _update_user_groups_view(self):
+        print("====================================================================")
+        print(self, 1256)
+        print("====================================================================")
         """ Modify the view with xmlid ``base.user_groups_view``, which inherits
             the user form view, and introduces the reified group fields.
         """
@@ -1368,6 +1419,9 @@ class UsersView(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
+        print("====================================================================")
+        print(self, 1423)
+        print("====================================================================")
         new_vals_list = []
         for values in vals_list:
             new_vals_list.append(self._remove_reified_groups(values))
@@ -1383,6 +1437,9 @@ class UsersView(models.Model):
         return users
 
     def write(self, values):
+        print("====================================================================")
+        print(self, 1441)
+        print("====================================================================")
         values = self._remove_reified_groups(values)
         res = super(UsersView, self).write(values)
         if 'company_ids' not in values:
@@ -1398,6 +1455,9 @@ class UsersView(models.Model):
 
     @api.model
     def new(self, values={}, origin=None, ref=None):
+        print("====================================================================")
+        print(self, 1459)
+        print("====================================================================")
         values = self._remove_reified_groups(values)
         user = super().new(values=values, origin=origin, ref=ref)
         group_multi_company = self.env.ref('base.group_multi_company', False)
@@ -1410,6 +1470,9 @@ class UsersView(models.Model):
 
     def _remove_reified_groups(self, values):
         """ return `values` without reified group fields """
+        print("====================================================================")
+        print(self, 1474)
+        print("====================================================================")
         add, rem = [], []
         values1 = {}
 
@@ -1434,6 +1497,9 @@ class UsersView(models.Model):
 
     @api.model
     def default_get(self, fields):
+        print("====================================================================")
+        print(self, 1501)
+        print("====================================================================")
         group_fields, fields = partition(is_reified_group, fields)
         fields1 = (fields + ['groups_id']) if group_fields else fields
         values = super(UsersView, self).default_get(fields1)
@@ -1441,6 +1507,9 @@ class UsersView(models.Model):
         return values
 
     def onchange(self, values, field_name, field_onchange):
+        print("====================================================================")
+        print(self, 1511)
+        print("====================================================================")
         field_onchange['groups_id'] = ''
         result = super().onchange(values, field_name, field_onchange)
         if not field_name: # merged default_get
@@ -1451,6 +1520,9 @@ class UsersView(models.Model):
         return result
 
     def read(self, fields=None, load='_classic_read'):
+        print("====================================================================")
+        print(self, 1524)
+        print("====================================================================")
         # determine whether reified groups fields are required, and which ones
         fields1 = fields or list(self.fields_get())
         group_fields, other_fields = partition(is_reified_group, fields1)
@@ -1476,12 +1548,19 @@ class UsersView(models.Model):
 
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
+        print("====================================================================")
+        print(self, 1552)
+        print("====================================================================")
         if fields:
             # ignore reified fields
             fields = [fname for fname in fields if not is_reified_group(fname)]
         return super().read_group(domain, fields, groupby, offset=offset, limit=limit, orderby=orderby, lazy=lazy)
 
     def _add_reified_groups(self, fields, values):
+        print("====================================================================")
+        print(self, 1561, fields)
+        print(self, 1562, values)
+        print("====================================================================")
         """ add the given reified group fields into `values` """
         gids = set(parse_m2m(values.get('groups_id') or []))
         for f in fields:
