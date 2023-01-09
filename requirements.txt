@@ -51,6 +51,3 @@ zeep==3.4.0
 # For Shopee integration
 tzlocal
 pdfkit
-# For Lazada integration
-requests_oauthlib==1.3.0
-xmltodict==0.12.0
