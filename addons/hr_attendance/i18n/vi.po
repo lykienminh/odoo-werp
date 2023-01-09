@@ -75,6 +75,11 @@ msgid "<span class=\"o_form_label\">Employee PIN</span>"
 msgstr "<span class=\"o_form_label\">Mã PIN nhân viên</span>"
 
 #. module: hr_attendance
+#: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
+msgid "<div class="text-muted">Use PIN codes to check in</div>"
+msgstr "<div class="text-muted">Sử dụng mã PIN để điểm danh</div>"
+
+#. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.hr_user_view_form
 #: model_terms:ir.ui.view,arch_db:hr_attendance.view_employee_form_inherit_hr_attendance
 msgid ""
@@ -327,6 +332,11 @@ msgstr "Đăng xuất"
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
 msgid "Check-In/Out"
 msgstr "Đănh nhập/xuất"
+
+#. module: hr_attendance
+#: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
+msgid "<div class="text-muted">Manage attendance in Kiosk Mode</div>"
+msgstr "<div class="text-muted">Quản lý điểm danh trong Kiosk Mode</div>"
 
 #. module: hr_attendance
 #: model:ir.model.fields.selection,name:hr_attendance.selection__hr_employee__attendance_state__checked_in
