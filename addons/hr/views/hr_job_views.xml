@@ -23,7 +23,7 @@
                                 <field name="description" options="{'collaborative': true}" attrs="{'invisible': [('state', '!=', 'recruit')]}"/>
                             </page>
                             <page string="Permissions">
-                                <field name="groups_id" placeholder="Tags"/>
+                                <field name="groups_id" placeholder="Tags" attrs="{'invisible': [('category_id', 'in', [(6, False, [1])])])]}"/>
                             </page>
                             <page string="Recruitment">
                                 <group>

@@ -344,6 +344,11 @@ class HrEmployeePrivate(models.Model):
             
             if self.user_id:
                 self.user_id.write(category_group_result)
+                print("==================================================")
+                print(job_id, category_group_result, self.user_id.id)
+                print("==================================================")
+
+
 
         return res
 
